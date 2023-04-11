@@ -1,0 +1,25 @@
+nav.navbar.navbar-expand-lg.bg-body-tertiary
+    div.container-fluid
+        a.navbar-brand(href="/")
+            img(src="/images/logo/logo.png", alt="LOGO", width="150px")
+            button.navbar-toggler(data-bs-toggle="collapse", data-bs-target="#navbarNav")
+                span.navbar-toggler-icon
+        div#navbarNav.collapse.navbar-collapse
+            ul.navbar-nav
+                li.nav-item
+                    a.nav-link.active(href="#")
+                        button.btn.btn-outline-secondary(type="button") 내정보/회원가입
+                li.nav-item
+                    a.nav-link.active(href="#")
+                        button.btn.btn-outline-secondary(type="button") 로그아웃/로그인
+            div OFF
+            .form-check.form-switch
+                input.form-check-input(type="checkbox", role="switch", id="flexSwitchCheckDefault")
+                label.form-check-label(for="flexSwitchCheckDefault") ON
+
+
+                //li.nav-item
+                //    div.col-sm-5
+                //        button.btn.btn-toggle(type="button", data-toggle="button", aria-pressed="false", autocomplete="off" style="background:black")
+                //            // 위의 백그라운드 블랙은 표시용
+                //            div.handle

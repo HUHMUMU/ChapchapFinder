@@ -1,0 +1,58 @@
+extends layout
+
+block content
+    h2.my-4 리뷰 관리
+    h4.my-4 가게 이름
+    div
+        div.border.border-2.border-dark.my-4 평균 별점 (최근 6개월)
+            div.d-flex.justify-content-between
+                h1.my-4.text-start 별점 넣을곳
+                div.my-4(style="width: 50%")
+                    div.d-flex.justify-content-between
+                        p 5점
+                        div.progress.me-3(style="width: 90%")
+                            div.progress-bar.bg-warning.p-2(role='progressbar', style="width: 0" aria-valuenow='0', aria-valuemin='0', aria-valuemax='100')
+                    div.d-flex.justify-content-between
+                        p 4점
+                        div.progress.me-3(style="width: 90%")
+                            div.progress-bar.bg-warning.p-2(role='progressbar', style="width: 10%" aria-valuenow='0', aria-valuemin='10', aria-valuemax='100')
+                    div.d-flex.justify-content-between
+                        p 3점
+                        div.progress.me-3(style="width: 90%")
+                            div.progress-bar.bg-warning.p-2(role='progressbar', style="width: 40%" aria-valuenow='0', aria-valuemin='40', aria-valuemax='100')
+                    div.d-flex.justify-content-between
+                        p 2점
+                        div.progress.me-3(style="width: 90%")
+                            div.progress-bar.bg-warning.p-2(role='progressbar', style="width: 70%" aria-valuenow='0', aria-valuemin='70', aria-valuemax='100')
+                    div.d-flex.justify-content-between
+                        p 1점
+                        div.progress.me-3(style="width: 90%")
+                            div.progress-bar.bg-warning.p-2(role='progressbar', style="width: 100%" aria-valuenow='0', aria-valuemin='100', aria-valuemax='100')
+
+        div.d-flex.justify-content-between.my-4(style="width: 100%")
+            div.border.border-2.border-dark.text-center(style="width: 50%")
+                div 전체리뷰
+            div.border.border-2.border-dark.text-center(style="width: 50%")
+                div 미답변 리뷰(미답변 리뷰 개수 보여주기)
+
+        div.container.my-4
+            each review in reviews
+                div.row.border.border-2.border-dark
+                    div.col-2
+                        h3.my-2.text-start 닉네임
+                        h5.my-2.text-start 등급
+                        p.my-2 ★★★
+                    div.col-8
+                        h4.mt-4 리뷰내용
+                        p.mt-2 리뷰 블라블라
+                        p.my-4 메뉴 한줄평:
+                        div.my-4 메뉴 사진
+                        p.my-4 주문메뉴:
+                        form#addadminreviewForm(method='post', action='/')
+                            div.mb-3
+                                textarea#content.form-control(name='content', placeholder='리뷰 답변 내용', style='width: 100%; height: 10vh; resize: none;')
+                    div.col-2.d-flex.flex-column.align-items-start.justify-content-between
+                        div
+                            button.btn.btn-outline-secondary.my-4(type="button") 신고하기
+                        div
+                            button.btn.btn-outline-secondary.mt-auto.my-4(type="button") 등록하기
