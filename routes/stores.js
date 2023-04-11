@@ -21,5 +21,14 @@ router.post('/login.do', async (req,res)=>{
     res.redirect("/stores/login.do");
   }
 });
+router.get('/', (req, res) => {
+  // 로그인되어 있지 않은 경우에는 로그인 페이지로 리다이렉트
+  if (!req.session.loginStore) {
+    res.redirect('/stores/login.do');
+  } else {
+    // 로그인한 사용자에게만 메인 페이지 제공
+    res.render('stores/main');
+  }
+});
 
 module.exports = router;
