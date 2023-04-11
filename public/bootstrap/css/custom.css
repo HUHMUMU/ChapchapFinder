@@ -1,0 +1,4 @@
+.form-check-input:checked ~ .form-check-label::before {
+    background-color: #ff6b81;
+    border-color: #ff6b81;
+}

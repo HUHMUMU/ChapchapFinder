@@ -1,6 +1,6 @@
-const pool=require("../db/ChapChapPool");
-const reviewDao={
-    findByStoreNumSql : "SELECT * FROM ",
-    findAllSql: "",
-
-}
+// const pool=require("../db/ChapChapPool");
+// const reviewDao={
+//     findByStoreNumSql : "SELECT * FROM ",
+//     findAllSql: "",
+//
+// }
