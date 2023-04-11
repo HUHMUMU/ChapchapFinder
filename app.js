@@ -1,14 +1,17 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var usersRouter = require('./routes/reiviews');
+const logger = require('morgan');
+const session = require("express-session");
+const memorystore=require("memorystore")(session); //서버가 아니라 컴퓨터 메모리에 세션을 저장(type Map)
 
-var app = express();
+const indexRouter = require('./routes/index');
+const storesRouter = require('./routes/stores');
+const reviewsRouter = require('./routes/reiviews');
+
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,11 +21,39 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'my-secret-key',
+  resave:false,//변경없는 세션도 저장함
+  saveUninitialized: true,//초기화되지 않는 세션도 저장
+  store : new memorystore({
+    checkPeriod : 2*60*60*1000
+  })
+}));
+
+app.use(function (req, res, next){
+  res.locals.loginStore=req.session.loginStore;
+  next();
+});
+
+app.use( function (req, res, next ){
+  if(req.path==="/" || req.path==="/stores/login.do" ){
+    next();
+  }else{
+    if(req.session.loginStore){
+      next();
+    }else{
+      res.redirect("/stores/login.do");
+    }
+  }
+});
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/reviews',require("./routes/reiviews"));
+app.use('/stores', storesRouter);
+app.use('/admin', reviewsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

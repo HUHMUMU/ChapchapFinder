@@ -3,10 +3,8 @@ const ReviewsDao = require("../dao/ReviewsDao");
 const reviewsDao = new ReviewsDao(pool);
 
 class ReviewsService{
-    async list(storeNum, rrStatus){
-        if(storeNum){
-            return reviewsDao.findByStoreNumAndrrStatus(storeNum);
-        }
+    async list(){
+        return reviewsDao.findAll();
     }
 }
 
