@@ -42,17 +42,18 @@ function fileFilter (req, file, cb)  {
 const upload=multer({storage:storage,fileFilter:fileFilter});
 
 router.get('/list.do', async function(req, res) {
-    req.query.orderField = req.query.orderField || "post_time";
+    req.query.orderField = req.query.orderField || "date";
     req.query.orderDirect = req.query.orderDirect || "DESC";
+    req.session.loginStore
     let reviews=null;
     try {
-        reviews=await reviewsService.list(req.query);
+        reviews=await reviewsService.list();
     }catch (e) {
         new Error(e);
         //req.flash("actionMsg","검색 실패:"+e.message);
     }
     if(reviews){
-        res.render("admin/list",{reviews:reviews,params:req.query});
+        res.render("reviews/list",{reviews:reviews,params:req.query});
     }else {
         res.redirect("/")
     }

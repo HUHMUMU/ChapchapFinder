@@ -14,8 +14,12 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
                             img(src="/images/logo/signup.png", alt="signup-icon", width="20px")
                             span 회원가입
                 li.nav-item
-                    a.nav-link.active(href="#")
-                        button.btn.btn-outline-secondary(type="button") 로그아웃/로그인
+                    div#loginContainer
+                        if(!loginStore)
+                            a.btn.btn-outline-dark(href="/stores/login.do") 로그인
+                        else
+                            a.text-secondary.me-2.text-decoration-none(href=`/users/${loginStore.store_id}/detail.do`)=`${loginStore.store_id}`
+                            a.btn.btn-outline-dark(href="/stores/logout.do") 로그아웃
         div.form-check.form-switch.d-flex.align-items-center
             label.form-check-label.me-5(for="flexSwitchCheckDefault") OFF
             input.form-check-input(type="checkbox", role="switch", id="flexSwitchCheckDefault", style="width: 2.5rem; height: 1.5rem;")

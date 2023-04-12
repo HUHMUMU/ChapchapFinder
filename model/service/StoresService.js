@@ -1,10 +1,10 @@
 const sequelize=require("../chapchapSequelize");
-const storesEntity=require("../entity/StroesManages")(sequelize);
+const storesManagesEntity=require("../entity/StroesManages")(sequelize);
 const {Op}=require("sequelize");
 class StoresService {
-    async login(uId,pw){
+    async login(storeId,pw){
         try {
-            return await storesEntity.findOne({where:{store_id:uId,pw:pw}});
+            return await storesManagesEntity.findOne({where:{store_id:storeId,pw:pw}});
         }catch (e) {
             new Error(e);
         }

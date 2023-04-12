@@ -1,7 +1,15 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+
 const logger = require('morgan');
+const session = require("express-session");
+
+const indexRouter = require('./routes/index');
+const reviewsRouter = require('./routes/reviews');
+const repliesRouter = require('./routes/replies');
+const storesRouter = require('./routes/stores');
+
 const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -16,15 +24,20 @@ app.use(cookieParser(cookiePw));
 app.use(cookieEncrypter(cookiePw));
 ///// end
 
-const session = require("express-session");
 app.use(session({
   secret: 'my-secret-key',
   resave:false,
   saveUninitialized: true,
 }));
 
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+
 ///// connect-flash : 일회용 세션으로 req.flash(key,value) 를 보내면 리다이렉트 페이지로 메세지를 전달할 수 있다.(보통 action 페이지에서 처리 결과를 반환하기 위해 사용)
 const flash = require('connect-flash');
+
 app.use(flash());
 ///// end
 
@@ -64,21 +77,12 @@ app.use( function (req, res, next ){
   }
 });
 
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-const indexRouter = require('./routes/index');
-const reviewsRouter = require('./routes/reviews');
-const repliesRouter = require('./routes/replies');
-const storesRouter = require('./routes/stores');
-
 app.use('/', indexRouter);
 app.use('/replies', repliesRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/stores', storesRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
