@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const reviewService=require("../model/service/ReviewRepliesService");
+const reviewsService=require("../model/service/ReviewRepliesService");
 const path=require("path");
 
 router.get('/list.do', async function(req, res) {
