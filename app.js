@@ -8,8 +8,6 @@ const session = require("express-session");
 const memorystore=require("memorystore")(session); //서버가 아니라 컴퓨터 메모리에 세션을 저장(type Map)
 
 const indexRouter = require('./routes/index');
-const storesRouter = require('./routes/stores');
-const reviewsRouter = require('./routes/reiviews');
 
 const app = express();
 
@@ -25,45 +23,8 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({
-  secret: 'my-secret-key',
-  resave:false,//변경없는 세션도 저장함
-  saveUninitialized: true,//초기화되지 않는 세션도 저장
-  store : new memorystore({
-    checkPeriod : 2*60*60*1000
-  })
-}));
-
-app.use(function (req, res, next){
-  res.locals.loginStore=req.session.loginStore;
-  next();
-});
-
-app.use( function (req, res, next ){
-  if(req.path==="/" || req.path==="/stores/login.do" ){
-    next();
-  }else{
-    if(req.session.loginStore){
-      next();
-    }else{
-      res.redirect("/stores/login.do");
-    }
-  }
-});
-
-// 루트 경로를 '/login.do'로 설정
-app.get('/', (req, res) => {
-  res.redirect('/login.do');
-});
-
-//로그인 페이지 경로 설정
-app.get('/login.do', (req, res) => {
-  res.render('stores/login');
-});
 
 app.use('/', indexRouter);
-app.use('/stores', storesRouter);
-app.use('/admin', reviewsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
