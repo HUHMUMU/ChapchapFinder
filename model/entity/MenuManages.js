@@ -28,7 +28,7 @@ module.exports=(sequelize)=> {
             comment: '메뉴설명',
         },
         menu_type: {
-            type: DataTypes.ENUM('대표메뉴', '신메뉴', '이벤트'),
+            type: DataTypes.ENUM('대표메뉴', '신메뉴', '이벤트', '기존메뉴'),
             allowNull: false,
             comment: '메뉴종류',
         },
