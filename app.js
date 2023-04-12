@@ -31,10 +31,10 @@ app.use(flash());
 //자동로그인 미들웨어
 app.use(async function (req, res, next){
   let {autoLoginId, autoLoginPw}=req.signedCookies;  //암호된 쿠키를 암호를 풀면서 파싱한 필드
-  if( !req.session.loginUser && autoLoginId && autoLoginPw ){
-    const userService=require("./model/service/StoresService");
-    const user=await userService.login(autoLoginId,autoLoginPw);
-    if(user)req.session.loginUser=user;
+  if( !req.session.loginStore && autoLoginId && autoLoginPw ){
+    const storeService=require("./model/service/StoresService");
+    const store=await storeService.login(autoLoginId,autoLoginPw);
+    if(store)req.session.loginStore=store;
   }
   next();
 });
@@ -68,7 +68,6 @@ app.use( function (req, res, next ){
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const indexRouter = require('./routes/index');
@@ -77,8 +76,8 @@ const repliesRouter = require('./routes/replies');
 const storesRouter = require('./routes/stores');
 
 app.use('/', indexRouter);
-app.use('/stores/replies', repliesRouter);
-app.use('/stores/reviews', reviewsRouter);
+app.use('/replies', repliesRouter);
+app.use('/reviews', reviewsRouter);
 app.use('/stores', storesRouter);
 
 // catch 404 and forward to error handler
