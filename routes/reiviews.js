@@ -42,9 +42,13 @@ function fileFilter (req, file, cb)  {
 const upload=multer({storage:storage,fileFilter:fileFilter});
 
 
-router.get('/list.do', async function (req,res){
-    const reviews = await reviewsService.list();
+router.get('/:storeId/list.do', async function (req,res){
+    const status = req.query.r_rstatus;
+    const {store_id} = req.body;
+
+    const reviews = await reviewsService.list(store_id, status);
     res.render("admin/list",{reviews:reviews});
+
 });
 
 module.exports = router;

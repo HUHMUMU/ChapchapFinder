@@ -51,6 +51,16 @@ app.use( function (req, res, next ){
   }
 });
 
+// 루트 경로를 '/login.do'로 설정
+app.get('/', (req, res) => {
+  res.redirect('/login.do');
+});
+
+//로그인 페이지 경로 설정
+app.get('/login.do', (req, res) => {
+  res.render('stores/login');
+});
+
 app.use('/', indexRouter);
 app.use('/stores', storesRouter);
 app.use('/admin', reviewsRouter);
