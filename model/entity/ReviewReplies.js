@@ -20,6 +20,9 @@ module.exports=(sequelize)=> {
             type: DataTypes.STRING,
             allowNull: false
         }
+    },{
+        tableName:"review_replies",
+        timestamps:false //creat_at,update_at 두개의 필드가 있다는 전제로 맵핑
     });
     return reviewRepliesEntity;
 }
