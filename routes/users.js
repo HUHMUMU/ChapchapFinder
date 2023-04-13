@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const storeManagesService=require("../model/service/StoreManagesService");
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
