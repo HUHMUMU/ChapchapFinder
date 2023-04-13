@@ -14,6 +14,8 @@ module.exports=(sequelize)=> {
         sub_category: {
             type: DataTypes.STRING(255),
             allowNull: false
+        },
+        type_id: {
         }
     });
     return typeClassessEntity;
