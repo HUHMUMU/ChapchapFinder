@@ -5,6 +5,7 @@ const {Op, where}=require("sequelize");
 class MenuService{
     async findAllMenu() {// 모든 메뉴 데이터 조회
         const menu = await menuManagesEntity.findAll();
+        //메롱 제바루ㅜ
         return menu;
     }
 
