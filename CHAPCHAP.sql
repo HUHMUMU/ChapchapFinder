@@ -191,9 +191,10 @@ CREATE TABLE storetypes
 
 CREATE TABLE type_classess
 (
-    category_num  INT auto_increment primary key NOT NULL COMMENT '업종id',
+    category_num  INT auto_increment primary key NOT NULL COMMENT '카테_id',
     main_category ENUM ('음식점','카페','술집')         NOT NULL COMMENT '대분류',
     sub_category  VARCHAR(255)                   NOT NULL COMMENT '소분류'
+        store_num INT                      NOT NULL COMMENT '가게고유번호'
 );
 
 CREATE TABLE breaktimes

@@ -4,16 +4,16 @@ ul.ps-0(style="list-style:none")
             div.row.g-0
                 div.card-body
                     p.card-text
-                        small.pe-3=`댓글번호 : ${rrview.rr_num}`
+                        small.pe-3=`댓글번호 : ${rrview ? rrview.rr_num : ''}`
                         small.px-3=`글쓴이 : ${loginStore.store_id}`
                     p.card-text.d-flex
-                        small.pe-3.text-muted=`작성일 : ${rrview.post_date.toLocaleString("ko-KR")}`
-                    p.card-text=rrview.content
-                ul.nav.nav-tabs
-                    li.nav-item
-                        a.nav-link(href=`#replyModify${rrview.rr_num}`, role="button", data-bs-toggle="collapse") 수정
-                    li.nav-item
-                        a(href=`/replies/${rrview.rr_num}/${rrview.review_num}/delete.do`).nav-link 삭제
+                        small.pe-3.text-muted=`작성일 : ${rrview ? rrview.post_date.toLocaleString("ko-KR") : '날짜'}`
+                    p.card-text=rrview?rrview.content:'콘텐츠'
+                //ul.nav.nav-tabs
+                //    li.nav-item
+                //        a.nav-link(href=`#replyModify${rrview.rr_num}`, role="button", data-bs-toggle="collapse") 수정
+                //    li.nav-item
+                //        a(href=`/replies/${rrview.rr_num}/${rrview.review_num}/delete.do`).nav-link 삭제
                 //div.collapse(id=`replyModify${rr.rr_num}`)
                 //    include views/replies/update
                 //div.collapse(id=`replyReply${rr.rr_num}`)
