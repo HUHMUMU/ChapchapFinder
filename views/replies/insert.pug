@@ -1,0 +1,14 @@
+form#replyResgister.p-4.border.collapse(method="post", action="/replies/insert.do")
+    div.row
+        div.form-floating.col
+            input.form-control(name="b_id",value=board.b_id,readonly=true)
+            label 글번호
+        div.form-floating.col
+            input.form-control(name="u_id",value=loginUser.u_id,readonly=true)
+            label 가게 사장님
+    div.form-floating
+        textarea.form-control(name="content")
+        label 내용
+    div.mt-2.text-end
+        button.btn.btn-outline-warning.me-2(type="reset") 초기화
+        button.btn.btn-outline-primary(type="submit") 등록

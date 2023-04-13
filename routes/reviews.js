@@ -41,14 +41,22 @@ function fileFilter (req, file, cb)  {
 };
 const upload=multer({storage:storage,fileFilter:fileFilter});
 
-
-router.get('/:storeId/list.do', async function (req,res){
-    const status = req.query.r_rstatus;
-    const {store_id} = req.body;
-
-    const reviews = await reviewsService.list(store_id, status);
-    res.render("admin/list",{reviews:reviews});
-
+router.get('/list.do', async function(req, res) {
+    req.query.orderField = req.query.orderField || "date";
+    req.query.orderDirect = req.query.orderDirect || "DESC";
+    req.session.loginStore
+    let reviews=null;
+    try {
+        reviews=await reviewsService.list();
+    }catch (e) {
+        new Error(e);
+        //req.flash("actionMsg","검색 실패:"+e.message);
+    }
+    if(reviews){
+        res.render("reviews/list",{reviews:reviews,params:req.query});
+    }else {
+        res.redirect("/")
+    }
 });
 
 module.exports = router;

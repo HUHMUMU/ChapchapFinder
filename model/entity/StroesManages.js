@@ -39,6 +39,7 @@ module.exports=(sequelize)=> {
             comment: '가게고유번호'
         }
     }, {
+        tableName:"store_manages",
         timestamps: false
     });
     return storesManagesEntity;
