@@ -47,9 +47,8 @@ block content
                         p.my-4 메뉴 한줄평: #{review.coment}
                         div.my-4 메뉴 사진 #{review.img}
                         p.my-4 주문메뉴:
-                        form#addadminreviewForm(method='post', action='/')
-                            div.mb-3
-                                textarea#content.form-control(name='content', placeholder='리뷰 답변 내용', style='width: 100%; height: 10vh; resize: none;')
+                    div.mb-3
+                        include stores/replies/insert
                     div.col-2.d-flex.flex-column.align-items-start.justify-content-between
                         div
                             button.btn.btn-outline-secondary.my-4(type="button") 신고하기

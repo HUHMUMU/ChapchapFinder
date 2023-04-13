@@ -28,7 +28,7 @@ module.exports=(sequelize)=> {
             comment: '메뉴설명',
         },
         menu_type: {
-            type: DataTypes.ENUM('대표메뉴', '신메뉴', '이벤트'),
+            type: DataTypes.ENUM('대표메뉴', '신메뉴', '이벤트', '기존메뉴'),
             allowNull: false,
             comment: '메뉴종류',
         },
@@ -42,6 +42,11 @@ module.exports=(sequelize)=> {
             allowNull: false,
             comment: '가게고유번호',
         },
-    });
+
+    },
+        {
+            timestamps: false,
+            tableName: "menu_manages", // 이 부분에서 테이블 이름을 지정합니다.
+        });
     return menuManagesEntity;
 }
