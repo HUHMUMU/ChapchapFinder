@@ -1,7 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-
 const logger = require('morgan');
 const session = require("express-session");
 
@@ -78,8 +77,23 @@ app.use( function (req, res, next ){
 });
 
 app.use('/', indexRouter);
+
 app.use('/replies', repliesRouter);
 app.use('/reviews', reviewsRouter);
+app.get('/api/data', (req, res) => {
+  // 데이터를 반환하는 API
+  const data = {
+    message: 'Hello, data!'
+  };
+  res.json(data);
+});
+
+app.post('/api/user', (req, res) => {
+  // 데이터를 받아서 처리하는 API
+  console.log(req.body);
+  res.send('Received!');
+});
+
 app.use('/stores', storesRouter);
 
 

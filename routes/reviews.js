@@ -44,16 +44,19 @@ const upload=multer({storage:storage,fileFilter:fileFilter});
 router.get('/list.do', async function(req, res) {
     req.query.orderField = req.query.orderField || "date";
     req.query.orderDirect = req.query.orderDirect || "DESC";
-    req.session.loginStore
+    let storeNum = req.session.loginStore.store_num;
+    let rRstatus = '공개';
+    let count = 0;
     let reviews=null;
     try {
-        reviews=await reviewsService.list();
+        reviews=await reviewsService.list(storeNum,rRstatus);
+        count = await reviewsService.answeredCount(storeNum,rRstatus);
     }catch (e) {
         new Error(e);
         //req.flash("actionMsg","검색 실패:"+e.message);
     }
     if(reviews){
-        res.render("reviews/list",{reviews:reviews,params:req.query});
+        res.render("reviews/list",{reviews:reviews,params:req.query, count:count});
     }else {
         res.redirect("/")
     }
