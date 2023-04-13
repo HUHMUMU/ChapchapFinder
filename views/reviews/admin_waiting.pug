@@ -1,0 +1,77 @@
+extends layout
+
+block content
+    block content
+    div.container
+        nav.nav-item.d-flex
+            li.d-flex.border.border-3
+                a.nav-link.active(href="#") 리뷰 관리
+            li.d-flex.border.border-3
+                a.nav-link.active(href="#") 가게 정보 관리
+            li.d-flex.border.border-3
+                a.nav-link.active(href="#") 가게 메뉴 관리
+            li.d-flex.border.border-danger.border-3
+                a.nav-link.active(href="#") 웨이팅 관리
+        div.container.border.border-2.w-100
+            h4.my-4 웨이팅 관리
+            div.d-flex
+                div.border.border-2.border-dark.my-4.text-center.w-100 입장순서
+                    div.align-content-center.text-center.w-auto.border-3.border-dark
+                        div.d-flex.w-auto   
+                            li.d-flex.border.w-auto 123번
+                                div.border.w-auto 인원 및 대기시간
+                                    button.btn.btn-outline-secondary(type="button")
+                                        a(href="/") 입장 알림
+                                    button(href="/").btn.btn-outline-secondary(type="button")
+                                        a(href="/") 입장취소
+                        div.d-flex.w-auto
+                            li.d-flex.border.w-auto 124번
+                                div.border 인원 및 대기시간
+                                    button(href="/").btn.btn-outline-secondary(type="button")
+                                        a(href="/") 입장 알림
+                                    button(href="/").btn.btn-outline-secondary(type="button")
+                                        a(href="/") 입장취소
+                        div.d-flex.w-auto
+                            li.d-flex.border.w-auto 125번
+                                div.border 인원 및 대기시간
+                                    button(href="/").btn.btn-outline-secondary(type="button")
+                                        a(href="/") 입장알림
+                                    button(href="/").btn.btn-outline-secondary(type="button")
+                                        a(href="/") 입장취소
+            div.d-inline-block.border.border-2.w-100.d-flex
+                div.d-flex.border.border-2.w-100.border-dark
+                    div.border.border-dark.w-100
+                        h4.text-center 대기순서
+                            div
+div.align-content-center.d-inline-flex.w-50
+    ul
+                                        li.d-flex.border 126번
+                                            div.border.d-flex 인원 및 대기시간
+                                        li.d-flex.border 127번
+                                            div.border.d-flex 인원 및 대기시간
+                                        li.d-flex.border 128번
+                                            div.border.d-flex 인원 및 대기시간
+                                        li.d-flex.border 129번
+                                            div.border.d-flex 인원 및 대기시간
+                                        li.d-flex.border 130번
+                                            div.border.d-flex 인원 및 대기시간
+                                        li.d-flex.border 131번
+                                            div.border.d-flex 인원 및 대기시간
+                                        li.d-flex.border 132번
+                                            div.border.d-flex 인원 및 대기시간
+                                        li.d-flex.border 133번
+                                            div.border.d-flex 인원 및 대기시간
+                                div.d-inline-flex.m-auto.align-content-center.flex-column.w-50
+                                    div.m-auto.text-center.align-content-center.pb-5
+                                        div.flex-column.m-auto
+                                            button
+                                                a(href="/") 홍보 url
+                                        div.flex-column.m-auto
+                                            button
+                                                a(href="/") 기본 시간/인원 설정
+                                        div.flex-column.m-auto
+                                            button
+                                                a(href="/") 웨이팅 ON
+                                            button
+                                                a(href="/") 웨이팅 OFF
+                //                                    일단은 여기까지 건들여보자221212212
