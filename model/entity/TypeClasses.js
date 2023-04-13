@@ -14,9 +14,10 @@ module.exports=(sequelize)=> {
         sub_category: {
             type: DataTypes.STRING(255),
             allowNull: false
-        },
-        type_id: {
         }
+    },{
+        tableName: 'type_classes',
+        timestamps: false,
     });
     return typeClassessEntity;
 }

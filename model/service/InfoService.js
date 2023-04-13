@@ -1,7 +1,7 @@
 const sequelize=require("../chapchapSequelize");
 const storesEntity=require("../entity/Stores")(sequelize);
 const mediasEntity=require("../entity/Medias")(sequelize);
-const TypeClassessEntity=require("../entity/TypeClassess")(sequelize);
+const TypeClassessEntity=require("../entity/TypeClasses")(sequelize);
 const storeTypesEntity=require("../entity/StoreTypes")(sequelize);
 const storeImgsEntity=require("../entity/StoreImgs")(sequelize);
 const BreakTimeEntity=require("../entity/BreakTime")(sequelize);
@@ -64,25 +64,6 @@ class InfoService{
 
 
     // 가게 업종 대분류
-    async findByType(storeNum){ // 가게 업종 대분류 조회
-        const TypeList = await storeTypesEntity.findAll({
-            where : {
-                store_num : storeNum
-            }
-        });
-        return TypeList;
-    }
-
-
-    // 가게 업종 소분류
-    async findByTypeClassess(storeNum){ // 가게 업종 소분류 조회 fk없는데  어떻게 하지 ??
-        const TypeClassessList = await TypeClassessEntity.findAll({
-            where : {
-
-            }
-        })
-        return storeNum;
-    }
 
 
 
