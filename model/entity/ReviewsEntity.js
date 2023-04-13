@@ -40,6 +40,11 @@ module.exports=(sequelize)=> {
             type: DataTypes.INTEGER,
             allowNull: false
         }
+    },{
+        tableName: 'reviews',
+        timestamps: false,
     });
+
+
     return reviewsEntity;
 }
