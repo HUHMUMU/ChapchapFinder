@@ -8,7 +8,7 @@ describe("MenuService test",()=>{
     });
 
     test("findByMenu",async ()=>{
-        const menus=await menuService.findByMenu(0);
+        const menus=await menuService.findByMenu(1);
         console.log(menus);
     });
 

@@ -9,6 +9,7 @@ const indexRouter = require('./routes/index');
 const reviewsRouter = require('./routes/reviews');
 const repliesRouter = require('./routes/replies');
 const storesRouter = require('./routes/stores');
+const manageRouter = require('./routes/manage');
 
 const app = express();
 // view engine setup
@@ -81,6 +82,7 @@ app.use('/', indexRouter);
 app.use('/replies', repliesRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/stores', storesRouter);
+app.use('/menu', manageRouter);
 
 
 
