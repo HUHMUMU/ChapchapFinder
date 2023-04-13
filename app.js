@@ -10,6 +10,8 @@ const reviewsRouter = require('./routes/reviews');
 const repliesRouter = require('./routes/replies');
 const storesRouter = require('./routes/stores');
 const manageRouter = require('./routes/manage');
+// const infoRouter = require('./routes/infos');
+
 
 const app = express();
 // view engine setup
@@ -83,6 +85,7 @@ app.use('/replies', repliesRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/stores', storesRouter);
 app.use('/menu', manageRouter);
+// app.use('/infos', infoRouter);
 
 
 
@@ -102,7 +105,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(8888,()=>{
-  console.log("http://localhost:8888 expressjs 관리자 프로젝트 시작");
+app.listen(9090,()=>{
+  console.log("http://localhost:9090 expressjs 관리자 프로젝트 시작");
 })
 module.exports = app;
