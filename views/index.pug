@@ -10,17 +10,140 @@ block content
             li
                 a.btn.btn-outline-secondary.btn-sm.m-2(href=`/menu/manage.do`) 가게 메뉴 관리
             li
-                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/`) 웨이팅 관리
-    div(style="background-color: lightgray; width: 80vw; height: 800px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center;")
-        div.mt-3
-            h1 챱챱파인더
-            div
-                p 챱챱파인더로
-                p 신규고객을 확보해보세요
-            div.mt-3
-                ul.d-flex.list-unstyled
-                    li
-                        a.btn.btn-outline-secondary.btn-sm.m-2(href=`/`) 가게 등록
-                    li
-                        a.btn.btn-outline-secondary.btn-sm.m-2(href=`/`) 회원 가입
+                a(style="background-color: lightgray;").btn.btn-outline-secondary.btn-sm.m-2.border-danger(href=`/reviews/admin_waiting.do`) 웨이팅 관리
+    div(style="background-color: lightgray; width: 80vw; height: 800px; display: flex; flex-direction: column; justify-content: center;").container.border.border-2
+        div.container.border.border-2.w-100
+                div.d-flex
+                    div.border.border-2.border-dark.my-4.text-center.w-100
+                        h3 입장순서
+                        div.align-content-center.text-center.w-auto.border-3.border-dark.vw-100
+                            div.d-flex.w-auto.vw-80
+                                li.d-flex.border.w-auto 123번
+                                    div.border.w-auto 인원 및 대기시간
+                                        button.btn.btn-outline-secondary(type="button")
+                                            a(href="/") 입장 알림
+                                        button(href="/").btn.btn-outline-secondary(type="button")
+                                            a(href="/") 입장취소
+                            div.d-flex.w-auto.vw-80
+                                li.d-flex.border.w-auto 124번
+                                    div.border 인원 및 대기시간
+                                        button(href="/").btn.btn-outline-secondary(type="button")
+                                            a(href="/") 입장 알림
+                                        button(href="/").btn.btn-outline-secondary(type="button")
+                                            a(href="/") 입장취소
+                            div.d-flex.w-auto.vw-80
+                                li.d-flex.border.w-auto 125번
+                                    div.border 인원 및 대기시간
+                                        button(href="/").btn.btn-outline-secondary(type="button")
+                                            a(href="/") 입장알림
+                                        button(href="/").btn.btn-outline-secondary(type="button")
+                                            a(href="/") 입장취소
+                div.d-inline-block.border.border-2.w-100.d-flex
+                    div.d-flex.border.border-2.w-100.border-dark
+                        div.border.border-dark.w-100
+                            h4.text-center.border-danger.text-decoration-underline 대기순서
+                                div.d-flex
+                                    div.align-content-center.d-inline-flex.w-50
+                                        ul
+                                            li.d-flex.border 126번
+                                                div.border.d-flex 인원 및 대기시간
+                                            li.d-flex.border 127번
+                                                div.border.d-flex 인원 및 대기시간
+                                            li.d-flex.border 128번
+                                                div.border.d-flex 인원 및 대기시간
+                                            li.d-flex.border 129번
+                                                div.border.d-flex 인원 및 대기시간
+                                            li.d-flex.border 130번
+                                                div.border.d-flex 인원 및 대기시간
+                                            li.d-flex.border 131번
+                                                div.border.d-flex 인원 및 대기시간
+                                            li.d-flex.border 132번
+                                                div.border.d-flex 인원 및 대기시간
+                                            li.d-flex.border 133번
+                                                div.border.d-flex 인원 및 대기시간
+                                    div.d-inline-block
+                                        div
+                                            li 총 대기 인원 수
+                                        div
+                                            li 총 대기 팀 수
+                                        div
+                                            li 마지막 대기번호
 
+
+                    div.d-inline-flex.m-auto.align-content-center.flex-column.w-50
+                        div.m-auto.text-center.align-content-center.pb-5
+                            div.flex-column.m-auto
+                                button
+                                    a(href="/") 홍보 url
+                            div.flex-column.m-auto
+                                button
+                                    a(href="/") 기본 시간/인원 설정
+                            div.flex-column.m-auto
+                                button
+                                    a(href="/") 웨이팅 ON
+                                button
+                                    a(href="/") 웨이팅 OFF
+
+                        main
+                              // 입장순서가 제일 가까운 3팀만 표시하는 영역
+                              #closest-teams
+                                h2 입장순서가 가장 가까운 3팀
+                                table
+                                  thead
+                                    tr
+                                      th 대기번호
+                                      th 팀명
+                                      th 인원수
+                                      th 대기시간
+                                      th 입장알림
+                                      th 입장취소
+                                  tbody
+                                    each team in closestTeams
+                                      tr
+                                        td= team.id
+                                        td= team.teamName
+                                        td= team.numPeople
+                                        td= team.waitingTime
+                                        td
+                                          form(action='/notify', method='post')
+                                            input(type='hidden', name='teamId', value=team.id)
+                                            button(type='submit') 알림 보내기
+                                        td
+                                          form(action='/cancel', method='post')
+                                            input(type='hidden', name='teamId', value=team.id)
+                                            button(type='submit') 취소하기
+
+                              // 그 외의 대기중인 팀 표시하는 영역
+                              #other-teams
+                                h2 그 외 대기중인 팀
+                                table
+                                  thead
+                                    tr
+                                      th 대기번호
+                                      th 팀명
+                                      th 인원수
+                                      th 대기시간
+                                  tbody
+                                    each team in otherTeams
+                                      tr
+                                        td= team.id
+                                        td= team.teamName
+                                        td= team.numPeople
+                                        td= team.waitingTime
+
+                                // 대기중인 팀이 7팀 이상일 경우 마지막 팀만 표시
+                                if (otherTeams.length > 7)
+                                  p ... (총 #{otherTeams.length}팀 대기중)
+                                  table
+                                    thead
+                                      tr
+                                        th 대기번호
+                                        th 팀명
+                                        th 인원수
+                                        th 대기시간
+                                    tbody
+                                      tr
+                                        td= otherTeams[otherTeams.length-1].id
+                                        td= otherTeams[otherTeams.length-1].teamName
+                                        td= otherTeams[otherTeams.length-1].numPeople
+                                        td= otherTeams[otherTeams.length-1].waitingTime
