@@ -90,7 +90,7 @@ CREATE TABLE store_manages
 (
     store_id     VARCHAR(255) primary key NOT NULL COMMENT '사장아이디',
     pw           VARCHAR(255)             NOT NULL COMMENT '사장비밀번호',
-    business_num VARCHAR(255)              NOT NULL COMMENT '사업자번호',
+    business_num VARCHAR(255)             NOT NULL COMMENT '사업자번호',
     store_call   VARCHAR(255)             NOT NULL COMMENT '가게전화번호',
     phone        VARCHAR(255)             NOT NULL COMMENT '사장전화번호',
     email        VARCHAR(255)             NOT NULL COMMENT '사장이메일',
@@ -99,14 +99,14 @@ CREATE TABLE store_manages
 
 CREATE TABLE menu_manages
 (
-    menu_num  INT primary key auto_increment NOT NULL COMMENT '메뉴번호',
-    name      VARCHAR(255)                   NOT NULL COMMENT '메뉴이름',
-    img       VARCHAR(255)                   NULL COMMENT '메뉴사진',
-    price     INT                            NOT NULL COMMENT '메뉴가격',
-    info      VARCHAR(255)                   NULL COMMENT '메뉴설명',
-    menu_type ENUM ('대표메뉴', '신메뉴', '이벤트', )    NOT NULL COMMENT '메뉴종류',
-    status    BOOLEAN                        NOT NULL COMMENT '메뉴상태',
-    store_num INT                            NOT NULL COMMENT '가게고유번호'
+    menu_num  INT primary key auto_increment      NOT NULL COMMENT '메뉴번호',
+    name      VARCHAR(255)                        NOT NULL COMMENT '메뉴이름',
+    img       VARCHAR(255)                        NULL COMMENT '메뉴사진',
+    price     INT                                 NOT NULL COMMENT '메뉴가격',
+    info      VARCHAR(255)                        NULL COMMENT '메뉴설명',
+    menu_type ENUM ('대표메뉴', '신메뉴', '이벤트', '일반메뉴') NOT NULL COMMENT '메뉴종류',
+    status    BOOLEAN                             NOT NULL COMMENT '메뉴상태',
+    store_num INT                                 NOT NULL COMMENT '가게고유번호'
 );
 
 CREATE TABLE jjim_manages
@@ -156,7 +156,7 @@ CREATE TABLE stores
     store_name        VARCHAR(255)                   NOT NULL COMMENT '가게이름',
     detail_info       VARCHAR(255)                   NOT NULL COMMENT '가게디테일설명',
     short_info        VARCHAR(255)                   NOT NULL COMMENT '가게한줄설명',
-    origin            VARCHAR(255)                   NOT NULL COMMENT '원산지표시',
+    madein            VARCHAR(255)                   NOT NULL COMMENT '원산지표시',
     address           VARCHAR(255)                   NOT NULL COMMENT '가게주소',
     opentime          VARCHAR(255)                   NOT NULL COMMENT '영업시간',
     lastorder         VARCHAR(255)                   NULL COMMENT '라스트오더',
@@ -185,16 +185,16 @@ CREATE TABLE medias
 
 CREATE TABLE storetypes
 (
-    type_id   VARCHAR(255) primary key NOT NULL COMMENT '업종id',
-    store_num INT                      NOT NULL COMMENT '가게고유번호'
+    type_id      VARCHAR(255) primary key auto_increment NOT NULL COMMENT '업종id',
+    store_num    INT                      NOT NULL COMMENT '가게고유번호',
+    category_num INT                      NOT NULL COMMENT '업종카테고리'
 );
 
-CREATE TABLE type_classess
+CREATE TABLE type_classes
 (
-    category_num  INT auto_increment primary key NOT NULL COMMENT '카테_id',
-    main_category ENUM ('음식점','카페','술집')         NOT NULL COMMENT '대분류',
-    sub_category  VARCHAR(255)                   NOT NULL COMMENT '소분류'
-        store_num INT                      NOT NULL COMMENT '가게고유번호'
+    category_num  INT                    NOT NULL COMMENT '업종카테고리',
+    main_category ENUM ('음식점','카페','술집') NOT NULL COMMENT '대분류',
+    sub_category  VARCHAR(255)           NOT NULL COMMENT '소분류'
 );
 
 CREATE TABLE breaktimes
@@ -263,49 +263,49 @@ CREATE TABLE store_imgs
 );
 
 ALTER TABLE menu_manages
-    ADD FOREIGN KEY (store_num) REFERENCES stores(store_num);
+    ADD FOREIGN KEY (store_num) REFERENCES stores (store_num);
 
 ALTER TABLE jjim_manages
-    ADD FOREIGN KEY (store_num) REFERENCES stores(store_num);
+    ADD FOREIGN KEY (store_num) REFERENCES stores (store_num);
 
 ALTER TABLE reviewlikes
-    ADD FOREIGN KEY (review_num) REFERENCES reviews(review_num);
+    ADD FOREIGN KEY (review_num) REFERENCES reviews (review_num);
 
 ALTER TABLE userswaiting
-    ADD FOREIGN KEY (store_num) REFERENCES stores(store_num);
+    ADD FOREIGN KEY (store_num) REFERENCES stores (store_num);
 
 ALTER TABLE storeswaiting
-    ADD FOREIGN KEY (store_num) REFERENCES stores(store_num);
+    ADD FOREIGN KEY (store_num) REFERENCES stores (store_num);
 
 ALTER TABLE medias
-    ADD FOREIGN KEY (store_num) REFERENCES stores(store_num);
+    ADD FOREIGN KEY (store_num) REFERENCES stores (store_num);
 
 ALTER TABLE storetypes
-    ADD FOREIGN KEY (store_num) REFERENCES stores(store_num);
+    ADD FOREIGN KEY (store_num) REFERENCES stores (store_num);
 
 ALTER TABLE breaktimes
-    ADD FOREIGN KEY (store_num) REFERENCES stores(store_num);
+    ADD FOREIGN KEY (store_num) REFERENCES stores (store_num);
 
 ALTER TABLE holidays
-    ADD FOREIGN KEY (store_num) REFERENCES stores(store_num);
+    ADD FOREIGN KEY (store_num) REFERENCES stores (store_num);
 
 ALTER TABLE chap_deals
-    ADD FOREIGN KEY (store_num) REFERENCES stores(store_num);
+    ADD FOREIGN KEY (store_num) REFERENCES stores (store_num);
 
 ALTER TABLE points
-    ADD FOREIGN KEY (user_id) REFERENCES users(user_id);
+    ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
 
 ALTER TABLE chapstoryimgs
-    ADD FOREIGN KEY (chap_num) REFERENCES chapstorys(chap_num);
+    ADD FOREIGN KEY (chap_num) REFERENCES chapstorys (chap_num);
 
 ALTER TABLE userstatus
-    ADD FOREIGN KEY (user_id) REFERENCES users(user_id);
+    ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
 
 ALTER TABLE review_replies
-    ADD FOREIGN KEY (review_num) REFERENCES reviews(review_num);
+    ADD FOREIGN KEY (review_num) REFERENCES reviews (review_num);
 
 ALTER TABLE store_imgs
-    ADD FOREIGN KEY (store_num) REFERENCES stores(store_num);
+    ADD FOREIGN KEY (store_num) REFERENCES stores (store_num);
 
 ALTER TABLE jjim_manages
     ADD UNIQUE (user_id, store_num);
