@@ -122,7 +122,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(9090,()=>{
-  console.log("http://localhost:9090 expressjs 관리자 프로젝트 시작");
+app.listen(8080,()=>{
+  console.log("http://localhost:8080 expressjs 관리자 프로젝트 시작");
 })
 module.exports = app;
