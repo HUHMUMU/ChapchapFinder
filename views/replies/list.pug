@@ -4,11 +4,11 @@ ul.ps-0(style="list-style:none")
             div.row.g-0
                 div.card-body
                     p.card-text
-                        small.pe-3=`댓글번호 : ${rrview ? rrview.rr_num : ''}`
-                        small.px-3=`글쓴이 : ${loginStore.store_id}`
+                        small.pe-3=`댓글번호 : ${rreview ? rreview.rr_num : '댓글이 없어요 ㅠㅠ'}`
+                        small.px-3=`사장님 : ${loginStore.store_id}`
                     p.card-text.d-flex
-                        small.pe-3.text-muted=`작성일 : ${rrview ? rrview.post_date.toLocaleString("ko-KR") : '날짜'}`
-                    p.card-text=rrview?rrview.content:'콘텐츠'
+                        small.pe-3.text-muted=`작성일 : ${rreview ? rreview.post_date.toLocaleString("ko-KR") : '댓글이 없어요 ㅠㅠ'}`
+                    p.card-text=rreview?rreview.content:'댓글이 없어요 ㅠㅠ'
                 //ul.nav.nav-tabs
                 //    li.nav-item
                 //        a.nav-link(href=`#replyModify${rrview.rr_num}`, role="button", data-bs-toggle="collapse") 수정

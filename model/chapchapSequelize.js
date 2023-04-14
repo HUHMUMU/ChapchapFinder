@@ -12,6 +12,6 @@ const sequelize=new Sequelize("chapchap","root","mysql123",{
         acquire: 30000, //db 접속하는데 까지 기다려주는 시간
         idle:10000 //유저리스트를 가져오는데 까지 기다려주는 시간
     },
-    logging:true //자동으로 생성하는 쿼리를 로그로 출력(성능저하가 있기 때문에 배표시 false)
+    logging:false //자동으로 생성하는 쿼리를 로그로 출력(성능저하가 있기 때문에 배표시 false)
 });
 module.exports=sequelize;

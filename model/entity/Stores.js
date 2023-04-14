@@ -79,6 +79,9 @@ module.exports=(sequelize)=> {
             type: DataTypes.BOOLEAN,
             allowNull: false
         }
+    },{
+        tableName: 'stores',
+        timestamps: false
     });
     return storesEntity;
 }

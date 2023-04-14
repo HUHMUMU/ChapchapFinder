@@ -13,31 +13,27 @@ class ReviewsService{
         return reviews;
     }
 
-    async findByRrNum(storeNum,rRstatus){
-        try {
-            reviewsEntity.belongsTo(reviewRepliesEntity,{
-                foreignKey : "review_num",
-                as: "review_replies"
-            })
+    // async rrList(storeNum){
+    //     const rr = await reviewRepliesEntity.findAll({
+    //         where: {
+    //             store_num : storeNum,
+    //         }
+    //     });
+    //     return rr;
+    // }
 
-            const rreview = await reviewRepliesEntity.findOne({
-                where: {
-                    store_num : storeNum,
-                    r_rstatus : rRstatus,
-                },
-                include:[
-                    {
-                        foreignKey : "review_num",
-                        model:reviewRepliesEntity,
-                        as : "review_replies",
-                        required: false,
-                        where : { rr_num:null }
-                    }
-                ]
-            });
-            return rreview;
-        }catch (e){
-            new Error(e)
+    async findByRrNum(reviewNum,storeNum){
+        reviewsEntity.hasMany(reviewRepliesEntity, { foreignKey: 'review_num', as: 'replies' });
+        reviewRepliesEntity.belongsTo(reviewsEntity, { foreignKey: 'review_num', as: 'review' });
+
+        const review = await reviewsEntity.findOne({
+            where: { review_num: reviewNum, store_num: storeNum },
+            include: [{ model: reviewRepliesEntity, as: 'replies', required:false }]
+        });
+        if (review.replies.length > 0) {
+            return review.replies[0];
+        } else {
+            return null;
         }
     }
 
