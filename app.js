@@ -6,9 +6,10 @@ const session = require("express-session");
 
 const indexRouter = require('./routes/index');
 const reviewsRouter = require('./routes/reviews');
-// const repliesRouter = require('./routes/replies');
+const repliesRouter = require('./routes/replies');
 const storesRouter = require('./routes/stores');
 const manageRouter = require('./routes/manage');
+const storeManagesRouter=require('./routes/users');
 const infoRouter = require('./routes/infos');
 
 
@@ -68,7 +69,7 @@ app.use(function (req, res, next){
 });
 // 미들웨어를 이용해서 로그인 인증 구현 !
 app.use( function (req, res, next ){
-  if(req.path==="/" || req.path==="/stores/login.do"){
+  if(req.path==="/" || req.path==="/stores/login.do" || req.path==="/users/insert.do" ){
     next();
   }else{
     if(req.session.loginStore){
@@ -79,8 +80,10 @@ app.use( function (req, res, next ){
   }
 });
 
+
+
 app.use('/', indexRouter);
-// app.use('/replies', repliesRouter);
+app.use('/replies', repliesRouter);
 app.use('/reviews', reviewsRouter);
 app.get('/api/data', (req, res) => {
   // 데이터를 반환하는 API
@@ -98,6 +101,7 @@ app.post('/api/user', (req, res) => {
 
 app.use('/stores', storesRouter);
 app.use('/menu', manageRouter);
+app.use('/users', storeManagesRouter);
 app.use('/infos', infoRouter);
 
 
