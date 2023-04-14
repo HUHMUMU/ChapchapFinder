@@ -47,18 +47,18 @@ router.get('/list.do', async function(req, res) {
     let storeNum = req.session.loginStore.store_num;
     let rRstatus = '공개';
     let count = 0;
-    // let rrview=null;
+    let rrview=null;
     let reviews=null;
     try {
         reviews=await reviewsService.list(storeNum,rRstatus);
         count = await reviewsService.answeredCount(storeNum,rRstatus);
-        // rrview = await reviewsService.findByRrNum(storeNum,rRstatus)
+        rrview = await reviewsService.findByRrNum(storeNum,rRstatus)
     }catch (e) {
         new Error(e);
-        //req.flash("actionMsg","검색 실패:"+e.message);
+        req.flash("actionMsg","검색 실패:"+e.message);
     }
     if(reviews){
-        res.render("reviews/list",{reviews:reviews,params:req.query, count:count});
+        res.render("reviews/list",{reviews:reviews,params:req.query, count:count, rrview:rrview});
     }else {
         res.redirect("/")
     }

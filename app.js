@@ -68,7 +68,7 @@ app.use(function (req, res, next){
 });
 // 미들웨어를 이용해서 로그인 인증 구현 !
 app.use( function (req, res, next ){
-  if(req.path==="/" || req.path==="/stores/login.do" ){
+  if(req.path==="/" || req.path==="/stores/login.do"){
     next();
   }else{
     if(req.session.loginStore){
