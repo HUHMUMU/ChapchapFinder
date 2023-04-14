@@ -163,7 +163,7 @@ CREATE TABLE stores
     waiting_closetime VARCHAR(255)                   NULL COMMENT '웨이팅마감시간',
     blogurl           VARCHAR(255)                   NULL COMMENT '블로그url',
     youtubeurl        VARCHAR(255)                   NULL COMMENT '유튜브url',
-    facebookurl       VARCHAR(255)                   NULL COMMENT '페북url',
+    facebookurl       VARCHAR(255)                   NULL COMMENT '개페북url',
     instaurl          VARCHAR(255)                   NULL COMMENT '인스타url',
     s_rstatus         ENUM ('공개','심사','비공개')         NOT NULL COMMENT '신고상태',
     parking           BOOLEAN                        NOT NULL COMMENT '주차장',

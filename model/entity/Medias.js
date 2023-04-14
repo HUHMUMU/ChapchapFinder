@@ -32,6 +32,7 @@ module.exports=(sequelize)=> {
         },
     }, {
         timestamps: false,
+        tableName: 'medias'
     });
     return mediasEntity;
 }

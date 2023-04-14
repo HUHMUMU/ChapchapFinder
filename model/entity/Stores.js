@@ -19,7 +19,7 @@ module.exports=(sequelize)=> {
             type: DataTypes.STRING(255),
             allowNull: false
         },
-        origin: {
+        madein: {
             type: DataTypes.STRING(255),
             allowNull: false
         },
@@ -79,6 +79,10 @@ module.exports=(sequelize)=> {
             type: DataTypes.BOOLEAN,
             allowNull: false
         }
+    }, {
+        modelName: 'Store',
+        tableName: 'stores', // 테이블 이름 명시적으로 지정
+        timestamps: false // 필요한 경우, createdAt 및 updatedAt 타임스탬프를 비활성화합니다.
     });
     return storesEntity;
 }
