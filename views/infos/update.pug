@@ -5,8 +5,8 @@ block content
         h1.mt-5 가게정보입력
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
-            h3.mt-5.mb-5.label(for='store_name') 가게명
-            input#store_name.form-control.mb-5( name='storeName', type='text' placeholder="에이콘레스토랑")
+            h3.mt-5.mb-5.label(for='store_num') 가게 고유 번호
+            input#store_num.form-control.mb-5( name='storeNum', type='text' placeholder="39450939")
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
             div
@@ -47,6 +47,10 @@ block content
                 option(value='16') 디저트카페
                 option(value='17') 차전문점
                 option(value='18') 베이커리카페
+        hr
+        div.form-floating(method="post", enctype="multipart/form-data")
+            h3.mt-5.mb-5.label(for='store_num') 가게 고유 번호
+            input#store_num.form-control.mb-5( name='storeNum', type='text' placeholder="39450939")
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
             h3.mt-5.mb-5.label(for='address') 가게 주소

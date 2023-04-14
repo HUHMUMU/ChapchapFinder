@@ -1,3 +1,4 @@
+
 const sequelize=require("../chapchapSequelize");
 const storesEntity=require("../entity/Stores")(sequelize);
 const mediasEntity=require("../entity/Medias")(sequelize);
