@@ -83,7 +83,7 @@ app.use( function (req, res, next ){
 
 
 app.use('/', indexRouter);
-app.use('/replies', repliesRouter);
+// app.use('/replies', repliesRouter);
 app.use('/reviews', reviewsRouter);
 app.get('/api/data', (req, res) => {
   // 데이터를 반환하는 API
@@ -122,7 +122,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(8080,()=>{
-  console.log("http://localhost:8080 expressjs 관리자 프로젝트 시작");
+app.listen(9090,()=>{
+  console.log("http://localhost:9090 expressjs 관리자 프로젝트 시작");
 })
 module.exports = app;
