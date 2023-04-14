@@ -94,7 +94,7 @@ CREATE TABLE store_manages
     store_call   VARCHAR(255)             NOT NULL COMMENT '가게전화번호',
     phone        VARCHAR(255)             NOT NULL COMMENT '사장전화번호',
     email        VARCHAR(255)             NOT NULL COMMENT '사장이메일',
-    store_num    INT                      NOT NULL COMMENT '가게고유번호'
+    store_num    INT                      NULL COMMENT '가게고유번호'
 );
 
 CREATE TABLE menu_manages
@@ -104,7 +104,7 @@ CREATE TABLE menu_manages
     img       VARCHAR(255)                   NULL COMMENT '메뉴사진',
     price     INT                            NOT NULL COMMENT '메뉴가격',
     info      VARCHAR(255)                   NULL COMMENT '메뉴설명',
-    menu_type ENUM ('대표메뉴', '신메뉴', '이벤트')    NOT NULL COMMENT '메뉴종류',
+    menu_type ENUM ('대표메뉴', '신메뉴', '이벤트', )    NOT NULL COMMENT '메뉴종류',
     status    BOOLEAN                        NOT NULL COMMENT '메뉴상태',
     store_num INT                            NOT NULL COMMENT '가게고유번호'
 );
