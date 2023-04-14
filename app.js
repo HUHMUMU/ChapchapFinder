@@ -91,7 +91,7 @@ app.get('/api/data', (req, res) => {
 });
 
 app.post('/api/user', (req, res) => {
-  // 데이터를 받아서 처리하는 API
+  // 데이터를 받아서 처리하는 API 임
   console.log(req.body);
   res.send('Received!');
 });
