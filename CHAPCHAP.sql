@@ -191,7 +191,7 @@ CREATE TABLE storetypes
 
 CREATE TABLE type_classess
 (
-    category_num  INT auto_increment primary key NOT NULL COMMENT '업종id',
+    category_num  INT auto_increment primary key NOT NULL COMMENT '업종카테고리',
     main_category ENUM ('음식점','카페','술집')         NOT NULL COMMENT '대분류',
     sub_category  VARCHAR(255)                   NOT NULL COMMENT '소분류'
 );
