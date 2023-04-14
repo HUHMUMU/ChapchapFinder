@@ -1,27 +1,26 @@
-doctype html
-html
-    head
-        title "댓글과 좋아요 기능이 있는 게시판 관리자 페이지"
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width,initial-scale=1")
-        link(rel="stylesheet", href="/bootstrap/css/bootstrap.css")
-        script(src="/bootstrap/js/bootstrap.bundle.js")
-    body
-        header
-            include headerNav
-        main.p-0.m-0
-            block content
-                div(style="position: relative; width: 100%; height: 750px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center;")
-                    div(style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('/images/logo/rabbit.png'); opacity: 0.5; z-index: -1;")
-                    div.mt-3
-                        h1.mb-4 챱챱파인더
-                        div(style="display: flex; flex-direction: column; align-items: flex-end; justify-content: center;").me-5
-                            h4 챱챱파인더로
-                            h4 신규고객을 확보해보세요
-                            div.mt-3
-                                ul.d-flex.list-unstyled
-                                    li
-                                        a.btn.btn-outline-secondary.btn-sm.m-2(href=`/`) 가게 등록
-                                    if(!loginStore)
-                                        li
-                                            a.btn.btn-outline-secondary.btn-sm.m-2(href=`/`) 회원 가입
+extends layout
+
+block content
+    div.mt-3
+        ul.d-flex.list-unstyled
+            li
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/reviews/list.do`) 리뷰 관리
+            li
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/`) 가게 정보 관리
+            li
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/menu/manage.do`) 가게 메뉴 관리
+            li
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/`) 웨이팅 관리
+    div(style="background-color: lightgray; width: 80vw; height: 800px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center;")
+        div.mt-3
+            h1 챱챱파인더
+            div
+                p 챱챱파인더로
+                p 신규고객을 확보해보세요
+            div.mt-3
+                ul.d-flex.list-unstyled
+                    li
+                        a.btn.btn-outline-secondary.btn-sm.m-2(href=`/`) 가게 등록
+                    li
+                        a.btn.btn-outline-secondary.btn-sm.m-2(href=`/`) 회원 가입
+
