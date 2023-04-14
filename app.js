@@ -6,9 +6,10 @@ const session = require("express-session");
 
 const indexRouter = require('./routes/index');
 const reviewsRouter = require('./routes/reviews');
-// const repliesRouter = require('./routes/replies');
+const repliesRouter = require('./routes/replies');
 const storesRouter = require('./routes/stores');
 const manageRouter = require('./routes/manage');
+const storeManagesRouter=require('./routes/users');
 const infoRouter = require('./routes/infos');
 
 
@@ -68,7 +69,7 @@ app.use(function (req, res, next){
 });
 // 미들웨어를 이용해서 로그인 인증 구현 !
 app.use( function (req, res, next ){
-  if(req.path==="/" || req.path==="/stores/login.do" ){
+  if(req.path==="/" || req.path==="/stores/login.do" || req.path==="/users/insert.do" ){
     next();
   }else{
     if(req.session.loginStore){
@@ -78,6 +79,8 @@ app.use( function (req, res, next ){
     }
   }
 });
+
+
 
 app.use('/', indexRouter);
 // app.use('/replies', repliesRouter);
@@ -91,13 +94,14 @@ app.get('/api/data', (req, res) => {
 });
 
 app.post('/api/user', (req, res) => {
-  // 데이터를 받아서 처리하는 API
+  // 데이터를 받아서 처리하는 API 임
   console.log(req.body);
   res.send('Received!');
 });
 
 app.use('/stores', storesRouter);
 app.use('/menu', manageRouter);
+app.use('/users', storeManagesRouter);
 app.use('/infos', infoRouter);
 
 
@@ -118,7 +122,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(9090,()=>{
-  console.log("http://localhost:9090 expressjs 관리자 프로젝트 시작");
+app.listen(8080,()=>{
+  console.log("http://localhost:8080 expressjs 관리자 프로젝트 시작");
 })
 module.exports = app;

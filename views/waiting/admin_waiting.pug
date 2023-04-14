@@ -1,23 +1,22 @@
 extends layout
 
 block content
-    block content
-    div.container
-        nav.nav-item.d-flex
-            li.d-flex.border.border-3
-                a.nav-link.active(href="#") 리뷰 관리
-            li.d-flex.border.border-3
-                a.nav-link.active(href="#") 가게 정보 관리
-            li.d-flex.border.border-3
-                a.nav-link.active(href="#") 가게 메뉴 관리
-            li.d-flex.border.border-danger.border-3
-                a.nav-link.active(href="#") 웨이팅 관리
+    div.mt-3
+        ul.d-flex.list-unstyled
+            li
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/reviews/list.do`) 리뷰 관리
+            li
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/`) 가게 정보 관리
+            li
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/menu/manage.do`) 가게 메뉴 관리
+            li
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/reviews/admin_waiting.do`) 웨이팅 관리
         div.container.border.border-2.w-100
             h4.my-4 웨이팅 관리
             div.d-flex
                 div.border.border-2.border-dark.my-4.text-center.w-100 입장순서
                     div.align-content-center.text-center.w-auto.border-3.border-dark
-                        div.d-flex.w-auto   
+                        div.d-flex.w-auto
                             li.d-flex.border.w-auto 123번
                                 div.border.w-auto 인원 및 대기시간
                                     button.btn.btn-outline-secondary(type="button")
@@ -70,8 +69,8 @@ div.align-content-center.d-inline-flex.w-50
                                             button
                                                 a(href="/") 기본 시간/인원 설정
                                         div.flex-column.m-auto
-                                            button
-                                                a(href="/") 웨이팅 ON
-                                            button
-                                                a(href="/") 웨이팅 OFF
+                                            <div class="col-md-2 form-check form-switch" style="display: inline-block;">
+                                            <input class="form-check-input" type="checkbox" id="toggle-switch${name}" checked/>
+                                            <label class="form-check-label" for="toggle-switch${name}">주문가능</label>
+                                            </div>
                 //                                    일단은 여기까지 건들여보자221212212

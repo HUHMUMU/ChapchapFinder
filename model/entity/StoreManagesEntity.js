@@ -1,7 +1,7 @@
 const {Sequelize,DataTypes}=require("sequelize");
 
 module.exports=(sequelize)=> {
-    const storesManagesEntity = sequelize.define('storesManagesEntity', {
+    const storeManagesEntity = sequelize.define('storeManagesEntity', {
         store_id: {
             type: DataTypes.STRING(255),
             primaryKey: true,
@@ -42,5 +42,5 @@ module.exports=(sequelize)=> {
         tableName:"store_manages",
         timestamps: false
     });
-    return storesManagesEntity;
+    return storeManagesEntity;
 }

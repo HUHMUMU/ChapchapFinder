@@ -13,29 +13,33 @@ class ReviewsService{
         return reviews;
     }
 
-    // async findByRrNum(storeNum,rRstatus){
-    //     reviewsEntity.belongsTo(reviewRepliesEntity,{
-    //         foreignKey : "review_num",
-    //         as: "review_replies"
-    //     })
-    //
-    //     const rreview = await reviewRepliesEntity.findOne({
-    //         where: {
-    //             store_num : storeNum,
-    //             r_rstatus : rRstatus,
-    //         },
-    //         include:[
-    //             {
-    //                 foreignKey : "review_num",
-    //                 model:reviewRepliesEntity,
-    //                 as : "review_replies",
-    //                 required: false,
-    //                 where : { rr_num:null }
-    //             }
-    //         ]
-    //     });
-    //     return rreview;
-    // }
+    async findByRrNum(storeNum,rRstatus){
+        try {
+            reviewsEntity.belongsTo(reviewRepliesEntity,{
+                foreignKey : "review_num",
+                as: "review_replies"
+            })
+
+            const rreview = await reviewRepliesEntity.findOne({
+                where: {
+                    store_num : storeNum,
+                    r_rstatus : rRstatus,
+                },
+                include:[
+                    {
+                        foreignKey : "review_num",
+                        model:reviewRepliesEntity,
+                        as : "review_replies",
+                        required: false,
+                        where : { rr_num:null }
+                    }
+                ]
+            });
+            return rreview;
+        }catch (e){
+            new Error(e)
+        }
+    }
 
 
     async answeredCount(storeNum,rRstatus){
