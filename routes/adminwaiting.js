@@ -1,6 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
+const teams = await Waiting.findAll({
+    where: { enter_status: '대기' },
+    order: [['start_time', 'ASC']],
+    limit: 3,
+    include: [{ model: Store, attributes: ['store_name'] }]
+});
+
+
 
 router.get('/', async (req, res) => {
     try {
