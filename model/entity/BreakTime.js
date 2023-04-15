@@ -14,7 +14,7 @@ module.exports=(sequelize)=> {
             allowNull: true,
             comment: '휴식시작시간'
         },
-        rest_end_time: {
+        test_end_time: {
             type: DataTypes.DATE,
             allowNull: true,
             comment: '휴식끝시간'

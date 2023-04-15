@@ -13,7 +13,7 @@ class InfoService{
         return infoList;
     }
     async findByStore(storeNum){ // 한 가게 데이터 조회
-        const info = await storesEntity.findAll({
+        const info = await storesEntity.findOne({
             where: {
                 store_num : storeNum
             }
@@ -128,4 +128,4 @@ class InfoService{
     // }
 
 }
-module.exports=InfoService;
+module.exports= new InfoService();

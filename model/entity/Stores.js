@@ -19,7 +19,7 @@ module.exports=(sequelize)=> {
             type: DataTypes.STRING(255),
             allowNull: false
         },
-        madein: {
+        origin: {
             type: DataTypes.STRING(255),
             allowNull: false
         },

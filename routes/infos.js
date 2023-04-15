@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const infoServiceClass=require("../model/service/InfoService");
-const infoService = new infoServiceClass();
+const infoService=require("../model/service/InfoService");
 const path=require("path");
 
 router.get('/insert.do',async (req,res)=>{
@@ -24,18 +23,18 @@ router.post('/insert.do',async (req,res)=>{
 
 
 
-router.get('/update.do',async (req,res)=>{
-    res.render('infos/update');
-})
-router.get('/:storeNum/detail.do',async (req,res)=>{
-    const store = await infoService.findByStore(req.params.storeNum)
-    if(store){
-        res.render("/infos/update",{store:store});
-    } else{
-        res.redirect("/");
-    }
-})
+// router.get('/update.do',async (req,res)=>{
+//     res.render('infos/update');
+// })
 
+router.get('/detail.do', async (req, res) => {
+    const store = await infoService.findByStore(req.session.loginStore.store_num);
+    if (store) {
+        res.render('infos/update', { store: store });
+    } else {
+        res.redirect('/');
+    }
+});
 
 
 module.exports = router;

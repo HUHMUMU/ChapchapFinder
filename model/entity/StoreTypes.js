@@ -3,7 +3,7 @@ const {Sequelize,DataTypes}=require("sequelize");
 module.exports=(sequelize)=> {
     const storeTypesEntity = sequelize.define('storeTypesEntity', {
         type_id: {
-            type: DataTypes.STRING(255),
+            type : DataTypes.STRING,
             allowNull: false,
             primaryKey: true,
             comment: '업종id'
