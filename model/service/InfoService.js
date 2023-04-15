@@ -43,47 +43,47 @@ class InfoService{
     }
 
 
-    // 가게 방송출연
-    async findMedias(storeNum){ // 가게 방송출연 정보 조회
-        const mediaList = await mediasEntity.findAll({
-            where : {
-                store_num : storeNum
-            }
-        });
-        return mediaList;
-    }
-
-    async insertMedias(storeObj){ //가게 방송출연 정보 입력
-        const insertMedias = await mediasEntity.create(storeObj);
-        return insertMedias;
-    }
-
-    async updateMedias(tvNum, channal, episode, tvUrl, tvDate, storeNum){ //가게 방송출연 정보 수정
-        const updateMedias = await mediasEntity.update({
-            tv_num : tvNum,
-            channal : channal,
-            episode : episode,
-            tvUrl : tvUrl,
-            tv_date : tvDate,
-            store_num : storeNum,
-        },{
-            where : {
-                store_num : storeNum,
-                tv_num : tvNum
-            }
-        });
-        return updateMedias;
-    }
-
-    async dropMedias(storeNum, tvNum){ // 가게 방송출연 정보 삭제
-        const dropMedias = await mediasEntity.destroy({
-            where : {
-                store_num : storeNum,
-                tv_num : tvNum
-            }
-        });
-        return dropMedias;
-    }
+    // // 가게 방송출연
+    // async findMedias(storeNum){ // 가게 방송출연 정보 조회
+    //     const mediaList = await mediasEntity.findAll({
+    //         where : {
+    //             store_num : storeNum
+    //         }
+    //     });
+    //     return mediaList;
+    // }
+    //
+    // async insertMedias(storeObj){ //가게 방송출연 정보 입력
+    //     const insertMedias = await mediasEntity.create(storeObj);
+    //     return insertMedias;
+    // }
+    //
+    // async updateMedias(tvNum, channal, episode, tvUrl, tvDate, storeNum){ //가게 방송출연 정보 수정
+    //     const updateMedias = await mediasEntity.update({
+    //         tv_num : tvNum,
+    //         channal : channal,
+    //         episode : episode,
+    //         tvUrl : tvUrl,
+    //         tv_date : tvDate,
+    //         store_num : storeNum,
+    //     },{
+    //         where : {
+    //             store_num : storeNum,
+    //             tv_num : tvNum
+    //         }
+    //     });
+    //     return updateMedias;
+    // }
+    //
+    // async dropMedias(storeNum, tvNum){ // 가게 방송출연 정보 삭제
+    //     const dropMedias = await mediasEntity.destroy({
+    //         where : {
+    //             store_num : storeNum,
+    //             tv_num : tvNum
+    //         }
+    //     });
+    //     return dropMedias;
+    // }
 
 
     // 가게 업종

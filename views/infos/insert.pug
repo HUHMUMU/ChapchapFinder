@@ -95,16 +95,8 @@ block content
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
             h3.mt-5.mb-5.labe 방송 출연 정보
-            div.d-flex.justify-content-between
-                h4.mb-3 출연 매채 등록
-                button.mb-3.btn.btn-light(id="addTvInfoBtn",type="button") 추가
-            div#addTvInfo
-                div
-                    input.form-control.mb-2(name='channal', type='text' placeholder="채널 명을 입력하세요")
-                    input.form-control.mb-2(name='episode', type='text' placeholder="회차를 입력하세요")
-                    input.form-control.mb-2(name='tv_url', type='text' placeholder="방송 영상 링크가 있을시, 입력해주세요")
-                    input.form-control.mb-4(name='tv_date', type='text' placeholder="방영된 날짜를 입력해주세요")
-                    hr
+            h4.mb-3.label(for='media') 출연 매채 등록
+            input#media.form-control.mb-5(name='waitingClosetime', type='text' placeholder="출연 매채 등록")
         hr
         div
             h3.mt-5.mb-5 편의 시설
