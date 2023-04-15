@@ -22,8 +22,18 @@ router.post('/insert.do',async (req,res)=>{
     }
 })
 
-router.get('/detail.do',async (req,res)=>{
-    res.render('infos/detail');
+
+
+router.get('/update.do',async (req,res)=>{
+    res.render('infos/update');
+})
+router.get('/:storeNum/detail.do',async (req,res)=>{
+    const store = await infoService.findByStore(req.params.storeNum)
+    if(store){
+        res.render("/infos/update",{store:store});
+    } else{
+        res.redirect("/");
+    }
 })
 
 
