@@ -12,7 +12,7 @@ class InfoService{
         return infoList;
     }
     async findByStore(storeNum){ // 한 가게 데이터 조회
-        const info = await storescntity.findOne({
+        const info = await storesEntity.findOne({
             where: {
                 store_num : storeNum
             }
