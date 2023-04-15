@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+    div.d-flex.justify-content-between
+        h4.mb-3 메뉴 등록
+    each menu in menuList
+        div.d-flex.align-items-center.justify-content-around.m-3
+            img(src=menu.img, width="230", height="230")
+            div
+                p.m-1 메뉴 이름 : #{menu.name}
+                p.m-1 메뉴 가격 : #{menu.price}원
+                p.m-1 메뉴 설명 : #{menu.info}
+                button.btn.btn-warning(disabled) #{menu.menu_type}
+                div.form-check.form-switch
+                    input.form-check-input(type="checkbox", id="toggle-switch", checked=(menu.status == 1), disabled)
+                    label.form-check-label(for="toggle-switch") 주문가능
+    div.d-flex.justify-content-center
+        a.btn.btn-outline-dark.btn-lg.m-3(href="/menu/update.do") 수정하기

@@ -1,0 +1,105 @@
+extends ../layout
+
+block content
+    div
+        div
+            h4.mb-3 메뉴 등록
+            form.row.mt-4(action="menu/update.do", method="post")
+                input(type="hidden", name="menu_num")
+                //img(width="230", height="230", src=menu.img)
+                input.form-control.mb-1(type="text", name="menu_name", id="menu_name", placeholder="메뉴 이름")
+                input.form-control.mb-1(type="text", name="menu_price", id="menu_price", placeholder="메뉴 가격 (원 제외)")
+                input.form-control.mb-1(type="text", name="menu_info", id="menu_info", placeholder="메뉴 설명")
+                div.d-flex.justify-content-between
+                    div
+                        input.btn-check(type="radio", name="menu_type", id="popular_m")
+                        label.btn.btn-outline-warning.me-2(for="popular_m") 대표메뉴
+                        input.btn-check(type="radio", name="menu_type", id="new_m")
+                        label.btn.btn-outline-warning.me-2(for="new_m") 신메뉴
+                        input.btn-check(type="radio", name="menu_type", id="basics_m", checked=true)
+                        label.btn.btn-outline-warning.me-2(for="basics_m") 일반메뉴
+                        div.form-check.form-switch.ms-5(style="display: inline-block;")
+                            input.form-check-input(type="checkbox", id="toggle-switch", checked=true)
+                            label.form-check-label(for="toggle-switch") 주문가능
+                div.d-flex.justify-content-center
+                    button.btn.btn-outline-dark.btn-lg.m-5(type='submit') 등록
+
+
+        //div(id="menuList")
+        //    each menu in menuList
+        //        form.row.mt-4(action="/menus/update.do", method="post")
+        //            div.col-md-3.mb-2(style="display: inline-block;")
+        //                img#target_img(src="/images/menu/menu_empty.png", width="230", height="230")
+        //                form(name="signform", method="POST", action="./design_update.htm")
+        //                    input#file(type="file", name="file", style="display:none;", onchange="changeValue(this)")
+        //                    input(type="hidden", name="target_url")
+        //                input(type="hidden",value=menu.menu_num,name="menu_num")
+        //                input.form-control.mb-1(type="text", name="menu_name", id="menu_name", value=menu.name, placeholder="메뉴 이름")
+        //                input.form-control.mb-1(type="text", name="menu_price", id="menu_price", value=menu.price, placeholder="메뉴 가격")
+        //                input.form-control.mb-1(type="text", name="menu_info", id="menu_info", value=menu.info, placeholder="메뉴 설명")
+        //
+        //                input.btn-check(type="radio", name="menu_type", id="popular_m", checked=(menu.menu_type==='대표메뉴'))
+        //                label.btn.btn-outline-warning.me-2(for="popular_m") 대표메뉴
+        //                input.btn-check(type="radio", name="menu_type", id="new_m", checked=(menu.menu_type==='신메뉴'))
+        //                label.btn.btn-outline-warning.me-2(for="new_m") 신메뉴
+        //                input.btn-check(type="radio", name="menu_type", id="basics_m", checked=(menu.menu_type==='일반메뉴'))
+        //                label.btn.btn-outline-warning.me-2(for="basics_m") 일반메뉴
+        //
+        //                div.form-check.form-switch(style="display: inline-block;")
+        //                    input.form-check-input(type="checkbox", id="toggle-switch", checked=(menu.status==1))
+        //                    label.form-check-label(for="toggle-switch") 주문가능
+        //            a(class="btn btn-outline-danger col-md-1" onclick="this.closest('#menuList').remove()" href=`/menu/${menu.menu_num}/delete.do`) 삭제
+        //
+        //div.text-center(id="plusMenu")
+        //    button.btn.btn-outline-dark.m-1(type='submit') 등록하기
+
+
+    //script.
+        document.querySelector('#target_img').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector('#file').click();
+        });
+
+        function changeValue(obj) {
+            document.querySelector('input[name="target_url"]').value = document.querySelector('#target_img').src;
+            // document.querySelector('form[name="signform"]').submit();
+        }
+
+        var count_n = 0;
+        const addMenuBtn = document.getElementById("addMenuBtn");
+        const menuList = document.getElementById("menuList");
+        addMenuBtn.addEventListener("click", (e) => {
+            count_n++;
+            menuList.insertAdjacentHTML("beforeend", imgInputComponent());
+        });
+        function imgInputComponent() {
+            return `
+                <div id="menuInsert">
+                  <form class="row mt-4" action="/menus/manage.do" method="post">
+                    <input type="hidden" value=menu.menu_num name="menu_num">
+                    <div class="col-md-3 mb-2" style="display: inline-block;">
+                      <img id="target_img" src="/images/menu/menu_empty.png" width="230" height="230">
+                      <form name="signform" method="POST" action="./design_update.htm">
+                        <input id="file" type="file" name="file" style="display:none;" onchange="changeValue(this)">
+                        <input type="hidden" name="target_url">
+                      </form>
+                      <input class="form-control mb-1" type="text" name="menu_name" id="menu_name" value=menu.name placeholder="메뉴 이름">
+                      <input class="form-control mb-1" type="text" name="menu_price" id="menu_price" value=menu.price placeholder="메뉴 가격">
+                      <input class="form-control mb-1" type="text" name="menu_info" id="menu_info" value=menu.info placeholder="메뉴 설명">
+
+                      <input class="btn-check" type="radio" name="menu_type" id="popular_m" checked=(menu.menu_type==='대표메뉴')>
+                      <label class="btn btn-outline-warning me-2" for="popular_m">대표메뉴</label>
+                      <input class="btn-check" type="radio" name="menu_type" id="new_m" checked=(menu.menu_type==='신메뉴')>
+                      <label class="btn btn-outline-warning me-2" for="new_m">신메뉴</label>
+                      <input class="btn-check" type="radio" name="menu_type" id="basics_m" checked=(menu.menu_type==='기존메뉴')>
+                      <label class="btn btn-outline-warning me-2" for="basics_m">기존메뉴</label>
+
+                      <div class="form-check form-switch" style="display: inline-block;">
+                        <input class="form-check-input" type="checkbox" id="toggle-switch" checked>
+                        <label class="form-check-label" for="toggle-switch">주문가능</label>
+                      </div>
+                    </div>
+                    <button id="menuDeleteBtn" class="btn btn-outline-danger col-md-1" onclick="this.closest('#menuInsert').remove()">삭제</button>
+                  </form>
+                </div>`;
+        }

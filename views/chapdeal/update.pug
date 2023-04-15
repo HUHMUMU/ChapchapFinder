@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    div.d-flex.justify-content-between
+        h4.mb-3 챱딜 등록
+    each deal in dealList
+        div.d-flex.justify-content-center.mb-5
+            div.card(style="width: 800px;")
+                img.card-img-top(src="#{deal.event_img}", width="800", height="300")
+                div.card-body
+                    div.d-flex.justify-content-between
+                        h5.card-text #{deal.event_title}
+                        p #{deal.event_start.toLocaleString()}~#{deal.event_end.toLocaleString()}
+                    p.m-0.card-text 조건 : #{deal.event_condition}
+                    p.m-0.card-text 증정 : #{deal.event_reward}
+
+
+    div.d-flex.justify-content-center
+        a.btn.btn-outline-dark.m-3(href="/chapdeal/update.do") 등록하기

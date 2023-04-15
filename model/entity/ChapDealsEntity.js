@@ -36,9 +36,10 @@ module.exports=(sequelize)=> {
             type: DataTypes.DATEONLY,
             allowNull: true,
         },
-    }, {
-        timestamps: false,
-        comment: '이벤트보드',
-    });
+    },
+        {
+            timestamps:false,
+            tableName:"chap_deals"
+        });
     return chapDealsEntity;
 }

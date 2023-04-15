@@ -5,7 +5,6 @@ const {Op, where}=require("sequelize");
 class MenuService{
     async findAllMenu() {// 모든 메뉴 데이터 조회
         const menu = await menuManagesEntity.findAll();
-        //메롱 제바루ㅜ
         return menu;
     }
 
@@ -18,33 +17,38 @@ class MenuService{
         return menuList;
     }
 
-    async insertMenu(store_num, name, img, price, info, menu_type, status) { //가게별 메뉴 추가
-        const insertMenu = await menuManagesEntity.create({
-            store_num: store_num,
-            name: name,
-            img: img,
-            price: price,
-            info: info,
-            menu_type: menu_type,
-            status: status
-        });
+    async insertMenu(menu) { //가게별 메뉴 추가
+        const insertMenu = await menuManagesEntity.create(menu);
         return insertMenu;
     };
+    // async insertMenu(menu){ //가게 등록
+    //     const insertMenu=await menuManagesEntity.create(menu);
+    //     return insertMenu;
+    // }
 
     //수정
-    async modifyMenu(store_num, menu_num, name, img, price, info, menu_type, status) { //메뉴 수정
-        const modifyMenu = await menuManagesEntity.update({
-            name: name,
-            img: img,
-            price: price,
-            info: info,
-            menu_type: menu_type,
-            status: status
-        },{
+    // async modifyMenu(menu_num, name, img, price, info, menu_type, status, store_num) { //메뉴 수정
+    //     // UPDATE menu_manages SET img=?,name=?,price=?,info=?,menu_type=?,status=? WHERE menu_num=?;
+    //     const modifyMenu = await menuManagesEntity.update({
+    //         name: name,
+    //         img: img,
+    //         price: price,
+    //         info: info,
+    //         menu_type: menu_type,
+    //         status: status
+    //     },{
+    //         where: {
+    //             menu_num: menu_num,
+    //             store_num: store_num,
+    //         }
+    //     });
+    //     return modifyMenu;
+    // }
+    async modifyMenu(store_num) { //가게 수정
+        const modifyMenu = await menuManagesEntity.update(store_num, {
             where: {
-                store_num: store_num,
-                menu_num: menu_num
-            }
+                store_num: store_num
+            },
         });
         return modifyMenu;
     }
@@ -59,6 +63,6 @@ class MenuService{
         return dropMenu;
     }
 }
-module.exports=MenuService;
+module.exports=new MenuService();
 
 
