@@ -96,7 +96,7 @@ block content
         div.form-floating(method="post", enctype="multipart/form-data")
             h3.mt-5.mb-5.labe 방송 출연 정보
             h4.mb-3.label(for='media') 출연 매채 등록
-            input#media.form-control.mb-5(name='waitingClosetime', type='text' placeholder="출연 매채 등록")
+            input#media.form-control.mb-5(name='media', type='text' placeholder="출연 매채 등록")
         hr
         div
             h3.mt-5.mb-5 편의 시설
@@ -142,22 +142,3 @@ block content
             input#hash.form-control.mb-5(name='hash', type='text' placeholder="해시태그 등록")
         hr
         input#submit.btn.btn-primary.form-control.mt-5.mb-5(value="등록", placeholder="등록")
-
-    script.
-        const addTvInfoBtn = document.getElementById("addTvInfoBtn");
-        const addTvInfo = document.getElementById("addTvInfo");
-        addTvInfoBtn.addEventListener("click",(e)=>{
-            addTvInfo.insertAdjacentHTML("beforeend",tvInputComponent());
-        });
-        function tvInputComponent(){
-            return `
-                        <div>
-                          <input class="form-control mb-3 mt-4" name="channal" type="text" placeholder="채널 명을 입력하세요">
-                          <input class="form-control mb-2" name="episode" type="text" placeholder="회차를 입력하세요">
-                          <input class="form-control mb-2" name="tv_url" type="text" placeholder="방송 영상 링크가 있을시, 입력해주세요">
-                          <input class="form-control mb-4" name="tv_date" type="text" placeholder="방영된 날짜를 입력해주세요">
-                          <hr>
-                        </div>
-            `;
-        }
-

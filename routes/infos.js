@@ -22,5 +22,10 @@ router.post('/insert.do',async (req,res)=>{
     }
 })
 
+router.get('/detail.do',async (req,res)=>{
+    res.render('infos/detail');
+})
+
+
 
 module.exports = router;
