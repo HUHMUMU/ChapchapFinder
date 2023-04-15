@@ -140,12 +140,12 @@ block content
         div.form-floating(method="post", enctype="multipart/form-data")
             h3.mt-5.mb-5.label(for='madein') 원산지 표시
             h4.mb-3 재료에 대한 원산지 표시
-            textarea.form-control(id='madein' placeholder="??" value=store.madein)
+            testarea.form-control(id='madein' placeholder="??") #{store.madein}
         hr
-        div.form-floating(method="post", enctype="multipart/form-data")
-            h3.mt-5.mb-5.labe 방송 출연 정보
-            h4.mb-3.label(for='media') 출연 매채 등록
-            textarea.form-control(id='media' placeholder="??" value=store.media)
+        div.form-floating(method="post", type="text" enctype="multipart/form-data")
+            h3.mt-5.mb-5.label 방송 출연 정보
+            h4.mb-3.label(for='tvshow') 출연 매채 등록
+            textarea.form-control(id='tvshow' placeholder="??") #{store.tvshow}
         hr
         div
             h3.mt-5.mb-5 편의 시설
