@@ -10,6 +10,7 @@ const reviewsRouter = require('./routes/reviews');
 const storesRouter = require('./routes/stores');
 const manageRouter = require('./routes/manage');
 const infoRouter = require('./routes/infos');
+const waitingRouter=require('./routes/adminWaiting');
 
 
 const app = express();
@@ -99,7 +100,7 @@ app.post('/api/user', (req, res) => {
 app.use('/stores', storesRouter);
 app.use('/menu', manageRouter);
 app.use('/infos', infoRouter);
-
+app.use('/waitings', waitingRouter);
 
 
 // catch 404 and forward to error handler

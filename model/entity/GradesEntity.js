@@ -1,26 +1,27 @@
 const {Sequelize,DataTypes}=require("sequelize");
 
 module.exports=(sequelize)=> {
-    const storeTypesEntity = sequelize.define('storeTypesEntity', {
-        type_id: {
+    const gradesEntity = sequelize.define('gradesEntity', {
+        user_grade: {
             type: DataTypes.STRING(255),
             allowNull: false,
             primaryKey: true,
-            comment: '업종id'
+            comment: '유저등급'
         },
-        store_num: {
+        grade_low: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            comment: '가게고유번호'
+            comment: 'low범위'
         },
-        category_num: {
+        grade_high: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            comment: '업종카테고리'
-        }
+            comment: 'high범위'
+        },
     }, {
+        tableName: "grades",
         timestamps: false,
-        tableName: 'storetypes'
+        comment: '유저등급',
     });
-    return storeTypesEntity;
+    return gradesEntity;
 }
