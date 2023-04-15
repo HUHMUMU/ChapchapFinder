@@ -1,10 +1,9 @@
 const sequelize=require("../chapchapSequelize");
-const storesEntity=require("../entity/Stores")(sequelize);
-const mediasEntity=require("../entity/Medias")(sequelize);
-const TypeClassessEntity=require("../entity/TypeClasses")(sequelize);
-const storeTypesEntity=require("../entity/StoreTypes")(sequelize);
-const storeImgsEntity=require("../entity/StoreImgs")(sequelize);
-const BreakTimeEntity=require("../entity/BreakTime")(sequelize);
+const storesEntity=require("../entity/StoresEntity")(sequelize);
+const TypeClassessEntity=require("../entity/TypeClassesEntity")(sequelize);
+const storeTypesEntity=require("../entity/StoreTypesEntity")(sequelize);
+const storeImgsEntity=require("../entity/StoreImgsEntity")(sequelize);
+const BreakTimeEntity=require("../entity/BreakTimesEntity")(sequelize);
 const {Op}=require("sequelize");
 class InfoService{
     async findAllStoreInfo(){

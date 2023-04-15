@@ -16,6 +16,7 @@ module.exports=(sequelize)=> {
         },
         img: {
             type: DataTypes.STRING(255),
+            allowNull: true,
             comment: '메뉴사진',
         },
         price: {
@@ -25,10 +26,11 @@ module.exports=(sequelize)=> {
         },
         info: {
             type: DataTypes.STRING(255),
+            allowNull: true,
             comment: '메뉴설명',
         },
         menu_type: {
-            type: DataTypes.ENUM('대표메뉴', '신메뉴', '이벤트', '일반메뉴'),
+            type: DataTypes.ENUM('대표메뉴', '신메뉴', '일반메뉴'),
             allowNull: false,
             comment: '메뉴종류',
         },
@@ -42,11 +44,18 @@ module.exports=(sequelize)=> {
             allowNull: false,
             comment: '가게고유번호',
         },
+    }, {
+        timestamps: false,
+        tableName: "menu_manages",
+        comment: '메뉴관리'
+    });
 
-    },
-        {
-            timestamps: false,
-            tableName: "menu_manages", // 이 부분에서 테이블 이름을 지정합니다.
+    menuManagesEntity.associate = (models) => {
+        menuManagesEntity.belongsTo(models.storesEntity, {
+            foreignKey: "store_num",
+            targetKey: "store_num",
         });
+    };
+
     return menuManagesEntity;
-}
+};

@@ -1,6 +1,6 @@
-const {Sequelize,DataTypes}=require("sequelize");
+const {Sequelize, DataTypes} = require("sequelize");
 
-module.exports=(sequelize)=> {
+module.exports = (sequelize) => {
     const jjimManagesEntity = sequelize.define('jjimManagesEntity', {
         jjim_num: {
             type: DataTypes.INTEGER,
@@ -26,6 +26,25 @@ module.exports=(sequelize)=> {
         },
     }, {
         timestamps: false,
+        tableName: "jjim_manages",
     });
+
+    jjimManagesEntity.associate = (models) => {
+        jjimManagesEntity.belongsTo(models.storesEntity, {
+            foreignKey: "store_num",
+            targetKey: "store_num",
+        });
+        jjimManagesEntity.belongsTo(models.usersEntity, {
+            foreignKey: "user_id",
+            targetKey: "user_id",
+        });
+    };
+
+    jjimManagesEntity.addConstraint("unique_user_store_jjim", {
+        type: "unique",
+        fields: ["user_id", "store_num"],
+        name: "unique_user_store_jjim",
+    });
+
     return jjimManagesEntity;
-}
+};
