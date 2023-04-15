@@ -9,15 +9,5 @@ class StoresService {
             new Error(e);
         }
     }
-
-
-    async findStoreManage(storeId) {
-        const storeManage = await storeManagesEntity.findOne({
-            where : {
-                store_id : storeId
-            }
-        });
-        return storeManage;
-    }
 }
 module.exports = new StoresService();

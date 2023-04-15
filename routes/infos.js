@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const infoService=require("../model/service/InfoService");
-const storeService=require("../model/service/StoresService");
 const storeMenagesService=require("../model/service/StoreManagesService");
 const path=require("path");
 
