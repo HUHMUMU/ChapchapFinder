@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const infoService=require("../model/service/InfoService");
+const storeService=require("../model/service/StoresService");
+const storeMenagesService=require("../model/service/StoreManagesService");
 const path=require("path");
 
 router.get('/insert.do',async (req,res)=>{
@@ -29,8 +31,9 @@ router.post('/insert.do',async (req,res)=>{
 
 router.get('/detail.do', async (req, res) => {
     const store = await infoService.findByStore(req.session.loginStore.store_num);
-    if (store) {
-        res.render('infos/update', { store: store });
+    const storeManage= await  storeMenagesService.findStoreManage(req.session.loginStore.store_id)
+    if (store && storeManage) {
+        res.render('infos/update', { store: store, storeManage : storeManage});
     } else {
         res.redirect('/');
     }

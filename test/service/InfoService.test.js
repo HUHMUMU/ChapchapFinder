@@ -125,7 +125,7 @@ describe("InfoService test",()=>{
             tv_date: "2023-01-19",
         };
         try {
-            const updateResult = await infoService.updateMedias(
+            const updateResult2 = await infoService.updateMedias(
                 medias.tv_num,
                 medias.channal,
                 medias.episode,
@@ -133,8 +133,8 @@ describe("InfoService test",()=>{
                 medias.tv_date,
                 medias.store_num
             );
-
-            console.log("수정" + JSON.stringify(updateResult));
+            let updateResult = await infoService.findByStore(1);
+            console.log("수정" + JSON.stringify(updateResult2));
         } catch (e) {
             console.error(e);
         }
@@ -149,6 +149,47 @@ describe("InfoService test",()=>{
         }
     });
 
+    test("findByTypes", async ()=>{ // 가게 업종 조회
+        const type = await infoService.findByTypes(1)
+        console.log("조회"+ JSON.stringify(type));
+    })
+
+    test("findByBreaktime", async ()=>{
+        const breaktime = await infoService.findByBreaktime(1)
+        console.log("조회 " + JSON.stringify(breaktime));
+    })
+
+    test("insertBreaktime",async ()=>{
+        const store = {
+            store_num:"7",
+            rest_num:"7",
+            rest_start_time:"2023-04-15 14:30:00",
+            test_end_time:"2023-04-15 16:30:00",
+        }
+        let insert=0;
+        try {
+            insert= await infoService.insertBreaktime(store);
+            console.log("등록 : "+JSON.stringify(insert));
+        }catch (e) {
+            console.error(e)
+        }
+    })
+
+    test("updateBreaktime", async () => { //가게 방송출연 정보 수정
+        const store = {
+            store_num: "7",
+            rest_num : "7",
+            rest_start_time : "2020-04-15 05:30:00",
+            test_end_time :"2020-04-15 07:30:00"
+        };
+        try {
+            let update = await infoService.updateByStoreInfo(store);
+            let resultUser = await infoService.findByStore(1);
+            console.log("수정 : " + JSON.stringify(resultUser));
+        } catch (e) {
+            console.error(e);
+        }
+    });
 
 
 

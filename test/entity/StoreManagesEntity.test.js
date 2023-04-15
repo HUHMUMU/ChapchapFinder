@@ -1,13 +1,26 @@
-const storeManagesEntityTest=require("../../model/entity/StoreManagesEntity");
+const storeManagesService=require("../../model/service/StoreManagesService");
+const StoreManagesEntityTest=require("../../model/entity/StoreManagesEntity");
+const StoreManagesEntityTest=new StoreManagesEntityTest();
 
 describe("StoreManagesEntity Test", () => {
+    test("findStore", async ()=>{
+        const store = await storeManagesService.findStoreManage(1);
+        console.log(JSON.stringify(store))
+        }
+    )
+
+
+
+
+
+
     test("findAll", async () => {
-        const storemanages = await storeManagesEntityTest.findAll();
+        const storemanages = await storeManagesService.findAll();
         console.log(storemanages);
     });
 
     test("findByPk", async () => {
-        const storemanages = await storeManagesEntityTest.findByPk("store005");
+        const storemanages = await storeManagesService.
         console.log(storemanages);
     });
 
