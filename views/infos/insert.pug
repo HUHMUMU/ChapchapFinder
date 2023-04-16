@@ -89,25 +89,22 @@ block content
                 input#waiting_closetime.form-control.mb-5(name='waitingClosetime', type='text' placeholder="웨이팅 마감 시간")
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
-            h3.mt-5.mb-5.label(for='origin') 원산지 표시
-            div.d-flex.justify-content-between
-                h4.mb-3 재료에 대한 원산지 표시
-                button.mb-3.btn.btn-light(id="addMenuBtn",type="button") 추가
-            div#originList
-            div.d-flex.d-inline-block
-                input.form-control.mb-5.me-3(type='text' placeholder="재료를 적어주세요 ex)돼지고기")
-                input#origin.form-control.mb-5(name='origin', type='text' placeholder="원산지를 적어주세요 ex)호주산")
+            h3.mt-5.mb-5.label(for='madein') 원산지 표시
+            h4.mb-3 재료에 대한 원산지 표시
+            textarea.form-control(id='madein' placeholder="염병염병여병쳠ㅁ병~~~")
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
             h3.mt-5.mb-5.labe 방송 출연 정보
             div.d-flex.justify-content-between
                 h4.mb-3 출연 매채 등록
                 button.mb-3.btn.btn-light(id="addTvInfoBtn",type="button") 추가
-            div
-                input#channal.form-control.mb-2(name='channal', type='text' placeholder="채널 명을 입력하세요")
-                input#episode.form-control.mb-2(name='episode', type='text' placeholder="회차를 입력하세요")
-                input#tvUrl.form-control.mb-2(name='tv_url', type='text' placeholder="방송 영상 링크가 있을시, 입력해주세요")
-                input#tvDate.form-control.mb-2(name='tv_date', type='text' placeholder="방영된 날짜를 입력해주세요")
+            div#addTvInfo
+                div
+                    input.form-control.mb-2(name='channal', type='text' placeholder="채널 명을 입력하세요")
+                    input.form-control.mb-2(name='episode', type='text' placeholder="회차를 입력하세요")
+                    input.form-control.mb-2(name='tv_url', type='text' placeholder="방송 영상 링크가 있을시, 입력해주세요")
+                    input.form-control.mb-4(name='tv_date', type='text' placeholder="방영된 날짜를 입력해주세요")
+                    hr
         hr
         div
             h3.mt-5.mb-5 편의 시설
@@ -153,3 +150,22 @@ block content
             input#hash.form-control.mb-5(name='hash', type='text' placeholder="해시태그 등록")
         hr
         input#submit.btn.btn-primary.form-control.mt-5.mb-5(value="Input", placeholder="제출")
+
+    script.
+        const addTvInfoBtn = document.getElementById("addTvInfoBtn");
+        const addTvInfo = document.getElementById("addTvInfo");
+        addTvInfoBtn.addEventListener("click",(e)=>{
+            addTvInfo.insertAdjacentHTML("beforeend",tvInputComponent());
+        });
+        function tvInputComponent(){
+            return `
+                        <div>
+                          <input class="form-control mb-3 mt-4" name="channal" type="text" placeholder="채널 명을 입력하세요">
+                          <input class="form-control mb-2" name="episode" type="text" placeholder="회차를 입력하세요">
+                          <input class="form-control mb-2" name="tv_url" type="text" placeholder="방송 영상 링크가 있을시, 입력해주세요">
+                          <input class="form-control mb-4" name="tv_date" type="text" placeholder="방영된 날짜를 입력해주세요">
+                          <hr>
+                        </div>
+            `;
+        }
+

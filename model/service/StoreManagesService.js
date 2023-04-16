@@ -84,4 +84,4 @@ class StoreManagesService {
         }
     }
 }
-module.exports=StoreManagesService;
+module.exports=new StoreManagesService();

@@ -1,6 +1,6 @@
 const sequelize=require("../chapchapSequelize");
 const reviewsEntity=require("../entity/ReviewsEntity")(sequelize);
-const reviewRepliesEntity=require("../entity/ReviewReplies")(sequelize);
+const reviewRepliesEntity=require("../entity/ReviewRepliesEntity")(sequelize);
 const {Op}=require("sequelize");
 class ReviewsService{
     async list(storeNum,rRstatus){

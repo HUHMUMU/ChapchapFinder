@@ -1,26 +1,47 @@
-nav.navbar.navbar-expand-lg.bg-body-tertiary
+nav.navbar.navbar-expand-lg
     div.container-fluid
         a.navbar-brand(href="/")
             img(src="/images/logo/logo.png", alt="LOGO", width="150px")
-            button.navbar-toggler(data-bs-toggle="collapse", data-bs-target="#navbarNav")
-                span.navbar-toggler-icon
         div#navbarNav.collapse.navbar-collapse
             ul.navbar-nav
                 li.nav-item
-                    a.nav-link.active(href="#")
-                        button.btn.btn-outline-secondary(type="button")
-                            img(src="/images/logo/mypage.png", alt="mypage-icon", width="20px")
-                            span 내정보/
-                            img(src="/images/logo/signup.png", alt="signup-icon", width="20px")
-                            span 회원가입
+                    if(!loginStore)
+                        a.nav-link.active(href="#")
+                            button.btn.btn-outline-secondary(type="button")
+                                img(src="/images/logo/signup.png", alt="signup-icon", width="20px")
+                                span.ms-1 회원가입
+                    else
+                        a.nav-link.active(href="#")
+                            button.btn.btn-outline-secondary(type="button")
+                                img(src="/images/logo/mypage.png", alt="mypage-icon", width="20px")
+                                span.ms-1 내정보
                 li.nav-item
-                    div#loginContainer
+                    div#loginContainer.d-flex.align-items-center
                         if(!loginStore)
-                            a.btn.btn-outline-dark(href="/stores/login.do") 로그인
+                            a.nav-link.active(href="/stores/login.do")
+                                button.btn.btn-outline-secondary(type="button")
+                                    span 로그인
                         else
-                            a.text-secondary.me-2.text-decoration-none(href=`/users/${loginStore.store_id}/detail.do`)=`${loginStore.store_id}`
-                            a.btn.btn-outline-dark(href="/stores/logout.do") 로그아웃
-        div.form-check.form-switch.d-flex.align-items-center
+                            a.nav-link.active(href="/stores/logout.do")
+                                button.btn.btn-outline-secondary(type="button")
+                                    span 로그아웃
+                            button.btn.btn-outline-secondary.ms-2.disabled(type="button")
+                                b.text-secondary.me-2.text-decoration-none(href=`/users/${loginStore.store_id}/detail.do`)=`${loginStore.store_id}`
+                                span 님 환영합니다
+        div.form-check.form-switch.d-flex.align-items-center.px-2.py-1.border.border-teritory.rounded
             label.form-check-label.me-5(for="flexSwitchCheckDefault") OFF
             input.form-check-input(type="checkbox", role="switch", id="flexSwitchCheckDefault", style="width: 2.5rem; height: 1.5rem;")
             label.form-check-label.ms-2(for="flexSwitchCheckDefault") ON
+hr.m-0
+nav.navbar.navbar-expand-lg
+    div(style="margin-left:10.4rem;").container-fluid
+        ul.d-flex.list-unstyled
+            li
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/reviews/list.do`) 리뷰 관리
+            li
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/`) 가게 정보 관리
+            li
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/menu/manage.do`) 가게 메뉴 관리
+            li
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/`) 웨이팅 관리
+// 하.. 가게사장측도 스프링으로 했으면 좋았을텐데...진짜...
