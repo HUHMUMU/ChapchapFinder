@@ -1,5 +1,4 @@
-const InfoService=require("../../model/service/InfoService");
-const infoService=new InfoService();
+const infoService=require("../../model/service/InfoService");
 
 describe("InfoService test",()=>{
 
@@ -184,13 +183,59 @@ describe("InfoService test",()=>{
         };
         try {
             let update = await infoService.updateByStoreInfo(store);
-            let resultUser = await infoService.findByStore(1);
-            console.log("수정 : " + JSON.stringify(resultUser));
+            console.log("수정 : " + JSON.stringify(update));
         } catch (e) {
             console.error(e);
         }
     });
 
+    test("findHolidaysByStore", async ()=>{ // 가게 휴무일 조회
+        const holidays = await infoService.findHolidaysByStore(1)
+        console.log("조회"+ JSON.stringify(holidays));
+    })
+
+    test("insertHolidays",async ()=>{ // 가게 휴무일 등록
+        const holiday = {
+            store_num:"2",
+            holi_num:"11",
+            week:"일",
+            date:null,
+            regular:1
+        }
+        let insert=0;
+        try {
+            insert= await infoService.insertHolidays(holiday);
+            console.log("등록 : "+JSON.stringify(insert));
+        }catch (e) {
+            console.error(e)
+        }
+    })
+
+    test("updateHolidays", async () => { //가게 휴무일 수정
+        const holiday = {
+            store_num:"1",
+            holi_num:"1",
+            week:null,
+            date:"2023-05-01",
+            regular:0
+        };
+        try {
+            let update = await infoService.updateHolidays(holiday)
+            let resultHoli = await infoService.findHolidaysByStore(1)
+            console.log("수정 : " + JSON.stringify(resultHoli));
+        } catch (e) {
+            console.error(e);
+        }
+    })
+
+    test("dropHoliday", async () => { // 가게 휴무일 삭제
+        try{
+            const holiday = await infoService.dropHoliday(11,2)
+            console.log("삭제 :" +holiday)
+        }catch (e) {
+            console.error(e)
+        }
+    });
 
 
 })

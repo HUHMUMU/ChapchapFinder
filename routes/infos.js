@@ -31,8 +31,10 @@ router.post('/insert.do',async (req,res)=>{
 router.get('/detail.do', async (req, res) => {
     const store = await infoService.findByStore(req.session.loginStore.store_num);
     const storeManage= await  storeMenagesService.findStoreManage(req.session.loginStore.store_id)
-    if (store && storeManage) {
-        res.render('infos/update', { store: store, storeManage : storeManage});
+    const holidays = await  infoService.findHolidaysByStore(req.session.loginStore.store_num)
+    const breakTimes = await  infoService.findBreaktimesByStore(req.session.loginStore.store_num)
+    if (store) {
+        res.render('infos/update', { store: store, storeManage : storeManage, holidays : holidays, breakTimes : breakTimes});
     } else {
         res.redirect('/');
     }
