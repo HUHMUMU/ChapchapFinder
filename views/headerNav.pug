@@ -15,6 +15,7 @@ nav.navbar.navbar-expand-lg
                             button.btn.btn-outline-secondary(type="button")
                                 img(src="/images/logo/mypage.png", alt="mypage-icon", width="20px")
                                 span.ms-1 내정보
+                                // 내정보(사장 정보) 페이지 아직 미구현
                 li.nav-item
                     div#loginContainer.d-flex.align-items-center
                         if(!loginStore)
@@ -41,6 +42,6 @@ nav.navbar.navbar-expand-lg
             li
                 a.btn.btn-outline-secondary.btn-sm.m-2(href=`/infos/detail.do`) 가게 정보 관리
             li
-                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/menu/manage.do`) 가게 메뉴 관리
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/menu/list.do`) 가게 메뉴 관리
             li
-                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/waitings/admin_waiting.do`) 웨이팅 관리
+                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/waitings/all.do`) 웨이팅 관리
