@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+    div
+        h4.mb-3 메뉴 등록
+        form.mt-4(action="/menu/insert.do", method="post", enctype="multipart/form-data")
+            label.form-label(for='img')
+            input.form-control.mb-1(type='file', id='img', name="img", accept="image/*")
+
+            input.form-control.mb-1(type="text", name="name", id="name", placeholder="메뉴 이름")
+            input.form-control.mb-1(type="text", name="price", id="price", placeholder="메뉴 가격 (원 제외)")
+            input.form-control.mb-1(type="text", name="info", id="info", placeholder="메뉴 설명")
+
+            div.d-flex.justify-content-between
+                div
+                    input.btn-check(type="radio", name="menu_type", id="대표메뉴", value="대표메뉴")
+                    label.btn.btn-outline-warning.me-2(for="대표메뉴") 대표메뉴
+                    input.btn-check(type="radio", name="menu_type", id="신메뉴", value="신메뉴")
+                    label.btn.btn-outline-warning.me-2(for="신메뉴") 신메뉴
+                    input.btn-check(type="radio", name="menu_type", id="일반메뉴", value="일반메뉴", checked=true)
+                    label.btn.btn-outline-warning.me-2(for="일반메뉴") 일반메뉴
+
+                div
+                    input.btn-check(type="radio", name="status", id="1", value="1", checked=true)
+                    label.btn.btn-outline-secondary.me-2(for="1") 주문가능
+                    input.btn-check(type="radio", name="status", id="0", value="0")
+                    label.btn.btn-outline-secondary(for="0") 주문불가능
+
+            div.d-flex.justify-content-center
+                button.btn.btn-outline-dark.btn-lg.m-5(type='submit') 등록하기

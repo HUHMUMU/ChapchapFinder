@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+    div
+        h4.mb-3 챱딜 등록
+        form.mt-4(action="/chapdeal/insert.do", method="post", enctype="multipart/form-data")
+            label.form-label(for='event_img')
+            input.form-control.mb-1(type='file', id='event_img', name="event_img", accept="image/*" )
+
+            input.form-control.mb-1(type="text", name="event_title", id="event_title", placeholder="이벤트 제목")
+            input.form-control.mb-1(type="text", name="event_condition", id="event_condition", placeholder="이벤트 조건")
+            input.form-control.mb-1(type="text", name="event_reward", id="event_reward", placeholder="이벤트 보상")
+
+            div.d-flex.justify-content-between
+                label(for="event_start")
+                input.form-control(type="date" id="event_start" name="event_start")
+                h4 ~
+                label(for="event_end")
+                input.form-control(type="date" id="event_end" name="event_end")
+
+            div.d-flex.justify-content-center
+                button.btn.btn-outline-dark.btn-lg.m-5(type='submit') 등록하기
