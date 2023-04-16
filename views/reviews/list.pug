@@ -34,7 +34,7 @@ block content
                 div.border.border-2.border-dark.text-center(style="width: 50%")
                     button.btn.btn-outline-primary.text-decoration-none 전체 리뷰 (#{count})
                 div.border.border-2.border-dark.text-center(style="width: 50%")
-                    button.btn.btn-outline-primary.text-decoration-none 미답변 리뷰
+                    button.btn.btn-outline-primary.text-decoration-none 미답변 리뷰 (#{uncount})
 
         div.container.my-4
             each review in reviews
@@ -43,24 +43,12 @@ block content
                         h3.my-2.text-start #{review.review_num}
                         h3.my-2.text-start #{review.user_id}
                         h5.my-2.text-start 등급
-                        div.star-ratings-css
-                            div.star-ratings-css-top
-                                span#stars
-                                span#stars
-                                span#stars
-                                span#stars
-                                span#stars
-                            div.star-ratings-css-bottom
-                                input(type='radio', id='star5', name='rating', value='5')
-                                label(for='star5')
-                                input(type='radio', id='star4', name='rating', value='4')
-                                label(for='star4')
-                                input(type='radio', id='star3', name='rating', value='3')
-                                label(for='star3')
-                                input(type='radio', id='star2', name='rating', value='2')
-                                label(for='star2')
-                                input(type='radio', id='star1', name='rating', value='1')
-                                label(for='star1')
+                        div.star-ratings
+                            - const stars = Array.from({ length: review.star }, (_, i) => i + 1)
+                            each val in stars
+                                label.star-rating
+                                    input.star(type="hidden" name="rating" value=val)
+                                    i.fa.fa-star
                     div.col-8
                         h4.mt-4 리뷰내용
                         p.mt-2 #{review.content}
