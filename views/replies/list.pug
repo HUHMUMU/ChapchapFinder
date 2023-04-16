@@ -10,12 +10,12 @@ ul.ps-0(style="list-style:none")
                         p.card-text.d-flex
                             small.pe-3.text-muted=`작성일 : ${reply ? reply.post_date.toLocaleString("ko-KR") : '댓글이 없어요 ㅠㅠ'}`
                         p.card-text=reply?reply.content:'댓글이 없어요 ㅠㅠ'
-                //ul.nav.nav-tabs
-                //    li.nav-item
-                //        a.nav-link(href=`#replyModify${rrview.rr_num}`, role="button", data-bs-toggle="collapse") 수정
-                //    li.nav-item
-                //        a(href=`/replies/${rrview.rr_num}/${rrview.review_num}/delete.do`).nav-link 삭제
-                //div.collapse(id=`replyModify${rr.rr_num}`)
-                //    include views/replies/update
-                //div.collapse(id=`replyReply${rr.rr_num}`)
-                //    include replyInsert
+            ul.nav.nav-tabs
+                li.nav-item
+                    a.nav-link(href=`#replyModify${reply.rr_num}`, role="button", data-bs-toggle="collapse") 수정
+                li.nav-item
+                    a(href=`/replies/${reply.rr_num}/${reply.review_num}/delete.do`).nav-link 삭제
+                div.collapse(id=`replyModify${reply.rr_num}`)
+                    include update
+                div.collapse(id=`replyReply${reply.rr_num}`)
+                    include insert
