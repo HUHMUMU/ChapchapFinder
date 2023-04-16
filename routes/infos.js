@@ -40,5 +40,19 @@ router.get('/detail.do', async (req, res) => {
     }
 });
 
+router.get("/delete.do", async (req,res)=>{
+    let del=0;
+    try{
+        del=await infoService.findByStore(req.session.loginStore.store_num);
+    }catch(e){
+        console.error(e);
+    }
+    if(del>0){
+        res.redirect("/boards/list.do");
+    }else{
+        res.redirect(`/boards/detail.do`);
+    }
+});
+
 
 module.exports = router;
