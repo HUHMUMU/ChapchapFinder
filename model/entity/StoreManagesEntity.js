@@ -36,8 +36,11 @@ module.exports=(sequelize)=> {
         store_num: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            unique: true,
+            autoIncrement: true,
             comment: '가게고유번호'
         }
+
     }, {
         tableName:"store_manages",
         timestamps: false
