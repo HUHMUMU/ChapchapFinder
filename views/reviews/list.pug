@@ -59,7 +59,5 @@ block content
                             button.btn.btn-outline-secondary.my-4(type="button") 신고하기
                         div
                             button.btn.btn-outline-secondary.mt-auto.my-4(type="button") 등록하기
-                    //form.mx-auto.mb-4(method="GET", action="/reviews/list.do",style="width:400px")
-                    //    input(type="hidden",value=review.review_num,name="reviewNum")
-                    //    if ()
-                    //    include ../replies/list
+                each reply in replies
+                    include ../replies/list

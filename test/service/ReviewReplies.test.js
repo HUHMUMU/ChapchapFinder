@@ -7,8 +7,10 @@ describe("ReviewsService test",()=> {
         console.log(replies);
     });
 
+
+
     test("댓글찾기", async function ()  {
-        const replies = await  ReviewsService.rrList(1);
+        const replies = await  ReviewsService.findByRrNum();
         console.log(replies);
     });
 });
