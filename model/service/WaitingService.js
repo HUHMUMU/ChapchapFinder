@@ -1,16 +1,16 @@
-export async function cancelUser(id) {
-    
-}
+// export async function cancelUser(id) {
+//
+// }
+//
+// export async function enterUser(id) {
+//
+// }
+//
+// async function getWaitingList(param) {
+//
+// }
 
-export async function enterUser(id) {
-    
-}
-
-async function getWaitingList(param) {
-    
-}
-
-const { Op } = require("sequelize");
+const {Op} = require("sequelize");
 const sequelize = require("../chapchapSequelize");
 const UsersWaitingEntity = require("../entity/usersWaitingEntity")(sequelize);
 const StoresWaitingEntity = require("../entity/StoresWaitingEntity")(sequelize);

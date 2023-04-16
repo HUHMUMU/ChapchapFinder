@@ -8,7 +8,7 @@ const indexRouter = require('./routes/index');
 const reviewsRouter = require('./routes/reviews');
 const repliesRouter = require('./routes/replies');
 const storesRouter = require('./routes/stores');
-const manageRouter = require('./routes/manage');
+// const manageRouter = require('./routes/manage');
 const storeManagesRouter=require('./routes/users');
 const infoRouter = require('./routes/infos');
 const menusRouter = require('./routes/menus');
@@ -124,7 +124,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(8088,()=>{
-  console.log("http://localhost:8088 expressjs 관리자 프로젝트 시작");
+app.listen(8080,()=>{
+  console.log("http://localhost:8080 expressjs 관리자 프로젝트 시작");
 })
 module.exports = app;
