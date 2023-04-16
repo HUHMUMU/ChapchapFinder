@@ -5,7 +5,7 @@ const logger = require('morgan');
 const session = require("express-session");
 
 const indexRouter = require('./routes/index');
-const reviewsRouter = require('./routes/reviews');
+// const reviewsRouter = require('./routes/reviews');
 // const repliesRouter = require('./routes/replies');
 const storesRouter = require('./routes/stores');
 const menusRouter = require('./routes/menus');
@@ -82,7 +82,7 @@ app.use( function (req, res, next ){
 
 app.use('/', indexRouter);
 // app.use('/replies', repliesRouter);
-app.use('/reviews', reviewsRouter);
+// app.use('/reviews', reviewsRouter);
 app.get('/api/data', (req, res) => {
   // 데이터를 반환하는 API
   const data = {
