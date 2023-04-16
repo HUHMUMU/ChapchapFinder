@@ -13,6 +13,10 @@ class ReviewsService{
         return reviews;
     }
 
+    async findByStar(){
+
+    }
+
     // async rrList(storeNum){
     //     const rr = await reviewRepliesEntity.findAll({
     //         where: {
