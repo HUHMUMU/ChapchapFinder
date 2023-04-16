@@ -63,7 +63,7 @@ router.get('/list.do', async function(req, res) {
         new Error(e);
     }
     if(reviews){
-        res.render("reviews/list",{reviews:reviews,params:req.query, count:count, uncount:uncount, replies:replies, store:store});
+        res.render("reviews/list",{reviews:reviews,params:req.query, count:count, uncount:uncount, replies:replies, store: store});
     }else {
         res.redirect("/")
     }

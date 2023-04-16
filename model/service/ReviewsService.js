@@ -14,7 +14,7 @@ class ReviewsService{
         return reviews;
     }
 
-    async findByStore(storeNum){ // 한 가게 데이터 조회
+    async findByStore(storeNum){
         const store = await storesEntity.findOne({
             where: {
                 store_num : storeNum

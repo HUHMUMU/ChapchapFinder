@@ -1,10 +1,10 @@
 form#replyResgister.p-4.border.collapse(method="post", action="/replies/insert.do")
     div.row
         div.form-floating.col
-            input.form-control(name="b_id",value=board.b_id,readonly=true)
+            input.form-control(name="rr_num",value=reply.rr_num,readonly=true)
             label 글번호
         div.form-floating.col
-            input.form-control(name="u_id",value=loginUser.u_id,readonly=true)
+            input.form-control(name="store_name",value=store.store_name,readonly=true)
             label 가게 사장님
     div.form-floating
         textarea.form-control(name="content")
