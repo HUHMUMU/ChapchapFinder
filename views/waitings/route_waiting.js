@@ -201,3 +201,4 @@ router.post('/register', (req, res) => {
 
 
 //// route 관련 수정이 필요함
+// views/waitings 에 있는 route랑 routes 폴더 내의 있는 내용이 왜 두개냐고 ㅠㅠㅠ
