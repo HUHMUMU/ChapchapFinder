@@ -282,8 +282,8 @@ CREATE TABLE reports
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     FOREIGN KEY (chap_num) REFERENCES chapstorys (chap_num),
     FOREIGN KEY (store_num) REFERENCES stores (store_num)
-    # report_store_id 와 report_user_id 둘중 하나는 NULL 이어야 함.
-    # review_num 와 user_id 와 chap_num 와 store_num 의 4개중 3개는 NULL 이어야 함.
+    # report_store_id 와 report_user_id 둘중 하나는 NULL 이어야 함
+    # review_num 와 user_id 와 chap_num 와 store_num 의 4개중 3개는 NULL 이어야 함
 );
 
 #여기부터 더미데이터
