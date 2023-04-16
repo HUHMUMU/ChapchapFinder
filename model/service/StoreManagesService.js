@@ -1,4 +1,4 @@
-const sequelize=require("../ChapChapSequelizePool");
+const sequelize=require("../chapchapSequelize");
 const storeManagesEntity=require("../entity/StoreManagesEntity")(sequelize);
 const PageVo=require("../vo/PageVo");
 const {Op}=require("sequelize");

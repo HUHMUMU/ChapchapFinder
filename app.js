@@ -8,9 +8,12 @@ const indexRouter = require('./routes/index');
 const reviewsRouter = require('./routes/reviews');
 const repliesRouter = require('./routes/replies');
 const storesRouter = require('./routes/stores');
-const manageRouter = require('./routes/manage');
+// const manageRouter = require('./routes/manage');
 const storeManagesRouter=require('./routes/users');
 const infoRouter = require('./routes/infos');
+const menusRouter = require('./routes/menus');
+const chapdealsRouter = require('./routes/chapdeal');
+const waitingRouter=require('./routes/adminWaiting');
 
 
 const app = express();
@@ -80,8 +83,6 @@ app.use( function (req, res, next ){
   }
 });
 
-
-
 app.use('/', indexRouter);
 // app.use('/replies', repliesRouter);
 app.use('/reviews', reviewsRouter);
@@ -94,16 +95,17 @@ app.get('/api/data', (req, res) => {
 });
 
 app.post('/api/user', (req, res) => {
-  // 데이터를 받아서 처리하는 API 임
+  // 데이터를 받아서 처리하는 API
   console.log(req.body);
   res.send('Received!');
 });
 
 app.use('/stores', storesRouter);
-app.use('/menu', manageRouter);
+// app.use('/menu', manageRouter);
 app.use('/users', storeManagesRouter);
 app.use('/infos', infoRouter);
-
+app.use('/menu', menusRouter);
+app.use('/waitings', waitingRouter);
 
 
 // catch 404 and forward to error handler
@@ -122,7 +124,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(8088,()=>{
-  console.log("http://localhost:8088 expressjs 관리자 프로젝트 시작");
+app.listen(8080,()=>{
+  console.log("http://localhost:8080 expressjs 관리자 프로젝트 시작");
 })
 module.exports = app;

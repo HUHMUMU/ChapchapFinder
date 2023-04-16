@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+    div.d-flex.justify-content-between
+        h4.mb-3 메뉴 관리
+        a.mb-3.btn.btn-light(id="addMenuBtn", href="/menu/insert.do") 추가
+    each menu in menuList
+        div.d-flex.align-items-center.mb-3
+            img.me-5(src=menu.img , width="230", height="230")
+            div
+                div
+                    p.m-1 메뉴 이름 : #{menu.name}
+                    p.m-1 메뉴 가격 : #{menu.price}원
+                    p.m-1 메뉴 설명 : #{menu.info}
+                div
+                    button.btn.btn-sm.btn-warning.me-2(disabled=menu.status ? false : true) #{menu.menu_type}
+                    button.btn.btn-sm.btn-dark(disabled=menu.status ? false : true)
+                        if menu.status
+                            | 주문가능
+                        else
+                            | 주문불가
+                div.mt-4
+                    a.btn.btn-outline-dark.me-2(href=`/menu/${menu.menu_num}/update.do`) 수정하기
+                    a.btn.btn-outline-danger(href=`/menu/${menu.menu_num}/delete.do`) 삭제
