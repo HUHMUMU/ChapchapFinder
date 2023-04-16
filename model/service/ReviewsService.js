@@ -1,44 +1,31 @@
 const sequelize=require("../chapchapSequelize");
 const reviewsEntity=require("../entity/ReviewsEntity")(sequelize);
 const reviewRepliesEntity=require("../entity/ReviewRepliesEntity")(sequelize);
-const {Op}=require("sequelize");
+const storesEntity = require("../entity/StoresEntity")(sequelize);
+const {Op, Sequelize}=require("sequelize");
 class ReviewsService{
-    async list(storeNum,rRstatus){
+    async list(storeNum,rRstatus) {
         const reviews = await reviewsEntity.findAll({
             where: {
-                store_num : storeNum,
-                r_rstatus : rRstatus
+                store_num: storeNum,
+                r_rstatus: rRstatus
             }
         });
         return reviews;
     }
 
-    async findByRrNum(storeNum,rRstatus){
-        try {
-            reviewsEntity.belongsTo(reviewRepliesEntity,{
-                foreignKey : "review_num",
-                as: "review_replies"
-            })
+    async findByStore(storeNum){
+        const store = await storesEntity.findOne({
+            where: {
+                store_num : storeNum
+            }
+        });
+        return store;
+    }
 
-            const rreview = await reviewRepliesEntity.findOne({
-                where: {
-                    store_num : storeNum,
-                    r_rstatus : rRstatus,
-                },
-                include:[
-                    {
-                        foreignKey : "review_num",
-                        model:reviewRepliesEntity,
-                        as : "review_replies",
-                        required: false,
-                        where : { rr_num:null }
-                    }
-                ]
-            });
-            return rreview;
-        }catch (e){
-            new Error(e)
-        }
+    async findByRrNum(){
+        const replies = await reviewRepliesEntity.findAll();
+            return replies;
     }
 
 
@@ -52,15 +39,24 @@ class ReviewsService{
         return count;
     }
 
-    async unansweredCount(storeNum,rRstatus){
-        const uncount = await reviewsEntity.count({
-            where:{
-                store_num : storeNum,
-                r_rstatus : rRstatus,
-
-            }
+    async unansweredCount(storeNum) {
+        reviewsEntity.hasMany(reviewRepliesEntity, { foreignKey: 'review_num' });
+        const count = await reviewsEntity.count({
+            where: {
+                store_num: storeNum,
+                r_rstatus: '공개' // 공개 리뷰만 카운트
+            },
+            include: [
+                {
+                    model: reviewRepliesEntity, // 댓글 모델
+                    required: false // 조인되는 댓글이 없어도 리뷰는 가져옴
+                }
+            ],
+            // 댓글이 없는 리뷰만 카운트
+            group: ['review_num'],
+            having: Sequelize.literal('COUNT(rr_num) = 0')
         });
-        return
+        return count;
     }
 
 }
