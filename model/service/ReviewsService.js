@@ -1,6 +1,7 @@
 const sequelize=require("../chapchapSequelize");
 const reviewsEntity=require("../entity/ReviewsEntity")(sequelize);
 const reviewRepliesEntity=require("../entity/ReviewRepliesEntity")(sequelize);
+const storesEntity = require("../entity/StoresEntity")(sequelize);
 const {Op, Sequelize}=require("sequelize");
 class ReviewsService{
     async list(storeNum,rRstatus) {
@@ -13,14 +14,14 @@ class ReviewsService{
         return reviews;
     }
 
-    // async rrList(storeNum){
-    //     const rr = await reviewRepliesEntity.findAll({
-    //         where: {
-    //             store_num : storeNum,
-    //         }
-    //     });
-    //     return rr;
-    // }
+    async findByStore(storeNum){ // 한 가게 데이터 조회
+        const store = await storesEntity.findOne({
+            where: {
+                store_num : storeNum
+            }
+        });
+        return store;
+    }
 
     async findByRrNum(){
         const replies = await reviewRepliesEntity.findAll();

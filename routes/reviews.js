@@ -50,18 +50,20 @@ router.get('/list.do', async function(req, res) {
     let uncount = 0;
     let replies=null;
     let reviews=null;
+    let store = null;
     try {
         reviews=await reviewsService.list(storeNum,rRstatus);
         count = await reviewsService.answeredCount(storeNum,rRstatus);
         const arr = await reviewsService.unansweredCount(storeNum);
         uncount = arr.length;
         replies = await reviewsService.findByRrNum();
+        store = await reviewsService.findByStore(storeNum);
 
     }catch (e) {
         new Error(e);
     }
     if(reviews){
-        res.render("reviews/list",{reviews:reviews,params:req.query, count:count, uncount:uncount, replies:replies});
+        res.render("reviews/list",{reviews:reviews,params:req.query, count:count, uncount:uncount, replies:replies, store:store});
     }else {
         res.redirect("/")
     }
