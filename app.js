@@ -13,6 +13,7 @@ const storeManagesRouter=require('./routes/users');
 const infoRouter = require('./routes/infos');
 const menusRouter = require('./routes/menus');
 const chapdealsRouter = require('./routes/chapdeal');
+const waitingRouter=require('./routes/adminWaiting');
 
 
 const app = express();
@@ -104,8 +105,7 @@ app.use('/stores', storesRouter);
 app.use('/users', storeManagesRouter);
 app.use('/infos', infoRouter);
 app.use('/menu', menusRouter);
-
-
+app.use('/waitings', waitingRouter);
 
 
 // catch 404 and forward to error handler
