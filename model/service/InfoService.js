@@ -80,6 +80,29 @@ class InfoService{
         return breaktimes;
     }
 
+    async insertBreaktime(breaktimeObj){ //가게 브레이크타임 등록
+        const insertBreaktime=await BreakTimesEntity.create(breaktimeObj)
+        return insertBreaktime;
+    }
+
+    async updateBreaktime(breaktimeObj) { // 가게 브레이크타임 수정
+        const updateBreaktime = await BreakTimesEntity.update(breaktimeObj, {
+            where: {
+                store_num: breaktimeObj.store_num
+            },
+        });
+        return updateBreaktime;
+    }
+
+    async dropBreaktime(restNum, storeNum){ // 가게 브레이크타임 삭제
+        const dropBreaktime = await BreakTimesEntity.destroy({
+            where : {
+                rest_num : restNum,
+                store_num : storeNum
+            }
+        });
+        return dropBreaktime;
+    }
 
 }
 module.exports= new InfoService();

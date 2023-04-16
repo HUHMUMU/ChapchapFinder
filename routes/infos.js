@@ -8,13 +8,17 @@ router.get('/insert.do',async (req,res)=>{
     res.render('infos/insert');
 })
 router.post('/insert.do',async (req,res)=>{
-    let insert=0;
+    let insertStoreInfo=0;
+    let insertHoliday =0;
+    let insertBreaktime=0;
     try{
-        insert=await infoService.insertStoreInfo(req.body);
+        insertStoreInfo=await infoService.insertStoreInfo(req.body);
+        insertHoliday=await infoService.insertHolidays(req.body)
+        insertBreaktime=await infoService.insertBreaktime(req.body)
     }catch (e) {
         console.error(e)
     }
-    if(insert>0) {
+    if(insertStoreInfo>0 && insertHoliday>0 && insertBreaktime) {
         alert("등록성공");
         res.redirect("/");
     }else{
@@ -40,17 +44,46 @@ router.get('/detail.do', async (req, res) => {
     }
 });
 
-router.get("/delete.do", async (req,res)=>{
-    let del=0;
+router.post("/update.do",async (req,res)=>{
+    // for(let key in req.body){
+    //     if(key!=="bi_id" && !req.body[key].trim()) { // bi_id=>[].trim() 오류
+    //         req.body[key]=null;
+    //     }
+    // }
+    console.log("req.body",req.body);
+    let updateStoreInfo=0;
+    let updateHoliday=0;
+    let updateBreaktime=0;
     try{
-        del=await infoService.findByStore(req.session.loginStore.store_num);
+        updateStoreInfo=await infoService.updateByStoreInfo(req.body)
+        updateHoliday=await infoService.updateHolidays(req.body)
+        updateBreaktime=await infoService.updateBreaktime(req.body)
+    }catch (e) {
+        console.error(e)
+    }
+
+    if(updateStoreInfo>0 && updateHoliday && updateBreaktime){
+        res.redirect("/");
+    }else {
+        res.redirect(`/detail.do`);
+    }
+});
+
+router.get("/delete.do", async (req,res)=>{
+    let dropStoreInfo=0;
+    let dropHoliday=0;
+    let dropBreaktime=0;
+    try{
+        dropStoreInfo=await infoService.dropStoreInfo(req.session.loginStore.store_num)
+        dropHoliday=await infoService.dropHoliday(req.params.holi_num ,req.session.loginStore.store_num)
+        dropBreaktime=await infoService.dropBreaktime(req.params.rest_num ,req.session.loginStore.store_num)
     }catch(e){
         console.error(e);
     }
-    if(del>0){
-        res.redirect("/boards/list.do");
+    if(dropStoreInfo>0 && dropHoliday>0 && dropBreaktime>0){
+        res.redirect("/");
     }else{
-        res.redirect(`/boards/detail.do`);
+        res.redirect(`/detail.do`);
     }
 });
 
