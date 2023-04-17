@@ -2,6 +2,8 @@ const sequelize=require("../chapchapSequelize");
 const storesEntity=require("../entity/StoresEntity")(sequelize);
 const HolidaysEntity=require("../entity/HolidaysEntity")(sequelize);
 const BreakTimesEntity=require("../entity/BreakTimesEntity")(sequelize);
+const TypeClassesEntity = require("../entity/TypeClassesEntity")(sequelize);
+const StoreTypesEntity = require("../entity/StoreTypesEntity")(sequelize);
 const {Op}=require("sequelize");
 class InfoService{
     async findAllStoreInfo(){ // 가게 모든 데이터 조회
@@ -80,6 +82,10 @@ class InfoService{
         return breaktimes;
     }
 
+    async insertTypeClasses(typeObj){
+        const typeclasses = await TypeClassesEntity.create(typeObj)
+        return typeclasses;
+    }
 
 }
 module.exports= new InfoService();

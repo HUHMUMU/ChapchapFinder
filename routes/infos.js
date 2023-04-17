@@ -8,7 +8,9 @@ router.get('/insert.do',async (req,res)=>{
     res.render('infos/insert');
 })
 router.post('/insert.do',async (req,res)=>{
+
     let insert=0;
+    let {select_main_category1, select_main_category2, select_main_category3, subcategory} = req.body;
     try{
         insert=await infoService.insertStoreInfo(req.body);
     }catch (e) {
