@@ -26,6 +26,7 @@ block content
                 input.mb-5(type="file", class="form-control", id="store_img2", name="chooseFile" accept="image/*" onchange="loadFile(this)")
         hr
         h3.mt-5.mb-5 가게 업종
+        if storeTypes
             each st,i in storeTypes
                 h3.d-flex.mt-5.mb-5.label.justify-content-between(for='select_main_category')
                     select#maincategory1.form-select.mb-5.w-25(name="cate"+i onchange=`changeMenu('cate${i}')` disabled=(!(st.category_num>=1 && st.category_num<=10)))
