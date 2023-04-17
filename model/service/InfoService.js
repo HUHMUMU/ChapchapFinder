@@ -82,9 +82,30 @@ class InfoService{
         return breaktimes;
     }
 
-    async insertTypeClasses(typeObj){
-        const typeclasses = await TypeClassesEntity.create(typeObj)
-        return typeclasses;
+    async findTypeClasses(category){
+        const typeclasses = await TypeClassesEntity.findOne({
+            where:{
+                category_num : category
+            }
+        })
+        return typeclasses.category_num;
+    }
+
+    async insertStoreTypes(storeNum, category){
+        const storetypes = await StoreTypesEntity.create({
+            store_num: storeNum,
+            category_num: category
+    });
+        return storetypes;
+    }
+
+    async findStoreTypes(storeNum){
+        const storetypes = await StoreTypesEntity.findAll({
+            where:{
+                store_num : storeNum
+            }
+        })
+        return storetypes;
     }
 
 }

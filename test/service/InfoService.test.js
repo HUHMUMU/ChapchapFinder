@@ -237,5 +237,34 @@ describe("InfoService test",()=>{
         }
     });
 
+    test("findtypeclasses", async () => { // 가게 휴무일 삭제
+        try{
+            const typeclass = await infoService.findTypeClasses(1)
+            console.log(typeclass)
+        }catch (e) {
+            console.error(e)
+        }
+    });
+
+    test("insertstoretypes", async () => { // 가게 휴무일 삭제
+        try{
+            const insertCate = await infoService.insertStoreTypes(1,2)
+            console.log("등록 :" +insertCate)
+        }catch (e) {
+            console.error(e)
+        }
+    });
+
+    test("findStoretypes", async () => { // 가게 휴무일 삭제
+        try{
+            const findCate = await infoService.findStoreTypes(1)
+            console.log("등록 :" +findCate[0].category_num)
+            console.log("등록 :" +findCate[1].category_num)
+
+        }catch (e) {
+            console.error(e)
+        }
+    });
+
 
 })
