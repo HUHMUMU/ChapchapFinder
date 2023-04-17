@@ -227,6 +227,61 @@ block content
             }
         }
 
+        const addStoreTypesBtn = document.getElementById("addStoreTypesBtn")
+        const addStoreTypes = document.getElementById("addStoreTypes")
+
+        addStoreTypesBtn.addEventListener("click", (e) => {
+            addStoreTypes.insertAdjacentHTML("beforeend", addStoreTypeInputComponent());
+        })
+
+        function addStoreTypeInputComponent() {
+            return `
+                            <div id="inputHolidays" class="d-flex mt-5 mb-5 justify-content-between">
+                              <div class="form-floating">
+                                <h5 class="mb-3 label fs-6" for="" style="margin-right: 10px;">음식점 선택</h5>
+                                <select id="maincategory1" class="form-select" name="select_main_category1">
+                                  <option value="">음식점 선택</option>
+                                  <option value="1">고기</option>
+                                  <option value="2">돈까스, 회, 일식</option>
+                                  <option value="3">탕, 찜, 찌개</option>
+                                  <option value="4">양식</option>
+                                  <option value="5">중식</option>
+                                  <option value="6">아시안</option>
+                                  <option value="7">패스트푸드</option>
+                                  <option value="8">백반, 국수</option>
+                                  <option value="9">분식</option>
+                                  <option value="10">기타</option>
+                                </select>
+                              </div>
+                              <div>
+                                <h5 class="mb-3 label fs-6" for="" style="margin-right: 10px;">술집 선택</h5>
+                                <select id="maincategory2" class="form-select" name="select_main_category2">
+                                  <option value="">술집 선택</option>
+                                  <option value="11">호프집</option>
+                                  <option value="12">바</option>
+                                  <option value="13">이자카야</option>
+                                  <option value="14">포차</option>
+                                  <option value="15">와인바</option>
+                                  <option value="16">기타</option>
+                                </select>
+                              </div>
+                              <div>
+                                <h5 class="mb-3 label fs-6" for="" style="margin-right: 10px;">카페 선택</h5>
+                                <select id="maincategory3" class="form-select" name="select_main_category3">
+                                  <option value="">카페 선택</option>
+                                  <option value="17">커피전문점</option>
+                                  <option value="18">디저트카페</option>
+                                  <option value="19">차전문점</option>
+                                  <option value="20">베이커리카페</option>
+                                  <option value="21">기타</option>
+                                </select>
+                              </div>
+                              <button class="btn btn-outline-danger btn-sm" style="height: 30px;" onclick="this.closest('#inputHolidays').remove()">삭제</button>
+                            </div>
+
+                    `;
+        }
+
 
         const addHolidayBtn = document.getElementById("addHolidayBtn")
         const addHolidays = document.getElementById("addHolidays")

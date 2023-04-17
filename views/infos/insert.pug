@@ -1,3 +1,4 @@
+
 extends ../layout
 
 block content
@@ -203,7 +204,7 @@ block content
 
         function addStoreTypeInputComponent(){
             return `
-                    <div id="inputStoreType" class="d-flex mt-5 mb-5 justify-content-between">
+                    <div id="inputHolidays" class="d-flex mt-5 mb-5 justify-content-between">
                       <div class="form-floating">
                         <h5 class="mb-3 label fs-6" for="" style="margin-right: 10px;">음식점 선택</h5>
                         <select id="maincategory1" class="form-select" name="select_main_category1">
@@ -217,6 +218,7 @@ block content
                           <option value="7">패스트푸드</option>
                           <option value="8">백반, 국수</option>
                           <option value="9">분식</option>
+                          <option value="10">기타</option>
                         </select>
                       </div>
                       <div>
@@ -228,6 +230,7 @@ block content
                           <option value="13">이자카야</option>
                           <option value="14">포차</option>
                           <option value="15">와인바</option>
+                          <option value="16">기타</option>
                         </select>
                       </div>
                       <div>
@@ -238,9 +241,10 @@ block content
                           <option value="18">디저트카페</option>
                           <option value="19">차전문점</option>
                           <option value="20">베이커리카페</option>
+                          <option value="21">기타</option>
                         </select>
                       </div>
-                      <button class="btn btn-outline-danger btn-sm" style="height: 30px;" onclick="this.closest('#inputStoreType').remove()">삭제</button>
+                      <button class="btn btn-outline-danger btn-sm" style="height: 30px;" onclick="this.closest('#inputHolidays').remove()">삭제</button>
                     </div>
 
             `;
@@ -321,48 +325,6 @@ block content
         const mainCategory2 = document.getElementById("maincategory2");
         const mainCategory3 = document.getElementById("maincategory3");
 
-        mainCategory1.addEventListener("change", function () {
-            if (mainCategory1.value === "") {
-                mainCategory2.disabled = false;
-                mainCategory3.disabled = false;
-            } else {
-                mainCategory2.disabled = true;
-                mainCategory3.disabled = true;
-            }
-        });
-        // const resetUserForm = () => {
-        //     const addStoreInfoForm = document.getElementById('addStoreInfoForm');
-        //     addStoreInfoForm.reset();
-        // };
-        //
-        // // 초기화 버튼 클릭 이벤트 등록
-        // const resetBtn = document.getElementById('resetBtn');
-        // resetBtn.addEventListener('click', resetUserForm);
-
-        // 첫 번째 select 요소가 변경될 때
-        const mainCategory1 = document.getElementById("maincategory1");
-        const mainCategory2 = document.getElementById("maincategory2");
-        const mainCategory3 = document.getElementById("maincategory3");
-
-        mainCategory2.addEventListener("change", function () {
-            if (mainCategory2.value === "") {
-                mainCategory1.disabled = false;
-                mainCategory3.disabled = false;
-            } else {
-                mainCategory1.disabled = true;
-                mainCategory3.disabled = true;
-            }
-        });
-
-        mainCategory3.addEventListener("change", function () {
-            if (mainCategory3.value === "") {
-                mainCategory1.disabled = false;
-                mainCategory2.disabled = false;
-            } else {
-                mainCategory1.disabled = true;
-                mainCategory2.disabled = true;
-            }
-        });
         mainCategory1.addEventListener("change", function () {
             if (mainCategory1.value === "") {
                 mainCategory2.disabled = false;
