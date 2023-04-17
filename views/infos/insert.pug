@@ -21,9 +21,9 @@ block content
                 //div(style='display:flex; justify-content: space-around; align-items:center;')
                 input.mb-5(type="file", class="form-control", id="store_img2", name="chooseFile" accept="image/*" onchange="loadFile(this)")
         hr
-        div.form-floating(method="post", enctype="multipart/form-data")
-            h3.mt-5.mb-5.label(for='sub_category') 가게 업종
-            select.form-select.mb-5(name="select_sub_category1")
+        h3.mt-5.mb-5 가게 업종
+        h3.d-flex.mt-5.mb-5.label.justify-content-between(for='select_main_category')
+            select#maincategory1.form-select.mb-5.w-25(name="select_main_category1")
                 option(value="") 음식점 선택
                 option(value='1') 고기
                 option(value='2') 돈까스, 회, 일식
@@ -34,19 +34,22 @@ block content
                 option(value='7') 패스트푸드
                 option(value='8') 백반, 국수
                 option(value='9') 분식
-            select.form-select.mb-5(name="select_sub_category2")
+                option(value='10') 기타
+            select#maincategory2.form-select.mb-5.w-25(name="select_main_category2")
                 option(value='') 술집 선택
-                option(value='10') 호프집
-                option(value='11') 바
-                option(value='12') 이자카야
-                option(value='13') 포차
-                option(value='14') 와인바
-            select.form-select.mb-5(name="select_sub_category3")
+                option(value='11') 호프집
+                option(value='12') 바
+                option(value='13') 이자카야
+                option(value='14') 포차
+                option(value='15') 와인바
+                option(value='16') 기타
+            select#maincategory3.form-select.mb-5.w-25(name="select_main_category3")
                 option(value='') 카페 선택
-                option(value='15') 커피전문점
-                option(value='16') 디저트카페
-                option(value='17') 차전문점
-                option(value='18') 베이커리카페
+                option(value='17') 커피전문점
+                option(value='18') 디저트카페
+                option(value='19') 차전문점
+                option(value='20') 베이커리카페
+                option(value='21') 기타
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
             h3.mt-5.mb-5.label(for='address') 가게 주소
@@ -258,11 +261,46 @@ block content
                 `;
         }
 
-        const resetUserForm = () => {
-            const addStoreInfoForm = document.getElementById('addStoreInfoForm');
-            addStoreInfoForm.reset();
-        };
+        // const resetUserForm = () => {
+        //     const addStoreInfoForm = document.getElementById('addStoreInfoForm');
+        //     addStoreInfoForm.reset();
+        // };
+        //
+        // // 초기화 버튼 클릭 이벤트 등록
+        // const resetBtn = document.getElementById('resetBtn');
+        // resetBtn.addEventListener('click', resetUserForm);
 
-        // 초기화 버튼 클릭 이벤트 등록
-        const resetBtn = document.getElementById('resetBtn');
-        resetBtn.addEventListener('click', resetUserForm);
+        // 첫 번째 select 요소가 변경될 때
+        const mainCategory1 = document.getElementById("maincategory1");
+        const mainCategory2 = document.getElementById("maincategory2");
+        const mainCategory3 = document.getElementById("maincategory3");
+
+        mainCategory1.addEventListener("change", function () {
+            if (mainCategory1.value === "") {
+                mainCategory2.disabled = false;
+                mainCategory3.disabled = false;
+            } else {
+                mainCategory2.disabled = true;
+                mainCategory3.disabled = true;
+            }
+        });
+
+        mainCategory2.addEventListener("change", function () {
+            if (mainCategory2.value === "") {
+                mainCategory1.disabled = false;
+                mainCategory3.disabled = false;
+            } else {
+                mainCategory1.disabled = true;
+                mainCategory3.disabled = true;
+            }
+        });
+
+        mainCategory3.addEventListener("change", function () {
+            if (mainCategory3.value === "") {
+                mainCategory1.disabled = false;
+                mainCategory2.disabled = false;
+            } else {
+                mainCategory1.disabled = true;
+                mainCategory2.disabled = true;
+            }
+        });
