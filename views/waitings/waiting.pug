@@ -1,0 +1,67 @@
+extends ../layout
+
+block content
+    div.waiting.row.col-md-12
+        h2 입장 관리
+        table
+            thead
+                tr
+                    th 대기번호
+                    th 인원
+                    th 웨이팅 등록 시간
+                    th
+                    th
+            tbody
+                each waitingList in userswaiting
+                    tr
+                        td= waitingList.wait_num
+                        td= waitingList.user_people
+                        td= waitingList.start_time
+                        td
+                            button(type='button' class='enter-notification' data-waitingnum=userswaiting.wait_num, href='#') 입장 알림
+                        td
+                            button(type='button' class='enter-cancel' data-waitingnum=userswaiting.wait_num, href='#') 강제 취소
+        // 2 위치
+        div.waiting-info.row.col-md-4
+            h2 대기팀 정보
+            table
+                thead
+                    tr
+                        th 대기 번호
+                        th 대기 인원
+                        th 웨이팅 등록시간
+                tbody
+                    each waitingList  in waitingInfo
+                        tr
+                            td= waitingList.wait_num
+                            td= waitingList.user_people
+                            td= waitingList.start_time
+        // 3 위치
+        div.waiting-stats.row.col-md-4
+            h2 Waiting Stats
+            p Total Teams: #{waitingStats.total_teams}
+            p Total People: #{waitingStats.total_people}
+        // 4 위치
+        div.store-config.row.col-md-4
+            h2 웨이팅 관련 설정
+            div#store-ads
+                label(for='store-ads-input') 가게 홍보 URL:
+                input#store-ads-input(type='text' name='storeAdsInput', placeholder='가게 홍보 URL 입력하세요')
+                button#store-ads-submit(type='button') 완료
+            div#func-setting
+                div#time-setup
+                    label(for='time-setup-input') 기본 대기 시간 설정 (분):
+                    input#time-setup-input(type='number' name='timeSetupInput', placeholder='대기 시간(분)을 입력하세요')
+                    button#time-setup-submit(type='button') 완료
+                div#max-people-setup
+                    label(for='max-people-input') 최대 인원 설정:
+                    input#max-people-input(type='number' name='maxPeopleInput', placeholder='최대 인원을 입력하세요')
+                    button#max-people-submit(type='button') 완료
+                div#closing-time-setup
+                    label(for='closing-time-input') 웨이팅 마감 시간 설정:
+                    input#closing-time-input(type='time',name='closingTimeInput' , placeholder='대기등록 마감 시간을 입력하세요')
+                    button#closing-time-submit(type='button') 완료
+            div.form-check.form-switch.d-flex.align-items-center.px-2.py-1.border.border-teritory.rounded
+                label.form-check-label.me-5(for="flexSwitchCheckDefault") OFF
+                input.form-check-input(type="checkbox", role="switch", id="flexSwitchCheckDefault", style="width: 2.5rem; height: 1.5rem;")
+                label.form-check-label.ms-2(for="flexSwitchCheckDefault") ON
