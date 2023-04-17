@@ -25,12 +25,11 @@ router.get('/list.do', async (req, res) => {
 });
 
 router.get('/:menu_num/update.do', async (req, res) => {
-    const storeNum = req.session.loginStore.store_num; // 로그인한 가게 번호
-    const menus = await menuService.findOneMenu(storeNum,req.params.menu_num); //메뉴 정보 가져오기
+    // const storeNum = req.session.loginStore.store_num; // 로그인한 가게 번호
+    const menus = await menuService.findOneMenu(req.params.menu_num); //메뉴 정보 가져오기
     res.render('menu/update', { menus });
 });
 router.post("/:menu_num/update.do", upload.single('img'), async (req, res) => {
-    const storeNum = req.session.loginStore.store_num; // 로그인한 가게 번호
     let imagePath;
     if (req.file) {
         imagePath = "/"+req.file.path.replace('public\\', '');
@@ -45,7 +44,6 @@ router.post("/:menu_num/update.do", upload.single('img'), async (req, res) => {
         info,
         menu_type,
         status,
-        storeNum,
         req.params.menu_num
     );
     if (update > 0) {
@@ -87,9 +85,8 @@ router.post("/insert.do", upload.single('img'),async (req,res)=>{
 
 router.get('/:menu_num/delete.do', async (req, res) => {
     let del=0;
-    const storeNum = req.session.loginStore.store_num; // 로그인한 가게 번호
     try {
-        del=await menuService.dropMenu(storeNum,req.params.menu_num);
+        del=await menuService.dropMenu(req.params.menu_num);
     } catch (err) {
         console.error(err);
         res.status(500).send('서버 에러');
