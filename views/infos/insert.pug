@@ -58,35 +58,6 @@ block content
                             option(value='19') 차전문점
                             option(value='20') 베이커리카페
                     button.btn.btn-outline-danger.btn-sm(type='button' style="height: 30px; visibility:hidden" ) 삭제
-        h3.mt-5.mb-5 가게 업종
-        h3.d-flex.mt-5.mb-5.label.justify-content-between(for='select_main_category')
-            select#maincategory1.form-select.mb-5.w-25(name="select_main_category1")
-                option(value="") 음식점 선택
-                option(value='1') 고기
-                option(value='2') 돈까스, 회, 일식
-                option(value='3') 탕, 찜, 찌개
-                option(value='4') 양식
-                option(value='5') 중식
-                option(value='6') 아시안
-                option(value='7') 패스트푸드
-                option(value='8') 백반, 국수
-                option(value='9') 분식
-                option(value='10') 기타
-            select#maincategory2.form-select.mb-5.w-25(name="select_main_category2")
-                option(value='') 술집 선택
-                option(value='11') 호프집
-                option(value='12') 바
-                option(value='13') 이자카야
-                option(value='14') 포차
-                option(value='15') 와인바
-                option(value='16') 기타
-            select#maincategory3.form-select.mb-5.w-25(name="select_main_category3")
-                option(value='') 카페 선택
-                option(value='17') 커피전문점
-                option(value='18') 디저트카페
-                option(value='19') 차전문점
-                option(value='20') 베이커리카페
-                option(value='21') 기타
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
             h3.mt-5.mb-5.label(for='address') 가게 주소
@@ -232,7 +203,7 @@ block content
 
         function addStoreTypeInputComponent(){
             return `
-                    <div id="inputHolidays" class="d-flex mt-5 mb-5 justify-content-between">
+                    <div id="inputStoreType" class="d-flex mt-5 mb-5 justify-content-between">
                       <div class="form-floating">
                         <h5 class="mb-3 label fs-6" for="" style="margin-right: 10px;">음식점 선택</h5>
                         <select id="maincategory1" class="form-select" name="select_main_category1">
@@ -246,7 +217,6 @@ block content
                           <option value="7">패스트푸드</option>
                           <option value="8">백반, 국수</option>
                           <option value="9">분식</option>
-                          <option value="10">기타</option>
                         </select>
                       </div>
                       <div>
@@ -258,7 +228,6 @@ block content
                           <option value="13">이자카야</option>
                           <option value="14">포차</option>
                           <option value="15">와인바</option>
-                          <option value="16">기타</option>
                         </select>
                       </div>
                       <div>
@@ -269,10 +238,9 @@ block content
                           <option value="18">디저트카페</option>
                           <option value="19">차전문점</option>
                           <option value="20">베이커리카페</option>
-                          <option value="21">기타</option>
                         </select>
                       </div>
-                      <button class="btn btn-outline-danger btn-sm" style="height: 30px;" onclick="this.closest('#inputHolidays').remove()">삭제</button>
+                      <button class="btn btn-outline-danger btn-sm" style="height: 30px;" onclick="this.closest('#inputStoreType').remove()">삭제</button>
                     </div>
 
             `;
