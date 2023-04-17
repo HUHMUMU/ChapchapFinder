@@ -1,5 +1,4 @@
 extends ../layout
-
 block content
     form#addStoreInfoForm(method="post", enctype="multipart/form-data")
         h1 가게정보수정
@@ -55,7 +54,6 @@ block content
                         option(value=19, selected=(st.category_num===19)) 차전문점
                         option(value=20, selected=(st.category_num===20)) 베이커리카페
                         option(value=21, selected=(st.category_num===21)) 기타
-
         hr
         div.form-floating
                 h3.mt-5.mb-5.label(for='address') 가게 주소

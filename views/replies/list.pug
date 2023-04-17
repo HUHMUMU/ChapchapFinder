@@ -1,21 +1,29 @@
-ul.ps-0(style="list-style:none")
-    if(review.review_num === reply.rr_num)
-        li
-            div.card
-                div.row.g-0
-                    div.card-body
-                        p.card-text
-                            small.pe-3=`댓글번호 : ${reply ? reply.rr_num : '댓글이 없어요 ㅠㅠ'}`
-                            small.px-3=`사장님 : ${loginStore.store_id}`
-                        p.card-text.d-flex
-                            small.pe-3.text-muted=`작성일 : ${reply ? reply.post_date.toLocaleString("ko-KR") : '댓글이 없어요 ㅠㅠ'}`
-                        p.card-text=reply?reply.content:'댓글이 없어요 ㅠㅠ'
-            ul.nav.nav-tabs
-                li.nav-item
-                    a.nav-link(href=`#replyModify${reply.rr_num}`, role="button", data-bs-toggle="collapse") 수정
-                li.nav-item
-                    a(href=`/replies/${reply.rr_num}/${reply.review_num}/delete.do`).nav-link 삭제
-                div.collapse(id=`replyModify${reply.rr_num}`)
-                    include update
-                div.collapse(id=`replyReply${reply.rr_num}`)
-                    include insert
+if(review.review_num === reply.review_num)
+    ul.mt-3.d-flex.justify-content-start(style="list-style:none")
+        i.bi.bi-arrow-return-right.me-3(style="font-size: 2rem;")
+        li.w-100
+            div.row.border.border-2.border-dark.rounded-3.w-75
+                p
+                    small.px-2=`댓글작성날짜 : ${reply ? reply.post_date.toLocaleString("ko-KR") : '댓글 날짜가 없어요 ㅠㅠ'}`
+                    input.form-control-plaintext.px-3.mt-2(name="reply_content",style="font-size: 1.rem;" value=`${loginStore.store_id}님의 답글: ${reply.content}`, readonly=true)
+                    div.text-end
+                        button.btn.btn-outline-secondary(type="button") 수정하기
+
+
+
+
+
+
+
+
+
+
+
+
+                //ul.nav.nav-tabs.d-flex.justify-content-end
+                //    div.collapse.w-75(id=`replyModify${reply.rr_num}`)
+                //        include update
+                //    li.nav-item
+                //        a.nav-link(href=`#replyModify${reply.rr_num}`, role="button", data-bs-toggle="collapse") 수정
+                //    li.nav-item
+                //        a(href=`/replies/${reply.rr_num}/${reply.review_num}/delete.do`).nav-link 삭제

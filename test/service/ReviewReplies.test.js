@@ -18,4 +18,9 @@ describe("ReviewsService test",()=> {
         const replies = await  ReviewsService.findByStore(1);
         console.log(replies);
     });
+
+    test("리뷰찾기", async function ()  {
+        const replies = await  ReviewsService.unansweredCount(1);
+        console.log(replies);
+    });
 });
