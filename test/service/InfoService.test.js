@@ -15,9 +15,9 @@ describe("InfoService test",()=>{
 
     test("insertStoreInfo", async ()=>{ //가게 정보 등록
         const store =
-            {
-            store_num : "11",
-            store_name : "재연쓰의손맛",
+            {store_num : "11",
+            store_name : "재연쓰의손마맛",
+            main_img : "logo.png",
             detail_info : "강렬한 손맛",
             short_info : "짠맛인건가",
             madein : "미영이",
@@ -32,7 +32,7 @@ describe("InfoService test",()=>{
             s_rstatus : "공개",
             parking : 1,
             wifi : 1,
-            toilet : "공용",
+            toilet : 1,
             smokingroom : 1,
             babychair : 1
         };
@@ -44,6 +44,11 @@ describe("InfoService test",()=>{
             console.error(e)
         }
     });
+
+    // test("insertStoreInfo",async()=>{
+    //     const store=await infoService.insertStoreInfoo("1","룰루랄라","강렬한 손맛","짠맛인건가","미영이","재연쓰의 집", "10:00 - 22:00", "21:30", "01:00", "ㄴㄴ", "ㄴㄴ", "ㄴㄴ", "ㄴㄴ", "공개", "ㄴㅇㄹ","공개","1","1","1","1","1")
+    //     console.log(store)
+    // })
 
     test("updateByStoreInfo",async ()=>{ //가게 정보 수정
         const store = {
@@ -69,7 +74,7 @@ describe("InfoService test",()=>{
         };
         try {
             let update = await infoService.updateByStoreInfo(store);
-            let resultUser = await infoService.findByStore(1);
+            let resultUser = await infoService.findByStore(11);
             console.log("수정 : " + JSON.stringify(resultUser));
             // delete store.store_name;
             // delete store.detail_info;

@@ -20,8 +20,9 @@ router.post('/insert.do',async (req,res)=>{
     }
     if(insertStoreInfo>0 && insertHoliday>0 && insertBreaktime) {
         alert("등록성공");
-        res.redirect("/");
+        res.redirect("/infos/detail.do");
     }else{
+        alert("등록이 되지 않았습니다.")
         res.redirect("/infos/insert.do")
     }
 })
@@ -45,12 +46,6 @@ router.get('/detail.do', async (req, res) => {
 });
 
 router.post("/update.do",async (req,res)=>{
-    // for(let key in req.body){
-    //     if(key!=="bi_id" && !req.body[key].trim()) { // bi_id=>[].trim() 오류
-    //         req.body[key]=null;
-    //     }
-    // }
-    console.log("req.body",req.body);
     let updateStoreInfo=0;
     let updateHoliday=0;
     let updateBreaktime=0;

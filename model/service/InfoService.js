@@ -3,6 +3,7 @@ const storesEntity=require("../entity/StoresEntity")(sequelize);
 const HolidaysEntity=require("../entity/HolidaysEntity")(sequelize);
 const BreakTimesEntity=require("../entity/BreakTimesEntity")(sequelize);
 const {Op}=require("sequelize");
+const {add} = require("nodemon/lib/rules");
 class InfoService{
     async findAllStoreInfo(){ // 가게 모든 데이터 조회
         const infoList = await storesEntity.findAll();
@@ -20,11 +21,38 @@ class InfoService{
         const insertInfo=await storesEntity.create(storeObj);
         return insertInfo;
     }
+
+    // async insertStoreInfoo(store_num, store_name, detail_info, short_info, madein, address, main_img, opentime, lastorder, waiting_closetime, blogurl, youtubeurl, facebookurl, instaurl, tvshow, s_rstatus, parking, wifi, toilet, smokingroom, babychair){
+    //     const insertStore=await storesEntity.create({
+    //         store_num:store_num,
+    //         store_name:store_name,
+    //         detail_info:detail_info,
+    //         short_info:short_info,
+    //         madein:madein,
+    //         address:address,
+    //         main_img:main_img,
+    //         opentime:opentime,
+    //         lastorder:lastorder,
+    //         waiting_closetime:waiting_closetime,
+    //         blogurl:blogurl,
+    //         youtubeurl:youtubeurl,
+    //         facebookurl:facebookurl,
+    //         instaurl:instaurl,
+    //         tvshow:tvshow,
+    //         s_rstatus:s_rstatus,
+    //         parking:parking,
+    //         wifi:wifi,
+    //         toilet:toilet,
+    //         smokingroom:smokingroom,
+    //         babychair:babychair
+    //     })
+    //     return insertStore;
+    // }
     async updateByStoreInfo(storeObj) { //가게 수정
         const updateInfo = await storesEntity.update(storeObj, {
             where: {
                 store_num: storeObj.store_num
-            },
+            }
         });
         return updateInfo;
     }
