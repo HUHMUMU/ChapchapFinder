@@ -110,7 +110,7 @@ class InfoService{
         return breaktimes;
     }
 
-    async findTypeClasses(category){
+    async findTypeClasses(category){ // 가게 카테고리 찾기
         const typeclasses = await TypeClassesEntity.findOne({
             where:{
                 category_num : category
@@ -119,15 +119,7 @@ class InfoService{
         return typeclasses.category_num;
     }
 
-    async insertStoreTypes(storeNum, category){
-        const storetypes = await StoreTypesEntity.create({
-            store_num: storeNum,
-            category_num: category
-    });
-        return storetypes;
-    }
-
-    async findStoreTypes(storeNum){
+    async findStoreTypes(storeNum){ //가게 카테고리 찾기
         const storetypes = await StoreTypesEntity.findAll({
             where:{
                 store_num : storeNum
@@ -135,6 +127,37 @@ class InfoService{
         })
         return storetypes;
     }
+
+    async insertStoreTypes(storeNum, category){ //가게 카테고리 등록
+        const storetypes = await StoreTypesEntity.create({
+            store_num: storeNum,
+            category_num: category
+    });
+        return storetypes;
+    }
+
+    async updateStoreTypes(StoreNum, storetypeId, category) { // 가게 카테고리 수정
+        const updateStoretypes = await StoreTypesEntity.update({
+            category_num : category
+        }, {
+            where: {
+                store_num: StoreNum,
+                storetype_id: storetypeId
+            },
+        });
+        return updateStoretypes;
+    }
+
+    async dropStoreTypes(storetypeId, storeNum){ // 가게 카테고리 삭제
+        const dropStoreTypes = await StoreTypesEntity.destroy({
+            where : {
+                storetype_id : storetypeId,
+                store_num : storeNum
+            }
+        });
+        return dropStoreTypes;
+    }
+
     async insertBreaktime(breaktimeObj){ //가게 브레이크타임 등록
         const insertBreaktime=await BreakTimesEntity.create(breaktimeObj)
         return insertBreaktime;

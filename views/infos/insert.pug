@@ -249,6 +249,39 @@ block content
 
             `;
         }
+        const mainCategory1 = addStoreTypes.lastElementChild.querySelector("#maincategory1");
+        const mainCategory2 = addStoreTypes.lastElementChild.querySelector("#maincategory2");
+        const mainCategory3 = addStoreTypes.lastElementChild.querySelector("#maincategory3");
+
+        mainCategory1.addEventListener("change", function () {
+            if (mainCategory1.value === "") {
+                mainCategory2.disabled = false;
+                mainCategory3.disabled = false;
+            } else {
+                mainCategory2.disabled = true;
+                mainCategory3.disabled = true;
+            }
+        });
+
+        mainCategory2.addEventListener("change", function () {
+            if (mainCategory2.value === "") {
+                mainCategory1.disabled = false;
+                mainCategory3.disabled = false;
+            } else {
+                mainCategory1.disabled = true;
+                mainCategory3.disabled = true;
+            }
+        });
+
+        mainCategory3.addEventListener("change", function () {
+            if (mainCategory3.value === "") {
+                mainCategory1.disabled = false;
+                mainCategory2.disabled = false;
+            } else {
+                mainCategory1.disabled = true;
+                mainCategory2.disabled = true;
+            }
+        });
 
 
 
@@ -321,36 +354,7 @@ block content
 
 
 
-        const mainCategory1 = document.getElementById("maincategory1");
-        const mainCategory2 = document.getElementById("maincategory2");
-        const mainCategory3 = document.getElementById("maincategory3");
+        // const mainCategory1 = document.getElementById("maincategory1");
+        // const mainCategory2 = document.getElementById("maincategory2");
+        // const mainCategory3 = document.getElementById("maincategory3");
 
-        mainCategory1.addEventListener("change", function () {
-            if (mainCategory1.value === "") {
-                mainCategory2.disabled = false;
-                mainCategory3.disabled = false;
-            } else {
-                mainCategory2.disabled = true;
-                mainCategory3.disabled = true;
-            }
-        });
-
-        mainCategory2.addEventListener("change", function () {
-            if (mainCategory2.value === "") {
-                mainCategory1.disabled = false;
-                mainCategory3.disabled = false;
-            } else {
-                mainCategory1.disabled = true;
-                mainCategory3.disabled = true;
-            }
-        });
-
-        mainCategory3.addEventListener("change", function () {
-            if (mainCategory3.value === "") {
-                mainCategory1.disabled = false;
-                mainCategory2.disabled = false;
-            } else {
-                mainCategory1.disabled = true;
-                mainCategory2.disabled = true;
-            }
-        });
