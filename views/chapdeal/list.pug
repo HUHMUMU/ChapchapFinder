@@ -15,10 +15,6 @@ block content
                             p #{deal.event_start.toLocaleString()}~#{deal.event_end.toLocaleString()}
                         p.m-0.card-text 조건 : #{deal.event_condition}
                         p.m-0.card-text 증정 : #{deal.event_reward}
-
-
                 div.mt-4
                     a.btn.btn-outline-dark.me-2(href=`/chapdeal/${deal.event_num}/update.do`) 수정하기
                     a.btn.btn-outline-danger(href=`/chapdeal/${deal.event_num}/delete.do`) 삭제
-    //div.d-flex.justify-content-center
-    //    a.btn.btn-outline-dark.m-3(href="/chapdeal/update.do") 수정하기

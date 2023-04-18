@@ -4,6 +4,8 @@ block content
     div
         h4.mb-3 메뉴 등록
         form.mt-4(action="/menu/insert.do", method="post", enctype="multipart/form-data")
+            input(type="hidden", value=`${storeNum}`, name="store_num")
+
             label.form-label(for='img')
             input.form-control.mb-1(type='file', id='img', name="img", accept="image/*")
 

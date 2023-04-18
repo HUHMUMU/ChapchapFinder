@@ -10,12 +10,12 @@ module.exports = (sequelize) => {
             comment: "휴식시간",
         },
         rest_start_time: {
-            type: DataTypes.TIME,
+            type: DataTypes.DATE,
             allowNull: true,
             comment: "휴식시작시간",
         },
         rest_end_time: {
-            type: DataTypes.TIME,
+            type: DataTypes.DATE,
             allowNull: true,
             comment: "휴식끝시간",
         },

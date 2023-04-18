@@ -1,16 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const path=require("path");
 const WaitingService=require("../model/service/WaitingService");
+const sequelize = require("../model/chapchapSequelize");
+const UsersWaitingEntity = require("../model/entity/UsersWaitingEntity")(sequelize);
 
-let waitingList = []; // 대기 리스트
+
+
+
 function generateWaitNum() {
     if (waitingList.length === 0) {
         return 1;
     } else {
-        return waitingList[waitingList.length - 1].waitNum + 1;
+        return waitingList[waitingList.length - 1].wait_num + 1;
     }
 }
-
+// 대기등록 되면 번호 생성
 const errorHandler = (err, req, res, next) => {
     console.error(err);
     res.status(500).send('500 에러 발생!');
@@ -21,9 +26,27 @@ router.use(errorHandler);
 
 // div 1에 들어갈 내용
 // 1. 입장순서가 제일 가까운 3팀만 표 하나에 보이기
-router.get('/', async (req, res) => {
+
+router.get('/waiting.do', async (req, res) => {
+
+    let wait_num=req.query.wait_num;
+    let user_people=req.query.user_people;
+    let waitingList=await WaitingService.getTop3WaitingUsers(wait_num,user_people);
+
+    let waitingInfo =await WaitingService;
+    let length = await waitingList;
+
+
+
+    res.render("waitings/waiting", {
+        waitingList: waitingList,
+        waitingInfo: waitingInfo,
+        length: length,
+        waitingStats: this.waitingStats,
+    });
+
     try {
-        const waitingList = await Waiting.findAll({
+        const result = await UsersWaitingEntity.findAll({
             attributes: ['id', 'wait_num', 'user_people', 'start_time'],
             order: [['wait_num', 'ASC']],
             limit: 3
@@ -31,10 +54,9 @@ router.get('/', async (req, res) => {
         res.render('index', { waitings });
     } catch (error) {
         console.error(error);
-        next(error);
     }
-});
 
+});
 //div 1 위치에 들어갈 입장알림 버튼
 router.post('/enter', async (req, res, next) => {
     try {
@@ -61,11 +83,10 @@ router.post('/cancel', async (req, res, next) => {
         next(err);
     }
 });
-
 // div 2. 제일 가까운 3팀을 제외한 다른 팀의 대기 현황 보여주기
 router.get('/all', async (req, res) => {
     try {
-        const waitings = await Waiting.findAll({
+        const waitings = await UsersWaitingEntity.findAll({
             attributes: [
                 'id',
                 'wait_num',
@@ -111,13 +132,6 @@ router.get('/status', async (req, res) => {
         next(error);
     }
 });
-
-
-
-
-
-
-
 // 4
 router.get('/waiting-settings', async (req, res, next) => {
     try {
@@ -168,7 +182,7 @@ router.post('/toggle-waiting', async (req, res) => {
     }
 });
 
-
-
-
 module.exports = router;
+
+
+// 예라이 보완 더 해야함

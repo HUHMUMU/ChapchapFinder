@@ -6,6 +6,7 @@ block content
     each menu in menus
         form.mt-4(action=`/menu/${menu.menu_num}/update.do`, method="post", enctype="multipart/form-data")
             input(type="hidden", value=menu.menu_num, name="menu_num")
+            //input(type="text", value=menu.img, name="img")
 
             img.mb-1(width="230", height="230", src=menu.img, value="")
             label.form-label(for='img')

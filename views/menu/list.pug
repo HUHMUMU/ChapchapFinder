@@ -3,7 +3,7 @@ extends ../layout
 block content
     div.d-flex.justify-content-between
         h4.mb-3 메뉴 관리
-        a.mb-3.btn.btn-light(id="addMenuBtn", href="/menu/insert.do") 추가
+        a.btn.btn-light#addMenuBtn(href="/menu/insert.do", style="none") 추가
     each menu in menuList
         div.d-flex.align-items-center.mb-3
             img.me-5(src=menu.img , width="230", height="230")
