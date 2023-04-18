@@ -12,34 +12,52 @@ class ChapdealService{
         return dealList;
     }
 
-    async findOneDeal(event_num) { //특정 이벤트 데이터 조회
+    async findOneDeal(storeNum,event_num) { //특정 이벤트 데이터 조회
         const deal = await chapDealsEntity.findAll({
             where: {
+                store_num: storeNum,
                 event_num: event_num
             }
         });
         return deal;
     }
 
-    async insertDeal(eventObj) { //가게별 이벤트 추가
-        const insertDeal = await chapDealsEntity.create(eventObj);
+    async insertDeal(event_title, event_condition, event_reward, event_img, event_start, event_end, store_num) { //가게별 이벤트 추가
+        const insertDeal = await chapDealsEntity.create({
+            event_title: event_title,
+            event_condition: event_condition,
+            event_reward: event_reward,
+            event_img: event_img,
+            event_start: event_start,
+            event_end: event_end,
+            store_num: store_num
+        });
 
         return insertDeal;
     };
 
 
-    async modifyDeal(eventObj) { //특정 이벤트 수정
-        const modifyDeal = await chapDealsEntity.update(eventObj,{
+    async modifyDeal(event_title, event_condition, event_reward, event_img, event_start, event_end, store_num, event_num) { //특정 이벤트 수정
+        const modifyDeal = await chapDealsEntity.update({
+            event_title: event_title,
+            event_condition: event_condition,
+            event_reward: event_reward,
+            event_img: event_img,
+            event_start: event_start,
+            event_end: event_end
+        },{
             where : {
-                event_num: eventObj.event_num
+                store_num: store_num,
+                event_num: event_num
             }
         });
         return modifyDeal;
     }
 
-    async dropDeal(event_num) { //이벤트 삭제
+    async dropDeal(storeNum,event_num) { //이벤트 삭제
         const dropDeal = await chapDealsEntity.destroy({
             where: {
+                store_num: storeNum,
                 event_num: event_num
             }
         });

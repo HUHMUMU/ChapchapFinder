@@ -12,15 +12,15 @@ block content
                     th
                     th
             tbody
-                each waitingList in userswaiting
+                each top3 in getTop3WaitingUsers
                     tr
-                        td= waitingList.wait_num
-                        td= waitingList.user_people
-                        td= waitingList.start_time
+                        td= top3.wait_num
+                        td= top3.user_people
+                        td= top3.start_time
                         td
-                            button(type='button' class='enter-notification' data-waitingnum=userswaiting.wait_num, href='#') 입장 알림
+                            button(type='button' class='EnterNotiToUserBtn' data-waitingnum=top3.wait_num, href='#') 입장 알림
                         td
-                            button(type='button' class='enter-cancel' data-waitingnum=userswaiting.wait_num, href='#') 강제 취소
+                            button(type='button' class='CancelToUserBtn' data-waitingnum=top3.wait_num, href='#') 강제 취소
         // 2 위치
         div.waiting-info.row.col-md-4
             h2 대기팀 정보
@@ -31,16 +31,16 @@ block content
                         th 대기 인원
                         th 웨이팅 등록시간
                 tbody
-                    each waitingList  in waitingInfo
+                    each wlet3u  in WaitingListExceptTop3Users
                         tr
-                            td= waitingList.wait_num
-                            td= waitingList.user_people
-                            td= waitingList.start_time
+                            td= wlet3u.wait_num
+                            td= wlet3u.user_people
+                            td= wlet3u.start_time
         // 3 위치
         div.waiting-stats.row.col-md-4
-            h2 Waiting Stats
-            p Total Teams: #{waitingStats.total_teams}
-            p Total People: #{waitingStats.total_people}
+            h2 대기팀 정보
+            p 총 대기팀 수: #{WaitingListExceptTop3Users.user_people}
+            p 총 대기 인원 수: #{WaitingListExceptTop3Users.user_people}
         // 4 위치
         div.store-config.row.col-md-4
             h2 웨이팅 관련 설정
@@ -54,7 +54,7 @@ block content
                     input#time-setup-input(type='number' name='timeSetupInput', placeholder='대기 시간(분)을 입력하세요')
                     button#time-setup-submit(type='button') 완료
                 div#max-people-setup
-                    label(for='max-people-input') 최대 인원 설정:
+                    label(for='max-people-input') 웨이팅 등록 최대 인원 설정:
                     input#max-people-input(type='number' name='maxPeopleInput', placeholder='최대 인원을 입력하세요')
                     button#max-people-submit(type='button') 완료
                 div#closing-time-setup

@@ -59,9 +59,5 @@ class ReviewsService{
         return count;
     }
 
-    async report(storeNum){
-
-    }
-
 }
 module.exports=new ReviewsService();

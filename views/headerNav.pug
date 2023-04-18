@@ -11,10 +11,11 @@ nav.navbar.navbar-expand-lg
                                 img(src="/images/logo/signup.png", alt="signup-icon", width="20px")
                                 span.ms-1 회원가입
                     else
-                        a.nav-link.active(href="/users/detail.do")
+                        a.nav-link.active(href="#")
                             button.btn.btn-outline-secondary(type="button")
                                 img(src="/images/logo/mypage.png", alt="mypage-icon", width="20px")
                                 span.ms-1 내정보
+                                // 내정보(사장 정보) 페이지 아직 미구현
                 li.nav-item
                     div#loginContainer.d-flex.align-items-center
                         if(!loginStore)
