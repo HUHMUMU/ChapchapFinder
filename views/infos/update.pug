@@ -19,11 +19,16 @@ block content
                 div
                     input.mb-5(type="file",id='main_img' class="form-control", name="main_img" accept="image/*" onchange="loadFile(this)")
         hr
-        div.form-floating
-            div
-                h3.mt-5.mb-5.label(for='store_img') 이미지 등록
-                //div(style='display:flex; justify-content: space-around; align-items:center;')
-                input.mb-5(type="file", class="form-control", id="store_img2", name="chooseFile" accept="image/*" onchange="loadFile(this)")
+        div.form-floating.mb-5
+            div.d-flex.justify-content-between.mt-5
+                h3.label(for='store_img') 이미지 등록
+                button.btn.btn-primary(type='button' id='addImgBtn') 추가
+            each img in imgs
+                img.me-5.mt-5(src=img.store_img , width="230", height="230")
+            div#addImg
+                div.d-flex.mt-5.justify-content-around
+                    input.me-xxl-5.ms-xxl-5(type="file", class="form-control", id="store_img" name="store_img" accept="image/*" onchange="loadFile(this)")
+                    button.btn.btn-outline-danger.btn-sm.me-xxl-5(type='button' style="height: 30px; width:50px" onclick="this.closest('#addImg').remove()" ) 삭제
         hr
         div(method="post", enctype="multipart/form-data")
             div.d-flex.justify-content-between.mt-5
@@ -104,7 +109,7 @@ block content
                 div.d-flex.justify-content-between
                     h5.mb-3.label(for='regular_closeDay') 휴무일
                     button.btn.btn-primary(type='button' id='addHolidayBtn') 추가
-                p 휴무 요일과 날짜 둘 중에 하나만 선택해주세요 추가하고 싶을 시 추c가버튼을 눌러주세요.
+                p 휴무 요일과 날짜 둘 중에 하나만 선택해주세요 추가하고 싶을 시 추가버튼을 눌러주세요.
                 each holiday in holidays
                     div#addHolidays
                         div.d-flex.justify-content-around
@@ -225,6 +230,22 @@ block content
                     node.removeAttribute("disabled");
                 }
             }
+        }
+
+        const addImgBtn = document.getElementById("addImgBtn")
+        const addImg = document.getElementById("addImg")
+
+        addImgBtn.addEventListener("click",(e)=>{
+            addImg.insertAdjacentHTML("beforeend", addImgInputComponent());
+        })
+
+        function addImgInputComponent() {
+            return `
+                <div id="inputImgs" class="d-flex mt-5 justify-content-around">
+                  <input type="file" class="form-control me-xxl-5 ms-xxl-5" id="store_img" name="store_img" accept="image/*" onchange="loadFile(this)">
+                  <button class="btn btn-outline-danger btn-sm me-xxl-5" type="button" style="height: 30px; width:50px" onclick="this.closest('#inputImgs').remove()">삭제</button>
+                </div>
+            `;
         }
 
         const addStoreTypesBtn = document.getElementById("addStoreTypesBtn")

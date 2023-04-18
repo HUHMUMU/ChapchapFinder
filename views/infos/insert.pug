@@ -18,9 +18,9 @@ block content
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
             div
-                h3.mt-5.mb-5.label(for='') 이미지 등록
+                h3.mt-5.mb-5.label(for='store_img') 이미지 등록
                 //div(style='display:flex; justify-content: space-around; align-items:center;')
-                input.mb-5(type="file", class="form-control", id="", name="" accept="image/*" onchange="loadFile(this)")
+                input.mb-5(type="file", class="form-control", id="store_img", name="store_img" accept="image/*" onchange="loadFile(this)")
         hr
         div(method="post", enctype="multipart/form-data")
             div.d-flex.justify-content-between.mt-5

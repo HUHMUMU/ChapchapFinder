@@ -4,9 +4,12 @@ const HolidaysEntity=require("../entity/HolidaysEntity")(sequelize);
 const BreakTimesEntity=require("../entity/BreakTimesEntity")(sequelize);
 const TypeClassesEntity = require("../entity/TypeClassesEntity")(sequelize);
 const StoreTypesEntity = require("../entity/StoreTypesEntity")(sequelize);
+const StoreImgsEntity = require("../entity/StoreImgsEntity")(sequelize);
 const {Op}=require("sequelize");
 const {add} = require("nodemon/lib/rules");
 class InfoService{
+
+    //가게 정보
     async findAllStoreInfo(){ // 가게 모든 데이터 조회
         const infoList = await storesEntity.findAll();
         return infoList;
@@ -68,6 +71,8 @@ class InfoService{
         return dropStores;
     }
 
+
+    //휴무일
     async findHolidaysByStore(storeNum){ // 한 가게 휴무일 조회
         const holidays = await HolidaysEntity.findAll({
             where: {
@@ -101,6 +106,10 @@ class InfoService{
         return dropHoliday;
     }
 
+
+
+    //브레이크타임
+
     async findBreaktimesByStore(storeNum){ // 한 가게 브레이크타임 조회
         const breaktimes = await BreakTimesEntity.findAll({
             where: {
@@ -109,6 +118,33 @@ class InfoService{
         });
         return breaktimes;
     }
+
+    async insertBreaktime(breaktimeObj){ //가게 브레이크타임 등록
+        const insertBreaktime=await BreakTimesEntity.create(breaktimeObj)
+        return insertBreaktime;
+    }
+
+    async updateBreaktime(breaktimeObj) { // 가게 브레이크타임 수정
+        const updateBreaktime = await BreakTimesEntity.update(breaktimeObj, {
+            where: {
+                store_num: breaktimeObj.store_num
+            },
+        });
+        return updateBreaktime;
+    }
+
+    async dropBreaktime(restNum, storeNum){ // 가게 브레이크타임 삭제
+        const dropBreaktime = await BreakTimesEntity.destroy({
+            where : {
+                rest_num : restNum,
+                store_num : storeNum
+            }
+        });
+        return dropBreaktime;
+    }
+
+
+    // 가게 카테고리
 
     async findTypeClasses(category){ // 가게 카테고리 찾기
         const typeclasses = await TypeClassesEntity.findOne({
@@ -158,29 +194,49 @@ class InfoService{
         return dropStoreTypes;
     }
 
-    async insertBreaktime(breaktimeObj){ //가게 브레이크타임 등록
-        const insertBreaktime=await BreakTimesEntity.create(breaktimeObj)
-        return insertBreaktime;
+    //이미지
+    async findImg(storeNum){ //가게 이미지 찾기
+        const findImg = await StoreImgsEntity.findAll({
+            where:{
+                store_num : storeNum
+            }
+        })
+        return findImg;
     }
 
-    async updateBreaktime(breaktimeObj) { // 가게 브레이크타임 수정
-        const updateBreaktime = await BreakTimesEntity.update(breaktimeObj, {
-            where: {
-                store_num: breaktimeObj.store_num
-            },
+    async insertImg(img ) { //가게 이미지 등록
+        const insertImg = await StoreImgsEntity.create({
+            img_num: img.img_num,
+            store_img: img.store_img,
+            store_num: img.store_num
         });
-        return updateBreaktime;
+        return insertImg;
     }
 
-    async dropBreaktime(restNum, storeNum){ // 가게 브레이크타임 삭제
-        const dropBreaktime = await BreakTimesEntity.destroy({
+    async updateImg(img) { //가게 이미지 등록
+        const update = await StoreImgsEntity.update({
+            store_img: img.store_img
+        }, {
+            where: {
+                store_num: img.store_num,
+                img_num: img.img_num
+            }
+        });
+        return update;
+    }
+
+    async dropImg(imgNum, storeNum){ // 가게 이미지 삭제
+        const dropStoreImgs = await StoreImgsEntity.destroy({
             where : {
-                rest_num : restNum,
+                img_num : imgNum,
                 store_num : storeNum
             }
         });
-        return dropBreaktime;
+        return dropStoreImgs;
     }
+
+
+
 
 }
 module.exports= new InfoService();
