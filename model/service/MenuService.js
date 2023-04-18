@@ -21,20 +21,10 @@ class MenuService{
         return menuList;
     }
 
-    async insertMenu(name, img, price, info, menu_type, status, store_num) { //가게별 메뉴 추가
-        const insertMenu = await menuManagesEntity.create({
-            name: name,
-            img: img,
-            price: price,
-            info: info,
-            menu_type: menu_type,
-            status: status,
-            store_num: store_num
-        });
-
+    async insertMenu(menuObj) { //가게별 메뉴 추가
+        const insertMenu = await menuManagesEntity.create(menuObj);
         return insertMenu;
     };
-
 
     async modifyMenu(menuObj) { //특정 메뉴 수정
         const modifyMenu = await menuManagesEntity.update(menuObj,{

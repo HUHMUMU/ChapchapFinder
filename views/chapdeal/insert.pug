@@ -4,6 +4,8 @@ block content
     div
         h4.mb-3 챱딜 등록
         form.mt-4(action="/chapdeal/insert.do", method="post", enctype="multipart/form-data")
+            input(type="hidden", value=`${storeNum}`, name="store_num")
+
             label.form-label(for='event_img')
             input.form-control.mb-1(type='file', id='event_img', name="event_img", accept="image/*" )
 
