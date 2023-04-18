@@ -1,4 +1,3 @@
-
 extends ../layout
 
 block content
@@ -28,10 +27,8 @@ block content
                 button.btn.btn-primary(type='button' id='addStoreTypesBtn') 추가
             div#addStoreTypes
                 div.d-flex.mt-5.mb-5.justify-content-between
-                    div.form-floating
-                        h5.mb-3.label.fs-6(for='')(style='margin-right: 10px;') 음식점 선택
-                        select#maincategory1.form-select(name="select_main_category1")
-                            option(value="") 음식점 선택
+                    select#category_num.form-select(name="category_num")
+                        optgroup(label="음식점 선택")
                             option(value='1') 고기
                             option(value='2') 돈까스, 회, 일식
                             option(value='3') 탕, 찜, 찌개
@@ -41,24 +38,18 @@ block content
                             option(value='7') 패스트푸드
                             option(value='8') 백반, 국수
                             option(value='9') 분식
-                    div
-                        h5.mb-3.label.fs-6(for='')(style='margin-right: 10px;') 술집 선택
-                        select#maincategory2.form-select(name="select_main_category2")
-                            option(value='') 술집 선택
+                        optgroup(label="술집 선택")
                             option(value='11') 호프집
                             option(value='12') 바
                             option(value='13') 이자카야
                             option(value='14') 포차
                             option(value='15') 와인바
-                    div
-                        h5.mb-3.label.fs-6(for='')(style='margin-right: 10px;') 카페 선택
-                        select#maincategory3.form-select(name="select_main_category3")
-                            option(value='') 카페 선택
+                        optgroup(label="카페 선택")
                             option(value='17') 커피전문점
                             option(value='18') 디저트카페
                             option(value='19') 차전문점
                             option(value='20') 베이커리카페
-                    button.btn.btn-outline-danger.btn-sm(type='button' style="height: 30px; visibility:hidden" ) 삭제
+                    button.btn.btn-outline-danger.btn-sm.ms-5(type='button' style="height: 30px; width: 50px; visibility:hidden" ) 삭제
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
             h3.mt-5.mb-5.label(for='address') 가게 주소
@@ -204,84 +195,38 @@ block content
 
         function addStoreTypeInputComponent(){
             return `
-                    <div id="inputHolidays" class="d-flex mt-5 mb-5 justify-content-between">
-                      <div class="form-floating">
-                        <h5 class="mb-3 label fs-6" for="" style="margin-right: 10px;">음식점 선택</h5>
-                        <select id="maincategory1" class="form-select" name="select_main_category1">
-                          <option value="">음식점 선택</option>
-                          <option value="1">고기</option>
-                          <option value="2">돈까스, 회, 일식</option>
-                          <option value="3">탕, 찜, 찌개</option>
-                          <option value="4">양식</option>
-                          <option value="5">중식</option>
-                          <option value="6">아시안</option>
-                          <option value="7">패스트푸드</option>
-                          <option value="8">백반, 국수</option>
-                          <option value="9">분식</option>
-                          <option value="10">기타</option>
+                    <div class="d-flex mt-5 mb-5 InputStoreType">
+                        <select id="category_num" name="category_num" class="form-select">
+                            <optgroup label="음식점 선택">
+                                <option value='1'>고기</option>
+                                <option value='2'>돈까스, 회, 일식</option>
+                                <option value='3'>탕, 찜, 찌개</option>
+                                <option value='4'>양식</option>
+                                <option value='5'>중식</option>
+                                <option value='6'>아시안</option>
+                                <option value='7'>패스트푸드</option>
+                                <option value='8'>백반, 국수</option>
+                                <option value='9'>분식</option>
+                            </optgroup>
+                            <optgroup label="술집 선택">
+                                <option value='11'>호프집</option>
+                                <option value='12'>바</option>
+                                <option value='13'>이자카야</option>
+                                <option value='14'>포차</option>
+                                <option value='15'>와인바</option>
+                            </optgroup>
+                            <optgroup label="카페 선택">
+                                <option value='17'>커피전문점</option>
+                                <option value='18'>디저트카페</option>
+                                <option value='19'>차전문점</option>
+                                <option value='20'>베이커리카페</option>
+                            </optgroup>
                         </select>
-                      </div>
-                      <div>
-                        <h5 class="mb-3 label fs-6" for="" style="margin-right: 10px;">술집 선택</h5>
-                        <select id="maincategory2" class="form-select" name="select_main_category2">
-                          <option value="">술집 선택</option>
-                          <option value="11">호프집</option>
-                          <option value="12">바</option>
-                          <option value="13">이자카야</option>
-                          <option value="14">포차</option>
-                          <option value="15">와인바</option>
-                          <option value="16">기타</option>
-                        </select>
-                      </div>
-                      <div>
-                        <h5 class="mb-3 label fs-6" for="" style="margin-right: 10px;">카페 선택</h5>
-                        <select id="maincategory3" class="form-select" name="select_main_category3">
-                          <option value="">카페 선택</option>
-                          <option value="17">커피전문점</option>
-                          <option value="18">디저트카페</option>
-                          <option value="19">차전문점</option>
-                          <option value="20">베이커리카페</option>
-                          <option value="21">기타</option>
-                        </select>
-                      </div>
-                      <button class="btn btn-outline-danger btn-sm" style="height: 30px;" onclick="this.closest('#inputHolidays').remove()">삭제</button>
+                        <button type='button' class='btn btn-outline-danger btn-sm ms-5' style='height: 30px; width: 50px' onclick="this.closest('.InputStoreType').remove()">삭제</button>
                     </div>
 
             `;
         }
-        const mainCategory1 = addStoreTypes.lastElementChild.querySelector("#maincategory1");
-        const mainCategory2 = addStoreTypes.lastElementChild.querySelector("#maincategory2");
-        const mainCategory3 = addStoreTypes.lastElementChild.querySelector("#maincategory3");
-
-        mainCategory1.addEventListener("change", function () {
-            if (mainCategory1.value === "") {
-                mainCategory2.disabled = false;
-                mainCategory3.disabled = false;
-            } else {
-                mainCategory2.disabled = true;
-                mainCategory3.disabled = true;
-            }
-        });
-
-        mainCategory2.addEventListener("change", function () {
-            if (mainCategory2.value === "") {
-                mainCategory1.disabled = false;
-                mainCategory3.disabled = false;
-            } else {
-                mainCategory1.disabled = true;
-                mainCategory3.disabled = true;
-            }
-        });
-
-        mainCategory3.addEventListener("change", function () {
-            if (mainCategory3.value === "") {
-                mainCategory1.disabled = false;
-                mainCategory2.disabled = false;
-            } else {
-                mainCategory1.disabled = true;
-                mainCategory2.disabled = true;
-            }
-        });
 
 
 

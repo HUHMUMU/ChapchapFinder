@@ -109,7 +109,7 @@ router.get("/delete.do", async (req,res)=>{
     }catch(e){
         console.error(e);
     }
-    if(dropStoreInfo>0 && dropHoliday>0 && dropBreaktime>0 && dropStoreTypes>0 && dropImgs){
+    if(dropStoreInfo>0 && dropHoliday>0 && dropBreaktime>0 && dropStoreTypes>0 && dropImgs>0){
         res.redirect("/");
     }else{
         res.redirect(`/detail.do`);
