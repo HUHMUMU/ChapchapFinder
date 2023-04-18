@@ -92,9 +92,6 @@ app.use( function (req, res, next ){
   }
 });
 
-app.use('/', indexRouter);
-// app.use('/replies', repliesRouter);
-app.use('/reviews', reviewsRouter);
 app.get('/api/data', (req, res) => {
   // 데이터를 반환하는 API
   const data = {
@@ -108,6 +105,10 @@ app.post('/api/user', (req, res) => {
   res.send('Received!');
 });
 
+app.use('/', indexRouter);
+// app.use('/replies', repliesRouter);
+app.use('/reviews', reviewsRouter);
+app.use('/chapdeal', chapdealsRouter);
 app.use('/stores', storesRouter);
 app.use('/users', storeManagesRouter);
 app.use('/replies', repliesRouter);
