@@ -12,3 +12,6 @@ html
       include headerNav
     main.container
       block content
+    if actionMsg
+      script.
+        alert("#{actionMsg}");
