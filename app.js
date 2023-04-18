@@ -87,7 +87,6 @@ app.use( function (req, res, next ){
     if(req.session.loginStore){
       next();
     }else{
-      res.locals.actionMsg = actionMsg;
       res.redirect("/stores/login.do");
     }
   }

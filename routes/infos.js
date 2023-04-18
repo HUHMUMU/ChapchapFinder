@@ -26,8 +26,8 @@ router.post('/insert.do',async (req,res)=>{
         findCate = await infoService.findTypeClasses(select_main_category3);
     }
     try{
-        insertCate = await infoService.insertStoreTypes(storeNum, findCate)
         insertStoreInfo=await infoService.insertStoreInfo(req.body);
+        insertCate = await infoService.insertStoreTypes(storeNum, findCate)
         insertHoliday=await infoService.insertHolidays(req.body)
         insertBreaktime=await infoService.insertBreaktime(req.body)
         insertImg=await infoService.insertImg(req.body)
@@ -38,8 +38,8 @@ router.post('/insert.do',async (req,res)=>{
         alert("등록성공");
         res.redirect("/.do");
     }else{
-        alert("등록이 되지 않았습니다.")
-        res.redirect("/infos/insert.do")
+        alert("등록이 되지 않았습니다.");
+        res.redirect("/infos/insert.do");
     }
 })
 
