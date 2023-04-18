@@ -6,18 +6,18 @@ block content
         hr
         div.form-floating
             h3.mt-5.mb-5.label(for='store_name') 가게명
-            input#store_name.form-control.mb-5( name='storeName', type='text' placeholder="??" value=store.store_name)
+            input#store_name.form-control.mb-5( name='store_name', type='text' placeholder="??" value=store.store_name)
         hr
         div.form-floating
             h3.mt-5.mb-5.label(for='store_num') 가게 고유번호
-            input#store_num.form-control.mb-5( name='storeNum', type='text' readonly placeholder="??" value=store.store_num)
+            input#store_num.form-control.mb-5( name='store_num', type='text' readonly placeholder="??" value=store.store_num)
         hr
         div.form-floating
             div
-                h3.mt-5.mb-5.label(for='store_img') 대표이미지
+                h3.mt-5.mb-5.label(for='main_img') 대표이미지
                 //div.box(style='width: 100px; height: 100px; background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px;')
                 div
-                    input.mb-5(type="file",id='store_img1' class="form-control", name="chooseFile" accept="image/*" onchange="loadFile(this)")
+                    input.mb-5(type="file",id='main_img' class="form-control", name="main_img" accept="image/*" onchange="loadFile(this)")
         hr
         div.form-floating
             div
@@ -25,37 +25,44 @@ block content
                 //div(style='display:flex; justify-content: space-around; align-items:center;')
                 input.mb-5(type="file", class="form-control", id="store_img2", name="chooseFile" accept="image/*" onchange="loadFile(this)")
         hr
-        h3.mt-5.mb-5 가게 업종
+        div(method="post", enctype="multipart/form-data")
+            div.d-flex.justify-content-between.mt-5
+                h3.label(for='select_main_category') 가게 업종 선택
+                button.btn.btn-primary(type='button' id='addStoreTypesBtn') 추가
             each st,i in storeTypes
-                h3.d-flex.mt-5.mb-5.label.justify-content-between(for='select_main_category')
-                    select#maincategory1.form-select.mb-5.w-25(name="cate"+i onchange=`changeMenu('cate${i}')` disabled=(!(st.category_num>=1 && st.category_num<=10)))
-                        option(value="") 음식점 선택
-                        option(value=1, selected=(st.category_num===1)) 고기
-                        option(value=2, selected=(st.category_num===2)) 돈까스, 회, 일식
-                        option(value=3, selected=(st.category_num===3)) 탕, 찜, 찌개
-                        option(value=4, selected=(st.category_num===4)) 양식
-                        option(value=5, selected=(st.category_num===5)) 중식
-                        option(value=6, selected=(st.category_num===6)) 아시안
-                        option(value=7, selected=(st.category_num===7)) 패스트푸드
-                        option(value=8, selected=(st.category_num===8)) 백반, 국수
-                        option(value=9, selected=(st.category_num===9)) 분식
-                        option(value=10, selected=(st.category_num===10)) 기타
-                    select#maincategory2.form-select.mb-5.w-25(name="cate"+i onchange=`changeMenu('cate${i}')` disabled=(!(st.category_num >= 11 && st.category_num <= 16)))
-                        option(value='') 술집 선택
-                        option(value=11, selected=(st.category_num===11)) 호프집
-                        option(value=12, selected=(st.category_num===12)) 바
-                        option(value=13, selected=(st.category_num===13)) 이자카야
-                        option(value=14, selected=(st.category_num===14)) 포차
-                        option(value=15, selected=(st.category_num===15)) 와인바
-                        option(value=16, selected=(st.category_num===16)) 기타
-                    select#maincategory3.form-select.mb-5.w-25(name="cate"+i onchange=`changeMenu('cate${i}')` disabled=(!(st.category_num >= 17 && st.category_num <= 21)))
-                        option(value='') 카페 선택
-                        option(value=17, selected=(st.category_num===17)) 커피전문점
-                        option(value=18, selected=(st.category_num===18)) 디저트카페
-                        option(value=19, selected=(st.category_num===19)) 차전문점
-                        option(value=20, selected=(st.category_num===20)) 베이커리카페
-                        option(value=21, selected=(st.category_num===21)) 기타
-
+                div#addStoreTypes
+                    div.d-flex.mt-5.mb-5.justify-content-between
+                        div.form-floating
+                            h5.mb-3.label.fs-6(for='')(style='margin-right: 10px;') 음식점 선택
+                            select#maincategory1.form-select.mb-5(name="cate" + i onchange=`changeMenu('cate${i}')` disabled=(!(st.category_num >= 1 && st.category_num <= 10)))
+                                option(value="") 음식점 선택
+                                option(value=1, selected=(st.category_num === 1)) 고기
+                                option(value=2, selected=(st.category_num === 2)) 돈까스, 회, 일식
+                                option(value=3, selected=(st.category_num === 3)) 탕, 찜, 찌개
+                                option(value=4, selected=(st.category_num === 4)) 양식
+                                option(value=5, selected=(st.category_num === 5)) 중식
+                                option(value=6, selected=(st.category_num === 6)) 아시안
+                                option(value=7, selected=(st.category_num === 7)) 패스트푸드
+                                option(value=8, selected=(st.category_num === 8)) 백반, 국수
+                                option(value=9, selected=(st.category_num === 9)) 분식
+                        div
+                            h5.mb-3.label.fs-6(for='')(style='margin-right: 10px;') 술집 선택
+                            select#maincategory2.form-select.mb-5(name="cate" + i onchange=`changeMenu('cate${i}')` disabled=(!(st.category_num >= 11 && st.category_num <= 16)))
+                                option(value='') 술집 선택
+                                option(value=11, selected=(st.category_num === 11)) 호프집
+                                option(value=12, selected=(st.category_num === 12)) 바
+                                option(value=13, selected=(st.category_num === 13)) 이자카야
+                                option(value=14, selected=(st.category_num === 14)) 포차
+                                option(value=15, selected=(st.category_num === 15)) 와인바
+                        div
+                            h5.mb-3.label.fs-6(for='')(style='margin-right: 10px;') 카페 선택
+                            select#maincategory3.form-select.mb-5(name="cate" + i onchange=`changeMenu('cate${i}')` disabled=(!(st.category_num >= 17 && st.category_num <= 21)))
+                                option(value='') 카페 선택
+                                option(value=17, selected=(st.category_num === 17)) 커피전문점
+                                option(value=18, selected=(st.category_num === 18)) 디저트카페
+                                option(value=19, selected=(st.category_num === 19)) 차전문점
+                                option(value=20, selected=(st.category_num === 20)) 베이커리카페
+                        button.btn.btn-outline-danger.btn-sm(type='button' style="height: 30px;" onclick="this.closest('#addStoreTypes').remove()" ) 삭제
         hr
         div.form-floating
                 h3.mt-5.mb-5.label(for='address') 가게 주소
@@ -67,7 +74,7 @@ block content
                 h5.mb-3.label(for='store_call') 대표 번호
                 input#store_call.form-control.mb-5(name='storeCall', type='text' placeholder="??" value=storeManage.store_call)
         hr
-        form#addStoreInfo
+        div
             h3.mt-5.mb-5 가게 소개 글
             div.form-floating
                 h5.mb-3.label(for='detail_info') 가게 디테일 소개글 작성
@@ -95,9 +102,9 @@ block content
             h3.mt-5.mb-5 영업 시간
             div
                 div.d-flex.justify-content-between
-                    h5.mb-3.label(for='regular_closeDay')(style='display: inline-block; margin-right: 10px;') 휴무일
-                    button.btn.btn-primary(id='addHolidayBtn') 추가
-                p 휴무 요일과 날짜 둘 중에 하나만 선택해주세요 추가하고 싶을 시 추가버튼을 눌러주세요.
+                    h5.mb-3.label(for='regular_closeDay') 휴무일
+                    button.btn.btn-primary(type='button' id='addHolidayBtn') 추가
+                p 휴무 요일과 날짜 둘 중에 하나만 선택해주세요 추가하고 싶을 시 추c가버튼을 눌러주세요.
                 each holiday in holidays
                     div#addHolidays
                         div.d-flex.justify-content-around
@@ -118,14 +125,14 @@ block content
                                 div
                                     label 정규/비정규 선택
                                 div.form-check.form-switch.d-flex.align-items-center.mt-3
-                                    label.form-check-label.me-5(for="flexSwitchCheckDefault5") 비정규
-                                    input.form-check-input(type="checkbox", role="switch", id="flexSwitchCheckDefault6", style="width: 2.5rem; height: 1.5rem;" checked=(holiday.regular == 1))
-                                    label.form-check-label.ms-2(for="flexSwitchCheckDefault5") 정규
+                                    label.form-check-label.me-5(for="s_rstatus") 비정규
+                                    input.form-check-input(type="checkbox", role="switch", id="s_rstatus", style="width: 2.5rem; height: 1.5rem;" checked=(holiday.regular == 1))
+                                    label.form-check-label.ms-2(for="s_rstatus") 정규
                             button.btn.btn-outline-danger.btn-sm(style="height: 30px;", onclick="this.closest('#addHolidays').remove()") 삭제
             div
                 div.d-flex.justify-content-between
                     h5.mb-3 브레이크 타임
-                    button.btn.btn-primary(id='addBreaktimeBtn') 추가
+                    button.btn.btn-primary(type='button' id='addBreaktimeBtn') 추가
                 each breakTime in breakTimes
                     div#addBreaktimes
                         div.d-flex.justify-content-around
@@ -194,10 +201,6 @@ block content
                         label.form-check-label.me-5(for="flexSwitchCheckDefault5") OFF
                         input.form-check-input(type="checkbox", role="switch", id="flexSwitchCheckDefault5", style="width: 2.5rem; height: 1.5rem;")
                         label.form-check-label.ms-2(for="flexSwitchCheckDefault5") ON
-        hr
-        form#addHash
-            h3.mt-5.mb-5 해시태그 등록
-            input#hash.form-control.mb-5(name='hash', type='text' placeholder="해시태그 등록")
         hr
         div.text-end.mb-5
             a.btn.btn-outline-danger.me-2(href=`/infos/delete.do`) 삭제

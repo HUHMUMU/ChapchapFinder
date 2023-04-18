@@ -15,9 +15,9 @@ describe("InfoService test",()=>{
 
     test("insertStoreInfo", async ()=>{ //가게 정보 등록
         const store =
-            {
-            store_num : "11",
-            store_name : "재연쓰의손맛",
+            {store_num : "11",
+            store_name : "재연쓰의손마맛",
+            main_img : "logo.png",
             detail_info : "강렬한 손맛",
             short_info : "짠맛인건가",
             madein : "미영이",
@@ -32,7 +32,7 @@ describe("InfoService test",()=>{
             s_rstatus : "공개",
             parking : 1,
             wifi : 1,
-            toilet : "공용",
+            toilet : 1,
             smokingroom : 1,
             babychair : 1
         };
@@ -44,6 +44,11 @@ describe("InfoService test",()=>{
             console.error(e)
         }
     });
+
+    // test("insertStoreInfo",async()=>{
+    //     const store=await infoService.insertStoreInfoo("1","룰루랄라","강렬한 손맛","짠맛인건가","미영이","재연쓰의 집", "10:00 - 22:00", "21:30", "01:00", "ㄴㄴ", "ㄴㄴ", "ㄴㄴ", "ㄴㄴ", "공개", "ㄴㅇㄹ","공개","1","1","1","1","1")
+    //     console.log(store)
+    // })
 
     test("updateByStoreInfo",async ()=>{ //가게 정보 수정
         const store = {
@@ -69,7 +74,7 @@ describe("InfoService test",()=>{
         };
         try {
             let update = await infoService.updateByStoreInfo(store);
-            let resultUser = await infoService.findByStore(1);
+            let resultUser = await infoService.findByStore(11);
             console.log("수정 : " + JSON.stringify(resultUser));
             // delete store.store_name;
             // delete store.detail_info;
@@ -92,103 +97,8 @@ describe("InfoService test",()=>{
         console.log(store)
     });
 
-    // 가게 방송출연
-    test("findMedias", async ()=>{ // 가게 방송출연 정보 조회
-        const medias = await infoService.findMedias(2)
-        console.log("조회"+ JSON.stringify(medias));
-    })
-    test("insertMedias",async ()=>{ // 가게 방송출연 정보 등록
-        const medias={
-            store_num:"2",
-            tv_num:"12",
-            channal:"tv",
-            episode:"12",
-            tv_url:"https://example.com/tv12",
-            tv_date:"2023-01-10",
-        }
-        let insert=0;
-        try {
-            insert= await infoService.insertMedias(medias);
-            console.log("등록 : "+JSON.stringify(insert));
-        }catch (e) {
-            console.error(e)
-        }
-    })
-    test("updateMedias", async () => { //가게 방송출연 정보 수정
-        const medias = {
-            store_num: "2",
-            tv_num: "12",
-            channal: "sss",
-            episode: "754",
-            tv_url: "https://example.com/tv25",
-            tv_date: "2023-01-19",
-        };
-        try {
-            const updateResult2 = await infoService.updateMedias(
-                medias.tv_num,
-                medias.channal,
-                medias.episode,
-                medias.tv_url,
-                medias.tv_date,
-                medias.store_num
-            );
-            let updateResult = await infoService.findByStore(1);
-            console.log("수정" + JSON.stringify(updateResult2));
-        } catch (e) {
-            console.error(e);
-        }
-    });
 
-    test("dropMedias", async () => { // 가게 방송출연 정보 삭제
-        try{
-            const media = await infoService.dropMedias(2,12);
-            console.log("삭제 :" +media)
-        }catch (e) {
-            console.error(e)
-        }
-    });
-
-    test("findByTypes", async ()=>{ // 가게 업종 조회
-        const type = await infoService.findByTypes(1)
-        console.log("조회"+ JSON.stringify(type));
-    })
-
-    test("findByBreaktime", async ()=>{
-        const breaktime = await infoService.findByBreaktime(1)
-        console.log("조회 " + JSON.stringify(breaktime));
-    })
-
-    test("insertBreaktime",async ()=>{
-        const store = {
-            store_num:"7",
-            rest_num:"7",
-            rest_start_time:"2023-04-15 14:30:00",
-            test_end_time:"2023-04-15 16:30:00",
-        }
-        let insert=0;
-        try {
-            insert= await infoService.insertBreaktime(store);
-            console.log("등록 : "+JSON.stringify(insert));
-        }catch (e) {
-            console.error(e)
-        }
-    })
-
-    test("updateBreaktime", async () => { //가게 방송출연 정보 수정
-        const store = {
-            store_num: "7",
-            rest_num : "7",
-            rest_start_time : "2020-04-15 05:30:00",
-            test_end_time :"2020-04-15 07:30:00"
-        };
-        try {
-            let update = await infoService.updateByStoreInfo(store);
-            console.log("수정 : " + JSON.stringify(update));
-        } catch (e) {
-            console.error(e);
-        }
-    });
-
+    //휴무일
     test("findHolidaysByStore", async ()=>{ // 가게 휴무일 조회
         const holidays = await infoService.findHolidaysByStore(1)
         console.log("조회"+ JSON.stringify(holidays));
@@ -266,5 +176,51 @@ describe("InfoService test",()=>{
         }
     });
 
+
+    //브레이크타임
+    test("findBreaktimesByStore", async ()=>{ // 가게 브레이크타임 조회
+        const breaktime = await infoService.findBreaktimesByStore(1)
+        console.log("조회"+ JSON.stringify(breaktime));
+    })
+
+    test("insertBreaktime",async ()=>{ // 가게 브레이크타임 등록
+        const breaktime = {
+            store_num:"1",
+            rest_num:"21",
+            rest_start_time:"17:07:00",
+            rest_end_time:"17:37:00"
+        }
+        let insert=0;
+        try {
+            insert= await infoService.insertBreaktime(breaktime);
+            console.log("등록 : "+JSON.stringify(insert));
+        }catch (e) {
+            console.error(e)
+        }
+    })
+
+    test("updateBreaktime", async () => { //가게 브레이크타임 수정
+        const breaktime = {
+            store_num:"1",
+            rest_start_time:"18:08:00",
+            rest_end_time:"18:38:00"
+        };
+        try {
+            let update = await infoService.updateBreaktime(breaktime)
+            let resultBreaktime = await infoService.findBreaktimesByStore(1)
+            console.log("수정 : " + JSON.stringify(resultBreaktime));
+        } catch (e) {
+            console.error(e);
+        }
+    })
+
+    test("dropBreaktime", async () => { // 가게 휴무일 삭제
+        try{
+            const breaktime = await infoService.dropBreaktime(21,1)
+            console.log("삭제 :" +breaktime)
+        }catch (e) {
+            console.error(e)
+        }
+    });
 
 })

@@ -38,6 +38,7 @@ class MenuService{
     };
 
 
+
     async modifyMenu(name, img, price, info, menu_type, status, store_num, menu_num) { //특정 메뉴 수정
         const modifyMenu = await menuManagesEntity.update({
                     name: name,

@@ -4,93 +4,95 @@ block content
     form#addInfoForm(method='post' action='/infos/insert.do')
         h1.mt-5 가게정보입력
         hr
-        div.form-floating(method="post", enctype="multipart/form-data")
+        div(method="post", enctype="multipart/form-data")
             h3.mt-5.mb-5.label(for='store_name') 가게명
-            input#store_name.form-control.mb-5( name='storeName', type='text' placeholder="에이콘레스토랑")
+            input#store_name.form-control.mb-5( name='store_name', type='text' placeholder="??")
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
             div
-                h3.mt-5.mb-5.label(for='store_img') 대표이미지
+                h3.mt-5.mb-5.label(for='main_img') 대표이미지
                 //div.box(style='width: 100px; height: 100px; background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px;')
                 div
-                    input.mb-5(type="file",id='store_img1' class="form-control", name="chooseFile" accept="image/*" onchange="loadFile(this)")
+                    input.mb-5(type="file",id='main_img' class="form-control", name="main_img" accept="image/*" onchange="loadFile(this)")
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
             div
-                h3.mt-5.mb-5.label(for='store_img') 이미지 등록
+                h3.mt-5.mb-5.label(for='') 이미지 등록
                 //div(style='display:flex; justify-content: space-around; align-items:center;')
-                input.mb-5(type="file", class="form-control", id="store_img2", name="chooseFile" accept="image/*" onchange="loadFile(this)")
+                input.mb-5(type="file", class="form-control", id="", name="" accept="image/*" onchange="loadFile(this)")
         hr
-        h3.mt-5.mb-5 가게 업종
-        h3.d-flex.mt-5.mb-5.label.justify-content-between(for='select_main_category')
-            select#maincategory1.form-select.mb-5.w-25(name="select_main_category1")
-                option(value="") 음식점 선택
-                option(value='1') 고기
-                option(value='2') 돈까스, 회, 일식
-                option(value='3') 탕, 찜, 찌개
-                option(value='4') 양식
-                option(value='5') 중식
-                option(value='6') 아시안
-                option(value='7') 패스트푸드
-                option(value='8') 백반, 국수
-                option(value='9') 분식
-                option(value='10') 기타
-            select#maincategory2.form-select.mb-5.w-25(name="select_main_category2")
-                option(value='') 술집 선택
-                option(value='11') 호프집
-                option(value='12') 바
-                option(value='13') 이자카야
-                option(value='14') 포차
-                option(value='15') 와인바
-                option(value='16') 기타
-            select#maincategory3.form-select.mb-5.w-25(name="select_main_category3")
-                option(value='') 카페 선택
-                option(value='17') 커피전문점
-                option(value='18') 디저트카페
-                option(value='19') 차전문점
-                option(value='20') 베이커리카페
-                option(value='21') 기타
+        div(method="post", enctype="multipart/form-data")
+            div.d-flex.justify-content-between.mt-5
+                h3.label(for='select_main_category') 가게 업종 선택
+                button.btn.btn-primary(type='button' id='addStoreTypesBtn') 추가
+            div#addStoreTypes
+                div.d-flex.mt-5.mb-5.justify-content-between
+                    div.form-floating
+                        h5.mb-3.label.fs-6(for='')(style='margin-right: 10px;') 음식점 선택
+                        select#maincategory1.form-select(name="select_main_category1")
+                            option(value="") 음식점 선택
+                            option(value='1') 고기
+                            option(value='2') 돈까스, 회, 일식
+                            option(value='3') 탕, 찜, 찌개
+                            option(value='4') 양식
+                            option(value='5') 중식
+                            option(value='6') 아시안
+                            option(value='7') 패스트푸드
+                            option(value='8') 백반, 국수
+                            option(value='9') 분식
+                    div
+                        h5.mb-3.label.fs-6(for='')(style='margin-right: 10px;') 술집 선택
+                        select#maincategory2.form-select(name="select_main_category2")
+                            option(value='') 술집 선택
+                            option(value='11') 호프집
+                            option(value='12') 바
+                            option(value='13') 이자카야
+                            option(value='14') 포차
+                            option(value='15') 와인바
+                    div
+                        h5.mb-3.label.fs-6(for='')(style='margin-right: 10px;') 카페 선택
+                        select#maincategory3.form-select(name="select_main_category3")
+                            option(value='') 카페 선택
+                            option(value='17') 커피전문점
+                            option(value='18') 디저트카페
+                            option(value='19') 차전문점
+                            option(value='20') 베이커리카페
+                    button.btn.btn-outline-danger.btn-sm(type='button' style="height: 30px; visibility:hidden" ) 삭제
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
             h3.mt-5.mb-5.label(for='address') 가게 주소
             input#address.form-control.mb-5(name='address', type='text' placeholder="경기 파주시 지목로 43 101~105호")
         hr
         div
-            h3.mt-5.mb-5 가게전화번호
-            div.form-floating(method="post", enctype="multipart/form-data")
-                h5.mb-3.label(for='store_call') 대표 번호
-                input#store_call.form-control.mb-5(name='storeCall', type='text' placeholder="031-9999-9999")
-        hr
-        form#addStoreInfo(action='/' method='post')
             h3.mt-5.mb-5 가게 소개 글
             div.form-floating(method="post", enctype="multipart/form-data")
                 h5.mb-3.label(for='detail_info') 가게 디테일 소개글 작성
-                input#detailInfo.form-control.mb-4(name='detailInfo', type='text' placeholder="가게 상세 소개글 작성 (가게 메인에 올라가는 글입니다.)")
+                input#detail_info.form-control.mb-4(name='detail_info', type='text' placeholder="가게 상세 소개글 작성 (가게 메인에 올라가는 글입니다.)")
             div.form-floating(method="post", enctype="multipart/form-data")
                 h5.mb-3.label(for='short_info') 가게 한줄 소개글 작성
-                input#shortInfo.form-control.mb-5(name='shortInfo', type='text' placeholder="가게 한 줄 소개글 작성 (가게 미리보기에 올라가는 글입니다.)")
+                input#short_info.form-control.mb-5(name='short_info', type='text' placeholder="가게 한 줄 소개글 작성 (가게 미리보기에 올라가는 글입니다.)")
         hr
         div
             h3.mt-5.mb-5 url 등록
             div.form-floating
-                h5.mb-3.label(for='blog')(style='display: inline-block; margin-right: 10px;') 블로그 url
-                input#blog.form-control.mb-4(name='blog', type='text' placeholder="영업 날짜")
+                h5.mb-3.label(for='blogurl')(style='display: inline-block; margin-right: 10px;') 블로그 url
+                input#blogurl.form-control.mb-4(name='blogurl', type='text' placeholder="영업 날짜")
             div.form-floating
-                h5.mb-3.label(for='youtube')(style='display: inline-block; margin-right: 10px;') 유튜브 url
-                input#youtube.form-control.mb-4(name='youtube', type='text' placeholder="휴무일")
+                h5.mb-3.label(for='youtubeurl')(style='display: inline-block; margin-right: 10px;') 유튜브 url
+                input#youtubeurl.form-control.mb-4(name='youtubeurl', type='text' placeholder="휴무일")
             div.form-floating
-                h5.mb-3.label(for='facebook')(style='display: inline-block; margin-right: 10px;') 페이스북 url
-                input#facebook.form-control.mb-4(name='facebook', type='text' placeholder="??")
+                h5.mb-3.label(for='facebookurl')(style='display: inline-block; margin-right: 10px;') 페이스북 url
+                input#facebookurl.form-control.mb-4(name='facebookurl', type='text' placeholder="??")
             div.form-floating
-                h5.mb-3.label(for='insta')(style='display: inline-block; margin-right: 10px;') 인스타 url
-                input#insta.form-control.mb-4(name='insta', type='text' placeholder="??")
+                h5.mb-3.label(for='instaurl')(style='display: inline-block; margin-right: 10px;') 인스타 url
+                input#instaurl.form-control.mb-4(name='instaurl', type='text' placeholder="??")
         hr
         div
             h3.mt-5.mb-5 영업 시간
             div
                 div.d-flex.justify-content-between
-                    h5.mb-3.label(for='regular_closeDay')(style='display: inline-block; margin-right: 10px;') 휴무일
-                    button.btn.btn-primary(id='addHolidayBtn') 추가
+                    h5.mb-3.label(for='holidays') 휴무일
+                    button.btn.btn-primary(type='button' id='addHolidayBtn') 추가
                 p 휴무 요일과 날짜 둘 중에 하나만 선택해주세요 추가하고 싶을 시 추가버튼을 눌러주세요.
                 div#addHolidays
                     div.d-flex.justify-content-around
@@ -111,14 +113,14 @@ block content
                             div
                                 label 정규/비정규 선택
                             div.form-check.form-switch.d-flex.align-items-center.mt-3
-                                label.form-check-label.me-5(for="flexSwitchCheckDefault5") 비정규
-                                input.form-check-input(type="checkbox", role="switch", id="flexSwitchCheckDefault6", style="width: 2.5rem; height: 1.5rem;")
-                                label.form-check-label.ms-2(for="flexSwitchCheckDefault5") 정규
-                        button.btn.btn-outline-danger.btn-sm(style="height: 30px;", onclick="this.closest('#addHolidays').remove()") 삭제
+                                label.form-check-label.me-5(for="s_rstatus") 비정규
+                                input.form-check-input(type="checkbox", role="switch",name="s_rstatus", id="s_rstatus", style="width: 2.5rem; height: 1.5rem;")
+                                label.form-check-label.ms-2(for="s_rstatus") 정규
+                        button.btn.btn-outline-danger.btn-sm(type='button' style="height: 30px; visibility:hidden") 삭제
             div
                 div.d-flex.justify-content-between
                     h5.mb-3 브레이크 타임
-                    button.btn.btn-primary(id='addBreaktimeBtn') 추가
+                    button.btn.btn-primary(type='button' id='addBreaktimeBtn') 추가
                 div#addBreaktimes
                     div.d-flex.justify-content-around
                         div.form-floating
@@ -127,7 +129,7 @@ block content
                         div.form-floating
                             h5.mb-3.label.fs-6(for='rest_end_time')(style='margin-right: 10px;') 휴식 끝 시간
                             input#rest_end_time.form-control.mb-4(name='rest_end_time', type='time' placeholder="??")
-                        button.btn.btn-outline-danger.btn-sm(style="height: 30px;", onclick="this.closest('#addBreaktimes').remove()") 삭제
+                        button.btn.btn-outline-danger.btn-sm(type='button' style="height: 30px; visibility:hidden") 삭제
                 div.form-floating
                     h5.mb-3.label(for='opentime')(style='display: inline-block; margin-right: 10px;') 영업 시간
                     input#opentime.form-control.mb-4(name='openTime', type='text' placeholder="??")
@@ -136,17 +138,17 @@ block content
                     input#lastorder.form-control.mb-4(name='lastOrder', type='text' placeholder="??")
                 div.form-floating
                     h5.mb-3.label(for='waiting_closetime')(style='display: inline-block; margin-right: 10px;') 웨이팅 마감 시간
-                    input#waiting_closetime.form-control.mb-5(name='waitingClosetime', type='text' placeholder="??")
+                    input#waiting_closetime.form-control.mb-5(name='waiting_closetime', type='text' placeholder="??")
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
             h3.mt-5.mb-5.label(for='madein') 원산지 표시
             h4.mb-3 재료에 대한 원산지 표시
-            textarea.form-control(id='madein' placeholder="염병염병여병쳠ㅁ병~~~")
+            textarea.form-control(id='madein' name='madein' placeholder="염병염병여병쳠ㅁ병~~~")
         hr
         div.form-floating(method="post", enctype="multipart/form-data")
             h3.mt-5.mb-5.labe 방송 출연 정보
-            h4.mb-3.label(for='media') 출연 매채 등록
-            input#media.form-control.mb-5(name='media', type='text' placeholder="출연 매채 등록")
+            h4.mb-3.label(for='tvshow') 출연 매채 등록
+            input#tvshow.form-control.mb-5(name='tvshow', type='text' placeholder="출연 매채 등록")
         hr
         div
             h3.mt-5.mb-5 편의 시설
@@ -155,45 +157,97 @@ block content
                     div
                         label 주차 편의
                     div.form-check.form-switch.d-flex.align-items-center
-                        label.form-check-label.me-5(for="flexSwitchCheckDefault1") OFF
-                        input.form-check-input(type="checkbox", role="switch", id="flexSwitchCheckDefault1", style="width: 2.5rem; height: 1.5rem;")
-                        label.form-check-label.ms-2(for="flexSwitchCheckDefault1") ON
+                        label.form-check-label.me-5(for="parking") OFF
+                        input.form-check-input(type="checkbox",name="parking" role="switch", id="parking", style="width: 2.5rem; height: 1.5rem;")
+                        label.form-check-label.ms-2(for="parking") ON
                 div(style='display:flex; flex-direction:column; align-items:center')
                     div
                         label 애기 의자
                     div.form-check.form-switch.d-flex.align-items-center
-                        label.form-check-label.me-5(for="flexSwitchCheckDefault2") OFF
-                        input.form-check-input(type="checkbox", role="switch", id="flexSwitchCheckDefault2", style="width: 2.5rem; height: 1.5rem;")
-                        label.form-check-label.ms-2(for="flexSwitchCheckDefault2") ON
+                        label.form-check-label.me-5(for="babychair") OFF
+                        input.form-check-input(type="checkbox",name="babychair" role="switch", id="babychair", style="width: 2.5rem; height: 1.5rem;")
+                        label.form-check-label.ms-2(for="babychair") ON
                 div(style='display:flex; flex-direction:column; align-items:center')
                     div
                         label 흡연실
                     div.form-check.form-switch.d-flex.align-items-center
-                        label.form-check-label.me-5(for="flexSwitchCheckDefault3") OFF
-                        input.form-check-input(type="checkbox", role="switch", id="flexSwitchCheckDefault3", style="width: 2.5rem; height: 1.5rem;")
-                        label.form-check-label.ms-2(for="flexSwitchCheckDefault3") ON
+                        label.form-check-label.me-5(for="smokingroom") OFF
+                        input.form-check-input(type="checkbox",name="smokingroom" role="switch", id="smokingroom", style="width: 2.5rem; height: 1.5rem;")
+                        label.form-check-label.ms-2(for="smokingroom") ON
                 div(style='display:flex; flex-direction:column; align-items:center')
                     div
                         label 와이파이
                     div.form-check.form-switch.d-flex.align-items-center
-                        label.form-check-label.me-5(for="flexSwitchCheckDefault4") OFF
-                        input.form-check-input(type="checkbox", role="switch", id="flexSwitchCheckDefault4", style="width: 2.5rem; height: 1.5rem;")
-                        label.form-check-label.ms-2(for="flexSwitchCheckDefault4") ON
+                        label.form-check-label.me-5(for="wifi") OFF
+                        input.form-check-input(type="checkbox",name="wifi" role="switch", id="wifi", style="width: 2.5rem; height: 1.5rem;")
+                        label.form-check-label.ms-2(for="wifi") ON
                 div(style='display:flex; flex-direction:column; align-items:center')
                     div
                         label 화장실 구분
                     div.form-check.form-switch.d-flex.align-items-center
-                        label.form-check-label.me-5(for="flexSwitchCheckDefault5") OFF
-                        input.form-check-input(type="checkbox", role="switch", id="flexSwitchCheckDefault5", style="width: 2.5rem; height: 1.5rem;")
-                        label.form-check-label.ms-2(for="flexSwitchCheckDefault5") ON
+                        label.form-check-label.me-5(for="toilet") OFF
+                        input.form-check-input(type="checkbox",name="toilet", role="switch", id="toilet", style="width: 2.5rem; height: 1.5rem;")
+                        label.form-check-label.ms-2(for="toilet") ON
         hr
-        form#addHash(action='/' method='post')
-            h3.mt-5.mb-5 해시태그 등록
-            input#hash.form-control.mb-5(name='hash', type='text' placeholder="해시태그 등록")
-        hr
-        input#submit.btn.btn-primary.form-control.mt-5.mb-5(value="등록", placeholder="등록")
+        div.text-end.mb-5
+            button#resetStoreInfoBtn.btn.btn-outline-warning.me-3(type='reset') 초기화
+            button#addStoreInfoBtn.btn.btn-outline-primary(type='submit') 추가
 
     script.
+        const addStoreTypesBtn = document.getElementById("addStoreTypesBtn")
+        const addStoreTypes = document.getElementById("addStoreTypes")
+
+        addStoreTypesBtn.addEventListener("click",(e)=>{
+            addStoreTypes.insertAdjacentHTML("beforeend", addStoreTypeInputComponent());
+        })
+
+        function addStoreTypeInputComponent(){
+            return `
+                    <div id="inputStoreType" class="d-flex mt-5 mb-5 justify-content-between">
+                      <div class="form-floating">
+                        <h5 class="mb-3 label fs-6" for="" style="margin-right: 10px;">음식점 선택</h5>
+                        <select id="maincategory1" class="form-select" name="select_main_category1">
+                          <option value="">음식점 선택</option>
+                          <option value="1">고기</option>
+                          <option value="2">돈까스, 회, 일식</option>
+                          <option value="3">탕, 찜, 찌개</option>
+                          <option value="4">양식</option>
+                          <option value="5">중식</option>
+                          <option value="6">아시안</option>
+                          <option value="7">패스트푸드</option>
+                          <option value="8">백반, 국수</option>
+                          <option value="9">분식</option>
+                        </select>
+                      </div>
+                      <div>
+                        <h5 class="mb-3 label fs-6" for="" style="margin-right: 10px;">술집 선택</h5>
+                        <select id="maincategory2" class="form-select" name="select_main_category2">
+                          <option value="">술집 선택</option>
+                          <option value="11">호프집</option>
+                          <option value="12">바</option>
+                          <option value="13">이자카야</option>
+                          <option value="14">포차</option>
+                          <option value="15">와인바</option>
+                        </select>
+                      </div>
+                      <div>
+                        <h5 class="mb-3 label fs-6" for="" style="margin-right: 10px;">카페 선택</h5>
+                        <select id="maincategory3" class="form-select" name="select_main_category3">
+                          <option value="">카페 선택</option>
+                          <option value="17">커피전문점</option>
+                          <option value="18">디저트카페</option>
+                          <option value="19">차전문점</option>
+                          <option value="20">베이커리카페</option>
+                        </select>
+                      </div>
+                      <button class="btn btn-outline-danger btn-sm" style="height: 30px;" onclick="this.closest('#inputStoreType').remove()">삭제</button>
+                    </div>
+
+            `;
+        }
+
+
+
         const addHolidayBtn = document.getElementById("addHolidayBtn")
         const addHolidays = document.getElementById("addHolidays")
 
@@ -261,6 +315,21 @@ block content
                 `;
         }
 
+
+
+        const mainCategory1 = document.getElementById("maincategory1");
+        const mainCategory2 = document.getElementById("maincategory2");
+        const mainCategory3 = document.getElementById("maincategory3");
+
+        mainCategory1.addEventListener("change", function () {
+            if (mainCategory1.value === "") {
+                mainCategory2.disabled = false;
+                mainCategory3.disabled = false;
+            } else {
+                mainCategory2.disabled = true;
+                mainCategory3.disabled = true;
+            }
+        });
         // const resetUserForm = () => {
         //     const addStoreInfoForm = document.getElementById('addStoreInfoForm');
         //     addStoreInfoForm.reset();
@@ -275,6 +344,25 @@ block content
         const mainCategory2 = document.getElementById("maincategory2");
         const mainCategory3 = document.getElementById("maincategory3");
 
+        mainCategory2.addEventListener("change", function () {
+            if (mainCategory2.value === "") {
+                mainCategory1.disabled = false;
+                mainCategory3.disabled = false;
+            } else {
+                mainCategory1.disabled = true;
+                mainCategory3.disabled = true;
+            }
+        });
+
+        mainCategory3.addEventListener("change", function () {
+            if (mainCategory3.value === "") {
+                mainCategory1.disabled = false;
+                mainCategory2.disabled = false;
+            } else {
+                mainCategory1.disabled = true;
+                mainCategory2.disabled = true;
+            }
+        });
         mainCategory1.addEventListener("change", function () {
             if (mainCategory1.value === "") {
                 mainCategory2.disabled = false;
