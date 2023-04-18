@@ -13,6 +13,7 @@ router.post('/insert.do',async (req,res)=>{
     let insertHoliday =0;
     let insertBreaktime=0;
     let insertCate=0;
+    let insertImg=0;
     let findCate=0;
     let {select_main_category1, select_main_category2, select_main_category3} = req.body;
     if(select_main_category1){
@@ -29,10 +30,11 @@ router.post('/insert.do',async (req,res)=>{
         insertStoreInfo=await infoService.insertStoreInfo(req.body);
         insertHoliday=await infoService.insertHolidays(req.body)
         insertBreaktime=await infoService.insertBreaktime(req.body)
+        insertImg=await infoService.insertImg(req.body)
     }catch (e){
         console.error(e)
     }
-    if(insertCate>0 && insertStoreInfo>0 && insertHoliday>0 && insertBreaktime>0) {
+    if(insertCate>0 && insertStoreInfo>0 && insertHoliday>0 && insertBreaktime>0 && insertImg>0) {
         alert("등록성공");
         res.redirect("/.do");
     }else{
@@ -50,8 +52,9 @@ router.get('/detail.do', async (req, res) => {
     let holidays = await  infoService.findHolidaysByStore(storeNum)
     let breakTimes = await  infoService.findBreaktimesByStore(storeNum)
     let storeTypes = await infoService.findStoreTypes(storeNum);
+    let imgs = await infoService.findImg(storeNum)
     if (store) {
-        res.render('infos/update', { store: store, storeManage : storeManage, holidays : holidays, breakTimes : breakTimes, storeTypes:storeTypes});
+        res.render('infos/update', { store: store, storeManage : storeManage, holidays : holidays, breakTimes : breakTimes, storeTypes:storeTypes, imgs:imgs});
     } else {
         res.redirect('/');
     }
@@ -62,6 +65,7 @@ router.post("/update.do",async (req,res)=>{
     let updateHoliday=0;
     let updateBreaktime=0;
     let updateCate=0;
+    let updateImg =0;
     let {select_main_category1, select_main_category2, select_main_category3} = req.body;
     if(select_main_category1){
         findCate = await infoService.findTypeClasses(select_main_category1);
@@ -77,11 +81,12 @@ router.post("/update.do",async (req,res)=>{
         updateHoliday=await infoService.updateHolidays(req.body)
         updateBreaktime=await infoService.updateBreaktime(req.body)
         updateCate=await infoService.updateStoreTypes(req.body)
+        updateImg=await infoService.updateImg(req.body)
     }catch (e) {
         console.error(e)
     }
 
-    if(updateStoreInfo && updateHoliday && updateBreaktime && updateCate){
+    if(updateStoreInfo && updateHoliday && updateBreaktime && updateCate && updateImg){
         res.redirect("/");
     }else {
         res.redirect(`/detail.do`);
@@ -94,15 +99,17 @@ router.get("/delete.do", async (req,res)=>{
     let dropHoliday=0;
     let dropBreaktime=0;
     let dropStoreTypes =0;
+    let dropImgs=0;
     try{
         dropStoreInfo=await infoService.dropStoreInfo(storeNum)
         dropHoliday=await infoService.dropHoliday(req.params.holi_num ,storeNum)
         dropBreaktime=await infoService.dropBreaktime(req.params.rest_num ,storeNum)
         dropStoreTypes=await infoService.dropStoreTypes(req.params.storetype_id, storeNum)
+        dropImgs=await infoService.dropImg(req.params.img_num, storeNum)
     }catch(e){
         console.error(e);
     }
-    if(dropStoreInfo>0 && dropHoliday>0 && dropBreaktime>0 && dropStoreTypes>0){
+    if(dropStoreInfo>0 && dropHoliday>0 && dropBreaktime>0 && dropStoreTypes>0 && dropImgs){
         res.redirect("/");
     }else{
         res.redirect(`/detail.do`);
