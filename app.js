@@ -62,7 +62,6 @@ app.use(async function (req, res, next){
 //모든 요청에서 퍼그 렌더시 변수로 loginUser 를 제공
 app.use(function (req, res, next){
   const actionMsg = req.flash("actionMsg")[0]; //호출과 즉시 세션에서 삭제함
-  console.log(actionMsg);
   if (actionMsg) {
     res.locals.actionMsg = actionMsg;
   }
@@ -96,13 +95,13 @@ app.get('/api/data', (req, res) => {
 
 app.post('/api/user', (req, res) => {
   // 데이터를 받아서 처리하는 API
-  console.log(req.body);
   res.send('Received!');
 });
 
 app.use('/stores', storesRouter);
 // app.use('/menu', manageRouter);
 app.use('/users', storeManagesRouter);
+app.use('/replies', repliesRouter);
 app.use('/infos', infoRouter);
 app.use('/menu', menusRouter);
 app.use('/waitings', waitingRouter);
