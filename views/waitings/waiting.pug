@@ -12,15 +12,15 @@ block content
                     th
                     th
             tbody
-                each top3 in getTop3WaitingUsers
+                each gt3w in getTop3WaitingUsers
                     tr
-                        td= top3.wait_num
-                        td= top3.user_people
-                        td= top3.start_time
+                        td= gt3w.wait_num
+                        td= gt3w.user_people
+                        td= gt3w.start_time
                         td
-                            button(type='button' class='EnterNotiToUserBtn' data-waitingnum=top3.wait_num, href='#') 입장 알림
+                            button(type='button' class='EnterNotiToUserBtn' data-waitingnum=gt3w.wait_num, href='#') 입장 알림
                         td
-                            button(type='button' class='CancelToUserBtn' data-waitingnum=top3.wait_num, href='#') 강제 취소
+                            button(type='button' class='CancelToUserBtn' data-waitingnum=gt3w.wait_num, href='#') 강제 취소
         // 2 위치
         div.waiting-info.row.col-md-4
             h2 대기팀 정보
@@ -39,8 +39,8 @@ block content
         // 3 위치
         div.waiting-stats.row.col-md-4
             h2 대기팀 정보
-            p 총 대기팀 수: #{WaitingListExceptTop3Users.user_people}
-            p 총 대기 인원 수: #{WaitingListExceptTop3Users.user_people}
+            p 총 대기팀 수: #{waitingStats.wait_num}
+            p 총 대기 인원 수: #{waitingStats.user_people}
         // 4 위치
         div.store-config.row.col-md-4
             h2 웨이팅 관련 설정

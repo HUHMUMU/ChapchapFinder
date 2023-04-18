@@ -13,10 +13,10 @@ class WaitingService {
         try {
             const waitingList=await UsersWaitingEntity.findAll({
                 where:[
-                    "users_id",
+                    "user_id",
                     "waiting_num",
                     "wait_num",
-                    "enter_status='대기'",
+                    "enter_status",
                     "user_people",
                     "start_time",
                     "store_num",
@@ -36,10 +36,10 @@ class WaitingService {
         try {
             const getTop3WaitingUsers = await UsersWaitingEntity.findAll({
                 attributes: [
-                    "users_id",
+                    "user_id",
                     "wait_num",
                     "user_people",
-                    "enter_status='대기'",
+                    "enter_status",
                     "start_time",
                     "store_num",
                 ],
@@ -59,10 +59,10 @@ class WaitingService {
         try {
             const WaitingListExceptTop3Users = await UsersWaitingEntity.findAll({
                 attributes: [
-                    "users_id",
+                    "user_id",
                     "wait_num",
                     "user_people",
-                    "enter_status='대기'",
+                    "enter_status",
                     "start_time",
                     "store_num",
                     [sequelize.fn('TIMESTAMPDIFF', sequelize.literal('MINUTE'), sequelize.col('start_time'), sequelize.fn('NOW')), 'minute']
@@ -83,10 +83,10 @@ class WaitingService {
         try {
             const result = await UsersWaitingEntity.findAll({
                 attributes: [
-                    "users_id",
+                    "user_id",
                     "wait_num",
                     "user_people",
-                    "enter_status='대기'",
+                    "enter_status",
                     "start_time",
                     "store_num",
                 ],
@@ -121,10 +121,10 @@ class WaitingService {
         try {
             const result = await UsersWaitingEntity.findAll({
                 attributes: [
-                    "users_id",
+                    "user_id",
                     "wait_num",
                     "user_people",
-                    "enter_status='대기'",
+                    "enter_status",
                     "start_time",
                     "store_num",
                 ],
@@ -179,7 +179,7 @@ class WaitingService {
         try {
             const getLastWaitingUser = await UsersWaitingEntity.findOne({
                 attributes: [
-                    "users_id",
+                    "user_id",
                     "wait_num",
                     "user_people",
                     "start_time",
