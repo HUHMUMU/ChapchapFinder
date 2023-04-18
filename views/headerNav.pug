@@ -37,11 +37,21 @@ hr.m-0
 nav.navbar.navbar-expand-lg
     div(style="margin-left:10.4rem;").container-fluid
         ul.d-flex.list-unstyled
-            li
-                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/reviews/list.do`) 리뷰 관리
-            li
-                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/infos/detail.do`) 가게 정보 관리
-            li
-                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/menu/list.do`) 가게 메뉴 관리
-            li
-                a.btn.btn-outline-secondary.btn-sm.m-2(href=`/waitings/waiting.do`) 웨이팅 관리
+            if(!storeName)
+                li
+                    a.btn.btn-outline-secondary.btn-sm.m-2(href=`/infos/insert.do`) 리뷰 관리
+                li
+                    a.btn.btn-outline-secondary.btn-sm.m-2(href=`/infos/insert.do`) 가게 정보 관리
+                li
+                    a.btn.btn-outline-secondary.btn-sm.m-2(href=`/infos/insert.do`) 가게 메뉴 관리
+                li
+                    a.btn.btn-outline-secondary.btn-sm.m-2(href=`/infos/insert.do`) 웨이팅 관리
+            else
+                li
+                    a.btn.btn-outline-secondary.btn-sm.m-2(href=`/reviews/list.do`) 리뷰 관리
+                li
+                    a.btn.btn-outline-secondary.btn-sm.m-2(href=`/infos/detail.do`) 가게 정보 관리
+                li
+                    a.btn.btn-outline-secondary.btn-sm.m-2(href=`/menu/list.do`) 가게 메뉴 관리
+                li
+                    a.btn.btn-outline-secondary.btn-sm.m-2(href=`/waitings/waiting.do`) 웨이팅 관리

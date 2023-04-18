@@ -3,9 +3,9 @@ extends ../layout
 block content
     div.d-flex.justify-content-between
         h4.mb-3 메뉴 관리
-        a.mb-3.btn.btn-light(id="addMenuBtn", href="/menu/insert.do") 추가
+        a.btn.btn-light#addMenuBtn(href="/menu/insert.do", style="none") 추가
     each menu in menuList
-        div.d-flex.align-items-center.mb-3
+        div.menu-item.d-flex.align-items-center.mb-3
             img.me-5(src=menu.img , width="230", height="230")
             div
                 div
@@ -22,3 +22,14 @@ block content
                 div.mt-4
                     a.btn.btn-outline-dark.me-2(href=`/menu/${menu.menu_num}/update.do`) 수정하기
                     a.btn.btn-outline-danger(href=`/menu/${menu.menu_num}/delete.do`) 삭제
+
+    script.
+        const addMenuBtn = document.querySelector('#addMenuBtn');
+        const menuList = document.querySelectorAll('.menu-item');
+
+        addMenuBtn.addEventListener('click', () => {
+            if (menuList.length >= 20) {
+                alert('메뉴는 20개까지만 등록 가능합니다. 삭제 후 재등록 해주세요.');
+                event.preventDefault();
+            }
+        });

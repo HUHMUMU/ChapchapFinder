@@ -4,8 +4,11 @@ block content
     div
         h4.mb-3 챱딜 등록
         form.mt-4(action="/chapdeal/insert.do", method="post", enctype="multipart/form-data")
+            input(type="hidden", value=`${storeNum}`, name="store_num")
+
+            img#preview.mb-1(width="230", height="230", src="")
             label.form-label(for='event_img')
-            input.form-control.mb-1(type='file', id='event_img', name="event_img", accept="image/*" )
+            input.form-control.mb-1(type='file', id='event_img', name="event_img", accept="image/*")
 
             input.form-control.mb-1(type="text", name="event_title", id="event_title", placeholder="이벤트 제목")
             input.form-control.mb-1(type="text", name="event_condition", id="event_condition", placeholder="이벤트 조건")
@@ -20,3 +23,37 @@ block content
 
             div.d-flex.justify-content-center
                 button.btn.btn-outline-dark.btn-lg.m-5(type='submit') 등록하기
+
+    script.
+        const input = document.querySelector('#event_img');
+        const preview = document.querySelector('#preview');
+
+        input.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.addEventListener('load', function () {
+                    preview.src = reader.result;
+                    preview.style.display = "block";
+                });
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+                preview.style.display = "none";
+            }
+        });
+
+        //미입력시 경고창
+        const form = document.querySelector('form');
+        const event_title = document.querySelector('#event_title');
+        const event_condition = document.querySelector('#event_condition');
+        const event_reward = document.querySelector('#event_reward');
+        const event_start = document.querySelector('#event_start');
+        const event_end = document.querySelector('#event_end');
+
+        form.addEventListener('submit', function (event) {
+            if (event_title.value.trim() === '' || event_condition.value.trim() === '' || event_reward.value.trim() === '' || event_start.value.trim() === '' || event_end.value.trim() === '') {
+                alert('이벤트 정보를 입력해주세요.');
+                event.preventDefault();
+            }
+        });

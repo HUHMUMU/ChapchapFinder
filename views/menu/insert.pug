@@ -4,6 +4,10 @@ block content
     div
         h4.mb-3 메뉴 등록
         form.mt-4(action="/menu/insert.do", method="post", enctype="multipart/form-data")
+            input(type="hidden", value=`${storeNum}`, name="store_num")
+
+            //style="display:none"
+            img#preview.mb-1(width="230", height="230", src="")
             label.form-label(for='img')
             input.form-control.mb-1(type='file', id='img', name="img", accept="image/*")
 
@@ -28,3 +32,36 @@ block content
 
             div.d-flex.justify-content-center
                 button.btn.btn-outline-dark.btn-lg.m-5(type='submit') 등록하기
+
+        script.
+            //이미지 미리보기
+            const input = document.querySelector('#img');
+            const preview = document.querySelector('#preview');
+
+            input.addEventListener('change', function () {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.addEventListener('load', function () {
+                        preview.src = reader.result;
+                        preview.style.display = "block";
+                    });
+                    reader.readAsDataURL(file);
+                } else {
+                    preview.src = "";
+                    preview.style.display = "none";
+                }
+            });
+
+            //미입력시 경고창
+            const form = document.querySelector('form');
+            const nameInput = document.querySelector('#name');
+            const priceInput = document.querySelector('#price');
+            const infoInput = document.querySelector('#info');
+
+            form.addEventListener('submit', function (event) {
+                if (nameInput.value.trim() === '' || priceInput.value.trim() === '' || infoInput.value.trim() === '') {
+                    alert('메뉴 정보를 입력해주세요.');
+                    event.preventDefault();
+                }
+            });

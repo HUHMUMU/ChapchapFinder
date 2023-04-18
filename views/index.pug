@@ -14,14 +14,18 @@ html
                 div(style="position: relative; width: 100%; height: 750px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center;")
                     div(style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('/images/logo/rabbit.png'); opacity: 0.5; z-index: -1;")
                     div.mt-3
-                        h1.mb-4 챱챱파인더
+                        h1.mb-4(style="text-align:center;") 챱챱파인더
                         div(style="display: flex; flex-direction: column; align-items: flex-end; justify-content: center;").me-5
                             h4 챱챱파인더로
                             h4 신규고객을 확보해보세요
                             div.mt-4
                                 ul.d-flex.list-unstyled
-                                    li
-                                        a.btn.btn-outline-secondary.btn-sm.m-2(href=`/infos/insert.do`) 가게 등록
+                                    if(!storeName)
+                                        li
+                                            a.btn.btn-outline-secondary.btn-sm.m-2(href=`/infos/insert.do`) 가게 등록
                                     if(!loginStore)
                                         li
                                             a.btn.btn-outline-secondary.btn-sm.m-2(href=`/users/insert.do`) 회원 가입
+        if actionMsg
+            script.
+                alert("#{actionMsg}");

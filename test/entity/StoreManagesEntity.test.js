@@ -39,8 +39,7 @@ describe("StoreManagesEntity Test", () => {
             business_num: '4039334933',
             store_call: '02-1111-2222',
             phone: '010-3333-4444',
-            email: 'store11@naver.com',
-            store_num: 12
+            email: 'store11@naver.com'
         }
         let result;
         try {

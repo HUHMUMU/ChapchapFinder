@@ -8,7 +8,6 @@ const indexRouter = require('./routes/index');
 const reviewsRouter = require('./routes/reviews');
 const repliesRouter = require('./routes/replies');
 const storesRouter = require('./routes/stores');
-// const manageRouter = require('./routes/manage');
 const storeManagesRouter=require('./routes/users');
 const infoRouter = require('./routes/infos');
 const menusRouter = require('./routes/menus');
@@ -43,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 ///// connect-flash : 일회용 세션으로 req.flash(key,value) 를 보내면 리다이렉트 페이지로 메세지를 전달할 수 있다.(보통 action 페이지에서 처리 결과를 반환하기 위해 사용)
 const flash = require('connect-flash');
-
+const infoService = require("./model/service/InfoService");
 app.use(flash());
 ///// end
 
@@ -58,6 +57,15 @@ app.use(async function (req, res, next){
   next();
 });
 
+//loginStore의 store_num으로 stores테이블의 store_name 가져오기
+app.use(async function(req, res, next) {
+  if (req.session.loginStore) {
+    const infoService = require('./model/service/InfoService');
+    res.locals.loginStore = req.session.loginStore;
+    res.locals.storeName = await infoService.findByStore(req.session.loginStore.store_num);
+  }
+  next();
+});
 
 //모든 요청에서 퍼그 렌더시 변수로 loginUser 를 제공
 app.use(function (req, res, next){
@@ -70,6 +78,7 @@ app.use(function (req, res, next){
   if(req.session.loginStore)res.locals.loginStore=req.session.loginStore;
   next();
 });
+
 // 미들웨어를 이용해서 로그인 인증 구현 !
 app.use( function (req, res, next ){
   if(req.path==="/" || req.path==="/stores/login.do" || req.path==="/users/insert.do" ){
@@ -83,9 +92,6 @@ app.use( function (req, res, next ){
   }
 });
 
-app.use('/', indexRouter);
-// app.use('/replies', repliesRouter);
-app.use('/reviews', reviewsRouter);
 app.get('/api/data', (req, res) => {
   // 데이터를 반환하는 API
   const data = {
@@ -96,13 +102,16 @@ app.get('/api/data', (req, res) => {
 
 app.post('/api/user', (req, res) => {
   // 데이터를 받아서 처리하는 API
-  console.log(req.body);
   res.send('Received!');
 });
 
+app.use('/', indexRouter);
+// app.use('/replies', repliesRouter);
+app.use('/reviews', reviewsRouter);
+app.use('/chapdeal', chapdealsRouter);
 app.use('/stores', storesRouter);
-// app.use('/menu', manageRouter);
 app.use('/users', storeManagesRouter);
+app.use('/replies', repliesRouter);
 app.use('/infos', infoRouter);
 app.use('/menu', menusRouter);
 app.use('/waitings', waitingRouter);
@@ -124,7 +133,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(9090,()=>{
-  console.log("http://localhost:9090 expressjs 관리자 프로젝트 시작");
+app.listen(8088,()=>{
+  console.log("http://localhost:8088 expressjs 관리자 프로젝트 시작");
 })
 module.exports = app;
