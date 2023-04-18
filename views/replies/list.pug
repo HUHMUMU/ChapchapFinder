@@ -1,20 +1,19 @@
-if(review.review_num === reply.review_num)
-    ul.mt-3.d-flex.justify-content-start(style="list-style:none")
-        i.bi.bi-arrow-return-right.me-3(style="font-size: 2rem;")
-        li.w-100
-            div.row.border.border-2.border-dark.rounded-3.w-75
-                p
-                    small.px-2=`댓글작성날짜 : ${reply ? reply.post_date.toLocaleString("ko-KR") : '댓글 날짜가 없어요 ㅠㅠ'}`
-                    input.form-control-plaintext.px-3.mt-2(name="reply_content",style="font-size: 1.rem;" value=`${loginStore.store_id}님의 답글: ${reply.content}`, readonly=true)
-                    div.text-end
-                        div.modal.fade#updateModalToggle(aria-hidden="true", aria-labelledby="updateModalToggle", tabindex="-1")
-                            div.modal-dialog.modal-dialog-centered.modal-lg.modal-dialog-scrollable
-                                div.modal-content
-                                    div.modal-header
-                                        h1.modal-title.fs-5#updateModalToggle #{review.user_id}님에 대한 리뷰답글
-                                        button.btn-close(data-bs-dismiss="modal", aria-label="Close")
-                                    div.modal-body
-                                        textarea.form-control(style={width: "100%", height: "200px"}, name="reply_content") #{reply.content}
-                                    div.modal-footer
-                                        button.btn.btn-primary(type="button") 수정하기
-                        a.btn.btn-primary(data-bs-toggle="modal", href="#updateModalToggle", role="button") 수정하기
+ul.mt-3.d-flex.justify-content-start(style="list-style:none")
+    i.bi.bi-arrow-return-right.me-3(style="font-size: 2rem;")
+    li.w-100
+        div.row.border.border-2.border-dark.rounded-3.w-75
+            p
+                small.px-2=`댓글작성날짜 : ${replyPostdate ? replyPostdate.toLocaleString("ko-KR") : '댓글 날짜가 없어요 ㅠㅠ'}`
+                input.form-control-plaintext.px-3.mt-2(name="reply_content",style="font-size: 1.rem;" value=`${loginStore.store_id}님의 답글: ${review.dataValues.content}`, readonly=true)
+                div.text-end
+                    div.modal.fade(aria-hidden="true", aria-labelledby="updateModalToggle", tabindex="-1" id=`updateModalToggle${review.review_num}`)
+                        div.modal-dialog.modal-dialog-centered.modal-lg.modal-dialog-scrollable
+                            div.modal-content
+                                div.modal-header
+                                    h1.modal-title.fs-5#updateModalToggle #{review.user_id}님에 대한 리뷰답글
+                                    button.btn-close(data-bs-dismiss="modal", aria-label="Close")
+                                div.modal-body
+                                    textarea.form-control(style={width: "100%", height: "200px"}, name="reply_content") #{replyContent}
+                                div.modal-footer
+                                    button.btn.btn-primary(type="button") 수정하기
+                    a.btn.btn-primary(data-bs-toggle="modal", href=`#updateModalToggle${review.review_num}`, role="button") 수정하기

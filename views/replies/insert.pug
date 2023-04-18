@@ -1,17 +1,17 @@
 form.p-4.border(method="post", action="/replies/insert.do,enctype=\"multipart/form-data")
     div.w-100
         input(name="review_num",value=review.review_num,hidden=true)
-        p.text-end.h4 사장 댓글 수정 폼
+        p.text-end.h4 사장 댓글 등록 폼
         div.row
             div.form-floating.col
-                input.form-control(name="rr_num",value=reply.rr_num,readonly=true)
+                input.form-control(name="rr_num",value="")
                 label 댓글 번호
             div.form-floating.col
-                input.form-control(name="store_name",value=store.store_name,readonly=true)
+                input.form-control(name="store_name",value=store.store_name)
                 label 가게 이름:
         div.form-floating
-            textarea.form-control(name="content")=reply.content
+            textarea.form-control(name="content")
             label 내용
         div.mt-2.text-end
             button.btn.btn-outline-warning.me-2(type="reset") 초기화
-            button.btn.btn-outline-primary(type="submit") 수정
+            button.btn.btn-outline-primary(type="submit") 등록

@@ -59,6 +59,20 @@ class ReviewsService{
         return count;
     }
 
+    async reviewJoinReplies(storeNum){
+        reviewsEntity.hasMany(reviewRepliesEntity, { foreignKey: 'review_num' });
+
+        const result = await reviewsEntity.findAll({
+            where:{
+               store_num : storeNum
+            },
+            include: {
+                model: reviewRepliesEntity
+            }
+        });
+        return result;
+    }
+
     async report(storeNum){
 
     }

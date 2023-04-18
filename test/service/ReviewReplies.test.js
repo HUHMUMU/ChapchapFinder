@@ -23,4 +23,13 @@ describe("ReviewsService test",()=> {
         const replies = await  ReviewsService.unansweredCount(1);
         console.log(replies);
     });
+
+    test("리플찾기2", async function ()  {
+        const replies = await  ReviewsService.reviewJoinReplies(1);
+        //console.log(replies)
+        const firstReview = replies[1];
+        const firstReply = firstReview.reviewRepliesEntities[0];
+        const replyContent = firstReply.content;
+        console.log(replyContent);
+    });
 });
