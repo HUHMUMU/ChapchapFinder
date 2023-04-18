@@ -147,7 +147,9 @@ describe("InfoService test",()=>{
         }
     });
 
-    test("findtypeclasses", async () => { // 가게 휴무일 삭제
+
+    //가게 업종
+    test("findtypeclasses", async () => { // 가게 카테고리 찾기
         try{
             const typeclass = await infoService.findTypeClasses(1)
             console.log(typeclass)
@@ -156,7 +158,7 @@ describe("InfoService test",()=>{
         }
     });
 
-    test("insertstoretypes", async () => { // 가게 휴무일 삭제
+    test("insertstoretypes", async () => { // 가게 카테고리 등록
         try{
             const insertCate = await infoService.insertStoreTypes(1,2)
             console.log("등록 :" +insertCate)
@@ -165,7 +167,7 @@ describe("InfoService test",()=>{
         }
     });
 
-    test("findStoretypes", async () => { // 가게 휴무일 삭제
+    test("findStoretypes", async () => { // 가게 카테고리 찾기
         try{
             const findCate = await infoService.findStoreTypes(1)
             console.log("등록 :" +findCate[0].category_num)
@@ -175,6 +177,26 @@ describe("InfoService test",()=>{
             console.error(e)
         }
     });
+
+    test("updateStoretypes", async () => { //가게 카테고리 수정
+        try {
+            const updateCate=await infoService.updateStoreTypes(1,12,5)
+            console.log("수정 : " + JSON.stringify(updateCate));
+        } catch (e) {
+            console.error(e);
+        }
+    })
+
+    test("dropStoreTypes", async () => { // 가게 휴무일 삭제
+        try{
+            const storeType = await infoService.dropStoreTypes(13,1)
+            console.log("삭제 :" +storeType)
+        }catch (e) {
+            console.error(e)
+        }
+    });
+
+
 
 
     //브레이크타임
