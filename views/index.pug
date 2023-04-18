@@ -20,8 +20,12 @@ html
                             h4 신규고객을 확보해보세요
                             div.mt-4
                                 ul.d-flex.list-unstyled
-                                    li
-                                        a.btn.btn-outline-secondary.btn-sm.m-2(href=`/infos/insert.do`) 가게 등록
+                                    if(!storeName)
+                                        li
+                                            a.btn.btn-outline-secondary.btn-sm.m-2(href=`/infos/insert.do`) 가게 등록
                                     if(!loginStore)
                                         li
                                             a.btn.btn-outline-secondary.btn-sm.m-2(href=`/users/insert.do`) 회원 가입
+        if actionMsg
+            script.
+                alert("#{actionMsg}");

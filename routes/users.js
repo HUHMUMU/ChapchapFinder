@@ -14,12 +14,13 @@ router.post("/insert.do",async (req,res)=>{
         insertStoreUser=await storeManagesService.register(reqBody);
     }catch (e) {
         console.error(e);
-        req.flash("actionMsg","회원등록 실패 :"+e.message)
+        req.flash("actionMsg","회원등록 실패 :"+e.message);
     }
     if(insertStoreUser){
-        req.flash("actionMsg","회원등록 성공, 로그인하세요");
-        res.redirect(`/users/${insertStoreUser.store_id}/detail.do`);
+        req.flash("actionMsg", "회원등록 성공! 로그인하세요");
+        res.redirect(`/stores/login.do`);
     }else{
+        req.flash("actionMsg","오류 발생 다시 시도하세요");
         res.redirect("/users/insert.do");
     }
 });
