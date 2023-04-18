@@ -57,22 +57,41 @@ block content
                                 button.btn.btn-outline-secondary.my-4(type="button") 신고하기
                             -if(firstReply==null)
                                 div.text-end.mb-3
-                                    div.modal.fade(aria-hidden="true", aria-labelledby="insertModalToggle", tabindex="-1" id=`insertModalToggle${review.review_num}`)
+                                    div.modal.fade(aria-hidden="true", aria-labelledby="insertModalToggle", tabindex="-1", data-review-num=review.review_num)
                                         div.modal-dialog.modal-dialog-centered.modal-lg.modal-dialog-scrollable
                                             div.modal-content
                                                 div.modal-header
                                                     h1.modal-title.fs-5#insertModalToggle #{review.user_id}님에 대한 리뷰답글
                                                     button.btn-close(data-bs-dismiss="modal", aria-label="Close")
                                                 div.modal-body
-                                                    textarea.form-control(style={
+                                                    textarea#inputText.form-control(style={
                                                         width: "100%",
-                                                        height: "200px"
+                                                        height: "200px",
+                                                        rows:"3"
                                                     }, name="reply_content")
                                                 div.modal-footer
-                                                    button.btn.btn-primary(type="button") 등록하기
-                                    a.btn.btn-primary(data-bs-toggle="modal", href=`#insertModalToggle${review.review_num}`, role="button") 등록하기
+                                                    button.btn.btn-primary(type="button", data-bs-dismiss="modal") 등록하기
                     -if(firstReply!=null)
                         -const replyContent = firstReply.content;
                         -const replyPostdate = firstReply.post_date;
                         if(`${replyContent}`)
                         include ../replies/list
+    script.
+        const modalToggle = document.querySelector(`[data-review-num="${review.review_num}"]`);
+        const insertMo = modalToggle.querySelector(".modal-footer button");
+        const textA = modalToggle.querySelector(".modal-body textarea");
+        const xhr = new XMLHttpRequest();
+        const url = "/replies/insert.do";
+
+        insertMo.addEventListener(`click`, () => {
+            const params = JSON.stringify({value: textA.value, review_num: modalToggle.dataset.reviewNum});
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                }
+            };
+            xhr.send(params);
+        });

@@ -1,35 +1,22 @@
-const ReviewsService=require("../../model/service/ReviewsService");
+const ReviewsREpliesService=require("../../model/service/ReviewRepliesService");
+const infoService = require("../../model/service/InfoService");
 
-describe("ReviewsService test",()=> {
+describe("ReviewsReplies Service test",()=> {
 
     test("댓글찾기", async function ()  {
-        const replies = await  ReviewsService.findByRrNum(11,1);
-        console.log(replies);
+        const reply =
+            {
+                review_num : "12",
+                content : "이게 말이 돼!?",
+            };
+        let replies = 0;
+        try {
+             replies = await  ReviewsREpliesService.insert(reply);
+            console.log("등록 : "+replies);
+        }catch (e) {
+            console.error(e)
+        }
+
     });
 
-
-
-    test("댓글찾기2", async function ()  {
-        const replies = await  ReviewsService.findByRrNum();
-        console.log(replies);
-    });
-
-    test("댓글찾기3", async function ()  {
-        const replies = await  ReviewsService.findByStore(1);
-        console.log(replies);
-    });
-
-    test("리뷰찾기", async function ()  {
-        const replies = await  ReviewsService.unansweredCount(1);
-        console.log(replies);
-    });
-
-    test("리플찾기2", async function ()  {
-        const replies = await  ReviewsService.reviewJoinReplies(1);
-        //console.log(replies)
-        const firstReview = replies[1];
-        const firstReply = firstReview.reviewRepliesEntities[0];
-        const replyContent = firstReply.content;
-        console.log(replyContent);
-    });
 });

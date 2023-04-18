@@ -5,7 +5,7 @@ ul.mt-3.d-flex.justify-content-start(style="list-style:none")
             p
                 small.px-2=`댓글작성날짜 : ${firstReply.post_date ? firstReply.post_date.toLocaleString("ko-KR") : '댓글 날짜가 없어요 ㅠㅠ'}`
                 p #{loginStore.store_id}의 답글:
-                textarea.form-control-plaintext.px-3.mt-2(name="reply_content",style="font-size: 1.rem;", value=``, readonly=true) #{firstReply.content}
+                textarea.form-control-plaintext.px-3.mt-2(name="reply_content",style="font-size: 1.rem;", value=``, readonly=true, rows="3") #{firstReply.content}
                 div.text-end
                     div.modal.fade(aria-hidden="true", aria-labelledby="updateModalToggle", tabindex="-1" id=`updateModalToggle${review.review_num}`)
                         div.modal-dialog.modal-dialog-centered.modal-lg.modal-dialog-scrollable

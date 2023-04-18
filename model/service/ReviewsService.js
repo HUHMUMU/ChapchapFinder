@@ -76,6 +76,5 @@ class ReviewsService{
     async report(storeNum){
 
     }
-
 }
 module.exports=new ReviewsService();
