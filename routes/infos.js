@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const infoService=require("../model/service/InfoService");
-const storeMenagesService=require("../model/service/StoreManagesService");
+const storeManagesService=require("../model/service/StoreManagesService");
 const path=require("path");
 
 router.get('/insert.do',async (req,res)=>{
@@ -46,7 +46,7 @@ router.get('/detail.do', async (req, res) => {
     let storeNum = req.session.loginStore.store_num
     let storeId = req.session.loginStore.store_id
     let store = await infoService.findByStore(storeNum);
-    let storeManage= await  storeMenagesService.findStoreManage(storeId)
+    let storeManage= await  storeManagesService.findStoreManage(storeId)
     let holidays = await  infoService.findHolidaysByStore(storeNum)
     let breakTimes = await  infoService.findBreaktimesByStore(storeNum)
     let storeTypes = await infoService.findStoreTypes(storeNum);

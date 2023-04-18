@@ -33,14 +33,16 @@ class StoreManagesService {
         }
     }
 
-    //유저 상세
-    async detail(storeId) {
+    async update(storeUser) {
         try {
-            return await storeManagesEntity.findByPk(storeId);
+            await storeManagesEntity.update(storeUser, {
+                where: { store_id: storeUser.store_id },
+            });
         } catch (e) {
-            new Error(e);
+            throw new Error(e);
         }
     }
+
 
     //로그인
     async login(storeId, pw) {

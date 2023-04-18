@@ -1,6 +1,33 @@
 extends ../layout
+
 block content
-    h2.m-4 유저 등록 양식
+    if storeUser
+        h2.m-4 사장 상세 정보 수정
+            form#addStoreForm(method='post' action='/users/update.do')
+                div.form-floating.mb-3.mt-3
+                    input#store_id.form-control(name='store_id', type='text' placeholder="??" value=storeUser.store_id readonly)
+                    label.h6(for='store_id') 아이디
+                div.form-floating.mb-3
+                    input#pw.form-control(name='pw', type='password' placeholder="??" value=storeUser.pw)
+                    label.h6(for='pw') 비밀번호
+                div.form-floating.mb-3
+                    input#business_num.form-control(name='business_num', type='text' placeholder="??" value=storeUser.business_num)
+                    label.h6(for='business_num') 사업자 등록 번호
+                div.form-floating.mb-3
+                    input#store_call.form-control(name='store_call', type='text' placeholder="??" value=storeUser.store_call)
+                    label.h6(for='store_call') 식당 전화번호
+                div.form-floating.mb-3
+                    input#phone.form-control(name='phone', type='text' placeholder="??" value=storeUser.phone)
+                    label.h6(for='phone') 사장 핸드폰 번호
+                div.form-floating.mb-3
+                    input#email.form-control(name='email', type='email' placeholder="??" value=storeUser.email)
+                    label.h6(for='email') 이메일
+                div.text-end.mb-5
+                    a.btn.btn-primary.me-3(href="/") 메인페이지
+                    button#resetStoreBtn.btn.btn-warning.me-3(type='reset') 초기화
+                    button#addStoreBtn.btn.btn-primary(type='submit') 수정
+    else
+        h2.m-4 유저 등록 양식
         form#addStoreForm(method='post' action='/users/insert.do')
             div.form-floating.mb-3.mt-3
                 input#store_id.form-control(name='store_id', type='text' placeholder="??")
