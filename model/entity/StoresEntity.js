@@ -80,7 +80,8 @@ module.exports = (sequelize) => {
         },
         s_rstatus: {
             type: DataTypes.ENUM('공개', '심사', '비공개'),
-            allowNull: false,
+            allowNull: true,
+            defaultValue: '공개',
             comment: '신고상태'
         },
         parking: {

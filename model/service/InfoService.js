@@ -144,7 +144,7 @@ class InfoService{
     }
 
 
-    // 가게 카테고리
+    // 가게 카테고리  // 다시보기
 
     async findTypeClasses(category){ // 가게 카테고리 찾기
         const typeclasses = await TypeClassesEntity.findOne({
@@ -152,9 +152,9 @@ class InfoService{
                 category_num : category
             }
         })
-        return typeclasses.category_num;
+        return typeclasses;
     }
-
+S
     async findStoreTypes(storeNum){ //가게 카테고리 찾기
         const storetypes = await StoreTypesEntity.findAll({
             where:{
@@ -164,12 +164,34 @@ class InfoService{
         return storetypes;
     }
 
-    async insertStoreTypes(storeNum, category){ //가게 카테고리 등록
-        const storetypes = await StoreTypesEntity.create({
-            store_num: storeNum,
-            category_num: category
-    });
-        return storetypes;
+    async insertStoreTypes(st, storeNum){ //가게 카테고리 등록
+        const cate = await StoreTypesEntity.create({
+            storetype_id:st.storetype_id,
+            category_num:st.category_num
+            },{
+            where :{
+                store_num:storeNum
+            }
+        });
+        return cate;
+    }
+
+    async insertStoreTypes2(st){ //가게 카테고리 등록
+        const cate = await StoreTypesEntity.create({
+            storetype_id:st.storetype_id,
+            category_num:st.category_num,
+            store_num:st.store_num
+        })
+        return cate;
+    }
+
+    async insertImg(img ) { //가게 이미지 등록
+        const insertImg = await StoreImgsEntity.create({
+            img_num: img.img_num,
+            store_img: img.store_img,
+            store_num: img.store_num
+        });
+        return insertImg;
     }
 
     async updateStoreTypes(StoreNum, storetypeId, category) { // 가게 카테고리 수정
