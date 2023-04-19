@@ -23,6 +23,15 @@ class ReviewsService{
         return store;
     }
 
+    async findByReview(reviewNum){
+        const review = await reviewsEntity.findOne({
+            where: {
+                review_num : reviewNum
+            }
+        });
+        return review;
+    }
+
     async findByRrNum(){
         const replies = await reviewRepliesEntity.findAll();
             return replies;

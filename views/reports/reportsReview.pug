@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+    h2.my-4 리뷰 신고 관리
+    div
+        each r in reportsReview
+            h1.card-text 신고번호 : #{r.report_num}
+            h4.card-text 신고사장ID : #{r.report_store_id}
+            h4.card-text 신고유저ID : #{r.report_user_id}
+            h3.card-text 신고내용 : #{r.report_content}
+            div 신고당한 리뷰의 내용
+                //h4.card-text 리뷰고유번호 #{r.review_num}
+                //h4.card-text 리뷰내용 #{r.content}
+                //h4.card-text 한줄평 #{r.comment}
+                //h4.card-text 메뉴 #{r.menu_num}
+            hr

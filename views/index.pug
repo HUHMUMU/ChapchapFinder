@@ -26,6 +26,10 @@ html
                                     if(!loginStore)
                                         li
                                             a.btn.btn-outline-secondary.btn-sm.m-2(href=`/users/insert.do`) 회원 가입
+                                    // 로그인한 아이디가 admin이면 보이는 버튼
+                                    if(loginStore && loginStore.store_id==='admin')
+                                        li
+                                            a.btn.btn-danger.btn-sm.m-2(href=`/reports/reportsIndex.do`) 관리자페이지
         if actionMsg
             script.
                 alert("#{actionMsg}");
