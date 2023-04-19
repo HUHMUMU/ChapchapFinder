@@ -87,35 +87,14 @@ app.use( function (req, res, next ){
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.post("/replies/insert.do", (req, res) => {
-  // 요청 데이터 처리
-  const content = req.body.content;
 
-  // 처리 결과 반환
-  const result = { message: "reply created", content: { content } };
-  res.json(result);
-});
 
 app.use('/', indexRouter);
-// app.use('/replies', repliesRouter);
+app.use('/replies', repliesRouter);
 app.use('/reviews', reviewsRouter);
-app.get('/api/data', (req, res) => {
-  // 데이터를 반환하는 API
-  const data = {
-    message: 'Hello, data!'
-  };
-  res.json(data);
-});
-
-app.post('/api/user', (req, res) => {
-  // 데이터를 받아서 처리하는 API
-  res.send('Received!');
-});
-
 app.use('/stores', storesRouter);
 // app.use('/menu', manageRouter);
 app.use('/users', storeManagesRouter);
-app.use('/replies', repliesRouter);
 app.use('/infos', infoRouter);
 app.use('/menu', menusRouter);
 app.use('/waitings', waitingRouter);

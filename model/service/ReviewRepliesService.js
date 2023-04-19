@@ -2,19 +2,32 @@ const sequelize=require("../chapchapSequelize");
 const reviewRepliesEntity=require("../entity/ReviewRepliesEntity")(sequelize);
 const {Op, where}=require("sequelize");
 class ReviewRepliesService {
-    async insert(reply){
+    async insert(reviewNum, content) {
         try {
-            return await reviewRepliesEntity.create(reply);
-        }catch (e) {
-            new Error(e);
+            if (!content) {
+                throw new Error('content is required');
+            }
+            return await reviewRepliesEntity.create({
+                review_num: reviewNum,
+                content: content
+            });
+        } catch (e) {
+            throw new Error(e);
         }
     }
 
-    async modify(reviewNum,content){
+    async modify(reply) {
         try {
-            return await reviewRepliesEntity.modify(reviewNum,content);
-        }catch (e) {
-            new Error(e);
+            if (!reply.content) {
+                throw new Error('content is required');
+            }
+            const result = await reviewRepliesEntity.update(
+                { content : reply.content },
+                { where: { review_num: reply.review_num } }
+            );
+            return result;
+        } catch (e) {
+            throw new Error(e);
         }
     }
 
@@ -22,11 +35,23 @@ class ReviewRepliesService {
         try {
             return await reviewRepliesEntity.findOne({
                 where:{
-                    review_num : reviewNumt
+                    review_num : reviewNum
                 }
             });
         }catch (e) {
-            new Error(e);
+            throw new Error(e);
+        }
+    }
+
+    async deleteOne(reviewNum){
+        try {
+            return await reviewRepliesEntity.destroy({
+                where:{
+                    review_num : reviewNum
+                }
+            });
+        }catch (e) {
+            throw new Error(e);
         }
     }
 }
