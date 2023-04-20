@@ -5,6 +5,7 @@ const logger = require('morgan');
 const session = require("express-session");
 
 const indexRouter = require('./routes/index');
+const reportsRouter = require('./routes/reports');
 const reviewsRouter = require('./routes/reviews');
 const repliesRouter = require('./routes/replies');
 const storesRouter = require('./routes/stores');
@@ -98,6 +99,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.use('/', indexRouter);
+app.use('/reports', reportsRouter);
 app.use('/replies', repliesRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/stores', storesRouter);

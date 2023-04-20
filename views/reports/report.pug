@@ -1,0 +1,14 @@
+div.modal.fade(aria-hidden="true", aria-labelledby="reportModalToggle", tabindex="-1" id=`reportModalToggle${review.review_num}`)
+    div.modal-dialog.modal-dialog-centered.modal-lg.modal-dialog-scrollable
+        div.modal-content
+            div.modal-header
+                h1.modal-title.fs-5#reportModalToggle #{review.user_id}님의 리뷰 대해 신고하기
+                button.btn-close(data-bs-dismiss="modal", aria-label="Close")
+            form(action="/reports/insert.do", method="POST")
+                div.modal-body
+                    input.form-control(type="hidden",value=review.review_num,name="review_num")
+                    input.form-control(type="hidden",value=loginStore.store_id,name="store_id")
+                    textarea.form-control(style={width: "100%", height: "200px"}, name="content")
+                div.modal-footer
+                    button.btn.btn-primary(type="submit") 신고하기
+a.btn.btn-primary(data-bs-toggle="modal", href=`#reportModalToggle${review.review_num}`, role="button") 신고하기

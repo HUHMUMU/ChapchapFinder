@@ -11,16 +11,6 @@ const {Op, Sequelize}=require("sequelize");
 class ReportsService {
     // 심사->비공개 처리하기.
 
-    // 신고당한거 다찾기
-    async list(reportNum){
-        const report = await reportsEntity.findAll({
-            where: {
-                report_num: reportNum
-            }
-        });
-        return report;
-    }
-
     // review_num!=null만 찾기
     async findByReviewNum() {
         const reportAtReview = await reportsEntity.findAll({
@@ -122,6 +112,16 @@ class ReportsService {
         return reportsWithChapstory;
     }
 
+    async reportReview(reportObj) {
+        const report = await reportsEntity.create(
+        {
+            report_store_id: reportObj.store_id,
+            report_content: reportObj.content,
+            review_num: reportObj.review_num
+            }
+        );
+        return report;
+    }
 
 }
 module.exports=new ReportsService();
