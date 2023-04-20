@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const reviewsService=require("../model/service/ReviewsService");
-const reportsService = require("../model/service/ReportsService")
+const reportsService = require("../model/service/ReportsService");
 const path=require("path");
 const multer=require("multer");
 const storage=multer.diskStorage(
@@ -46,26 +46,29 @@ router.get('/list.do', async function(req, res) {
     req.query.orderField = req.query.orderField || "date";
     req.query.orderDirect = req.query.orderDirect || "DESC";
     let storeNum = req.session.loginStore.store_num;
+    let storeId = req.session.loginStore.store_id;
     let rRstatus = '공개';
     let count = 0;
     let uncount = 0;
     let replies=null;
     let reviews=null;
     let store = null;
-    let report=null;
+    let reports=null;
+    let reportCheck=null;
     try {
         reviews=await reviewsService.reviewJoinReplies(storeNum);
         count = await reviewsService.answeredCount(storeNum,rRstatus);
         const arr = await reviewsService.unansweredCount(storeNum);
         uncount = arr.length;
         store = await reviewsService.findByStore(storeNum);
-        reports = await reviewsService.reportReviewFindAll(req.session.loginStore.store_id);
+        reports = await reviewsService.reportReviewFindAll(storeId);
+        reportCheck = await reportsService.reportReviewCheck(storeId)
 
     }catch (e) {
         new Error(e);
     }
     if(reviews){
-        res.render("reviews/list",{reviews:reviews,params:req.query, count:count, uncount:uncount, store:store, reports:reports});
+        res.render("reviews/list",{reviews:reviews,params:req.query, count:count, uncount:uncount, store:store, reports:reports,reportCheck:reportCheck});
     }else {
         res.redirect("/")
     }

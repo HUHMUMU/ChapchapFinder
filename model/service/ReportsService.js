@@ -123,5 +123,15 @@ class ReportsService {
         return report;
     }
 
+    async reportReviewCheck(storeId) {
+        const report = await reportsEntity.findAll({
+            where: {
+                report_store_id: storeId,
+            }
+        })
+            return report;
+    }
+
+
 }
 module.exports=new ReportsService();

@@ -75,17 +75,17 @@ router.get('/reportsChapstory.do', async function(req, res) {
 });
 
 router.get('/insert.do', async function(req, res) {
-    res.render("report/insert");
+    res.redirect(`/reviews/list.do`);
 });
 
 router.post('/insert.do', async function(req, res) {
-    let reportCheck
+    let reportCheck=0;
     try{
-        await reportsService.reportReview(req.body);
-        res.redirect("/reviews/list.do");
-    }catch(e){
-        throw new Error(e)
+        reportCheck = await reportsService.reportReview(req.body,reportCheck);
         res.redirect(`/reviews/list.do`);
+    }catch(e){
+        res.redirect(`/reviews/list.do`);
+        throw new Error(e)
     }
 });
 

@@ -72,12 +72,13 @@ block content
                             p.my-4 주문메뉴:
                         div.col-2.d-flex.flex-column.align-items-start.justify-content-between
                             div.mt-3
-                                - let reportCheck = 0;
-                                each report in reports
-                                    if (report.review_num === review.review_num)
-                                    - reportCheck = 1;
-                                if (reportCheck === 0)
-                                include ../reports/report
+                                -var check=false;
+                                each rc,i in reportCheck
+                                    if(rc.review_num===review.review_num)
+                                        button.btn.btn-primary(type="submit" disabled) 신고 완료
+                                        -check=true;
+                                if(check===false)
+                                    include ../reports/report
                             if(firstReply==null)
                                 div.text-end.mb-3
                                     div.modal.fade(aria-hidden="true", aria-labelledby="insertModalToggle", tabindex="-1" id=`insertModalToggle${review.review_num}`)
@@ -97,7 +98,7 @@ block content
                                                     div.modal-footer
                                                         button.btn.btn-primary(type="submit") 등록하기
                                 a.mb-3.btn.btn-primary(data-bs-toggle="modal", href=`#insertModalToggle${review.review_num}`, role="button") 등록하기
-                    -if(firstReply!=null)
+                    if(firstReply!=null)
                         -const replyContent = firstReply.content;
                         -const replyPostdate = firstReply.post_date;
                         if(`${replyContent}`)

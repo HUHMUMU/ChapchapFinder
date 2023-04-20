@@ -19,4 +19,5 @@ ul.mt-3.d-flex.justify-content-start(style="list-style:none")
                                         textarea.form-control(style={width: "100%", height: "200px"}, name="content") #{firstReply.content}
                                     div.modal-footer
                                         button.btn.btn-primary(type="submit") 수정하기
-                    a.btn.btn-primary(data-bs-toggle="modal", href=`#updateModalToggle${review.review_num}`, role="button") 수정하기
+                    a.btn.btn-primary.me-5(data-bs-toggle="modal", href=`#updateModalToggle${review.review_num}`, role="button") 수정하기
+                    a.btn.btn-primary(href=`/replies/${review.review_num}/delete.do`) 삭제하기
