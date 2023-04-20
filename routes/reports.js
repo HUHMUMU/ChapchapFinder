@@ -26,6 +26,7 @@ router.get('/reportsReview.do',async function(req,res){
         res.render('reports/reportsReview', {reportsReview: reportsReview, review: review});
     } else {
         res.redirect('/');
+    //     하씨 왜안되는겨
     }
 });
 
