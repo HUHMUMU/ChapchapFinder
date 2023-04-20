@@ -1,3 +1,20 @@
 extends ../layout
 
 block content
+    h2.my-4 유저 신고 관리
+    div
+        each r in reportsStore
+            div.card.col
+                div.card-body
+                    span 신고번호 : #{r.report_num}
+                    i.bi.bi-dot
+                    if(r.report_store_id)
+                        small 신고사장ID : #{r.report_store_id}
+                    if(r.report_user_id)
+                        small 신고유저ID : #{r.report_user_id}
+                div
+                    h5.card-title 신고내용 : #{r.report_content}
+                    h6.card-text 신고당한가게 고유번호 : #{r.store.store_num}
+                    h6.card-text 신고당한가게 이름 : #{r.store.store_name}
+                    h6.card-text 신고당한가게 주소 : #{r.store.address}
+            hr

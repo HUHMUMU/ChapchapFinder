@@ -42,21 +42,22 @@ CREATE TABLE stores
 
 CREATE TABLE users
 (
-    user_id        VARCHAR(255) primary key unique NOT NULL COMMENT '유저아이디',
-    nickname       VARCHAR(255) unique             NOT NULL COMMENT '유저닉네임',
-    pw             VARCHAR(255)                    NOT NULL COMMENT '비밀번호',
-    name           VARCHAR(255)                    NOT NULL COMMENT '이름',
-    birth          DATE                            NOT NULL COMMENT '생년월일',
-    gender         ENUM ('MALE', 'FEMALE')         NOT NULL COMMENT '성별',
-    address        VARCHAR(255)                    NOT NULL COMMENT '주소',
-    detail_address VARCHAR(255)                    NOT NULL COMMENT '상세주소',
-    email          VARCHAR(255) unique             NOT NULL COMMENT '이메일',
-    insta_url      VARCHAR(255)                    NULL COMMENT '인스타url',
-    face_url       VARCHAR(255)                    NULL COMMENT '페이스북url',
-    youtube_url    VARCHAR(255)                    NULL COMMENT '유튜브url',
-    profile_img    VARCHAR(255)                    NULL COMMENT '프로필사진',
-    introduce      VARCHAR(255)                    NULL COMMENT '자기소개',
-    u_rstatus      ENUM ('공개', '심사', '비공개')        NOT NULL COMMENT '신고상태'
+    user_id          VARCHAR(255) primary key unique      NOT NULL COMMENT '유저아이디',
+    nickname         VARCHAR(255) unique                  NOT NULL COMMENT '유저닉네임',
+    pw               VARCHAR(255)                         NOT NULL COMMENT '비밀번호',
+    name             VARCHAR(255)                         NOT NULL COMMENT '이름',
+    birth            DATE                                 NOT NULL COMMENT '생년월일',
+    gender           ENUM ('MALE', 'FEMALE')              NOT NULL COMMENT '성별',
+    address          VARCHAR(255)                         NOT NULL COMMENT '주소',
+    detail_address   VARCHAR(255)                         NOT NULL COMMENT '상세주소',
+    email            VARCHAR(255) unique                  NOT NULL COMMENT '이메일',
+    insta_url        VARCHAR(255)                         NULL COMMENT '인스타url',
+    face_url         VARCHAR(255)                         NULL COMMENT '페이스북url',
+    youtube_url      VARCHAR(255)                         NULL COMMENT '유튜브url',
+    profile_img      VARCHAR(255)                         NULL COMMENT '프로필사진',
+    introduce        VARCHAR(255)                         NULL COMMENT '자기소개',
+    email_check_code VARCHAR(8)                           NULL COMMENT '가입인증이메일코드',
+    u_rstatus        ENUM ('공개', '심사', '비공개', '휴면', '탈퇴') NOT NULL COMMENT '상태'
 );
 
 CREATE TABLE menu_manages
@@ -78,12 +79,12 @@ CREATE TABLE reviews
     content    TEXT                               NULL COMMENT '리뷰 작성내용',
     comment    VARCHAR(255)                       NULL COMMENT '한줄평',
     img        VARCHAR(255)                       NULL COMMENT '가게 메뉴사진',
-    date       DATE                          NOT NULL COMMENT '날짜',
+    date       DATE                               NOT NULL COMMENT '날짜',
     star       INT                                NOT NULL COMMENT '별점1~5',
     r_rstatus  enum ('공개', '심사', '비공개')           NOT NULL COMMENT '신고상태',
     user_id    VARCHAR(255)                       NOT NULL COMMENT '유저아이디',
     store_num  INT                                NOT NULL COMMENT '가게 고유번호',
-    menu_num  INT                                 NOT NULL COMMENT '메뉴번호',
+    menu_num   INT                                NOT NULL COMMENT '메뉴번호',
     FOREIGN KEY (store_num) REFERENCES stores (store_num),
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     FOREIGN KEY (menu_num) REFERENCES menu_manages (menu_num)
@@ -199,15 +200,15 @@ CREATE TABLE storetypes
 CREATE TABLE breaktimes
 (
     rest_num        INT primary key auto_increment NOT NULL COMMENT '휴식시간',
-    rest_start_time TIME                       NULL COMMENT '휴식시작시간',
-    rest_end_time   TIME                       NULL COMMENT '휴식 끝시간',
+    rest_start_time TIME                           NULL COMMENT '휴식시작시간',
+    rest_end_time   TIME                           NULL COMMENT '휴식 끝시간',
     store_num       INT                            NOT NULL COMMENT '가게고유번호',
     FOREIGN KEY (store_num) REFERENCES stores (store_num)
 );
 
 CREATE TABLE holidays
 (
-    holi_num       int unsigned primary key auto_increment NOT NULL COMMENT '휴일번호',
+    holi_num  int unsigned primary key auto_increment NOT NULL COMMENT '휴일번호',
     store_num INT                                     NOT NULL COMMENT '가게고유번호',
     week      ENUM ('월','화','수','목','금','토','일')      NULL COMMENT '요일',
     date      DATE                                    NULL COMMENT '일',
@@ -244,13 +245,6 @@ CREATE TABLE chapstoryimgs
     chap_num INT                            NOT NULL COMMENT '챱스토리 번호',
     img      VARCHAR(255)                   NOT NULL COMMENT '이미지 경로(path)',
     FOREIGN KEY (chap_num) REFERENCES chapstorys (chap_num)
-);
-
-CREATE TABLE userstatus
-(
-    user_id VARCHAR(255) primary key NOT NULL COMMENT '유저아이디',
-    status  ENUM ('활동','휴면','탈퇴')    NOT NULL COMMENT '활동,휴면,탈퇴',
-    FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
 CREATE TABLE review_replies
@@ -609,11 +603,6 @@ INSERT INTO points (point_date, point_plus, point_reason, user_id) VALUES
    ('2023-04-11', 300, '이벤트 참여 포인트', 'user09'),
    ('2023-04-01', 500, '회원가입 축하 포인트', 'user10'),
    ('2023-04-12', 100, '추천가게 등록 포인트', 'user10');
-
-INSERT INTO userstatus (user_id, status)
-VALUES
-    ('user16', '휴면'),
-    ('user15', '탈퇴');
 
 INSERT INTO review_replies (review_num, post_date, content)
 VALUES
