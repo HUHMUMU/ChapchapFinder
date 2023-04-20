@@ -160,14 +160,35 @@ describe("InfoService test",()=> {
         }
     });
 
-    test("insertstoretypes", async () => { // 가게 카테고리 등록
+    test("insertStoreTypes", async () => { // 가게 이미지 등록 //왜 안되냐
+        const cate = {
+            storetype_id: "12",
+            category_num: "3",
+            store_num:"1"
+        }
+        let insert = 0;
         try {
-            const insertCate = await infoService.insertStoreTypes(1, 2)
-            console.log("등록 :" + insertCate)
+            insert = await infoService.insertStoreTypes(cate,1);
+            console.log("등록 : " + JSON.stringify(insert));
         } catch (e) {
             console.error(e)
         }
     })
+
+    test("insertStoreTypes2",async ()=>{
+        const cate={
+            storetype_id: "11",
+            category_num: "3",
+            store_num:"11"
+        }
+        let insert=0;
+        try {
+            insert = await infoService.insertStoreTypes2(cate)
+            console.log("등록 : " + JSON.stringify(insert));
+        } catch (e) {
+            console.error(e)
+
+        }})
 
     test("findStoretypes", async () => { // 가게 카테고리 찾기
         try {
@@ -207,10 +228,10 @@ describe("InfoService test",()=> {
 
     test("insertBreaktime", async () => { // 가게 브레이크타임 등록
         const breaktime = {
-            store_num: "1",
-            rest_num: "21",
-            rest_start_time: "17:07:00",
-            rest_end_time: "17:37:00"
+            rest_num: "11",
+            rest_start_time: "12:30:00",
+            rest_end_time: "15:30:00",
+            store_num: "7"
         }
         let insert = 0;
         try {
@@ -253,7 +274,7 @@ describe("InfoService test",()=> {
     })
 
 
-    test("insertImg", async () => { // 가게 이미지 등록 //왜 안되냐
+    test("insertImg", async () => { // 가게 이미지 등록
         const img = {
             img_num: "12",
             store_img: "/images/storeImg/store1_img4.jpg",
@@ -267,6 +288,10 @@ describe("InfoService test",()=> {
             console.error(e)
         }
     })
+
+
+
+
 
     test("updateImg", async () => { //가게 이미지 수정 //왜 안되냐
         const img = {
