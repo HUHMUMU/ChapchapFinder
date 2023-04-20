@@ -79,12 +79,13 @@ router.get('/insert.do', async function(req, res) {
 });
 
 router.post('/insert.do', async function(req, res) {
+    let reportCheck
     try{
         await reportsService.reportReview(req.body);
-        res.redirect(`/reviews/list.do`);
+        res.redirect("/reviews/list.do");
     }catch(e){
         throw new Error(e)
-        res.render("reviews/list");
+        res.redirect(`/reviews/list.do`);
     }
 });
 

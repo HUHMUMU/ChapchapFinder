@@ -18,7 +18,7 @@ router.post('/insert.do', async function(req, res) {
         res.redirect(`/reviews/list.do`);
     }catch(e){
         throw new Error(e)
-        res.render("reviews/list");
+        res.redirect(`/reviews/list.do`);
     }
 });
 

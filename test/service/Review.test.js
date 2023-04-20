@@ -32,4 +32,11 @@ describe("ReviewsService test",()=> {
         const replyContent = firstReply.content;
         console.log(replyContent);
     });
+
+    test("신고찾기2", async function ()  {
+        const report = await  ReviewsService.reportReviewFindAll("store001");
+        //console.log(replies)
+
+        console.log(report);
+    });
 });

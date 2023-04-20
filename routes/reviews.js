@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const reviewsService=require("../model/service/ReviewsService");
+const reportsService = require("../model/service/ReportsService")
 const path=require("path");
 const multer=require("multer");
 const storage=multer.diskStorage(
@@ -51,18 +52,20 @@ router.get('/list.do', async function(req, res) {
     let replies=null;
     let reviews=null;
     let store = null;
+    let report=null;
     try {
         reviews=await reviewsService.reviewJoinReplies(storeNum);
         count = await reviewsService.answeredCount(storeNum,rRstatus);
         const arr = await reviewsService.unansweredCount(storeNum);
         uncount = arr.length;
         store = await reviewsService.findByStore(storeNum);
+        reports = await reviewsService.reportReviewFindAll(req.session.loginStore.store_id);
 
     }catch (e) {
         new Error(e);
     }
     if(reviews){
-        res.render("reviews/list",{reviews:reviews,params:req.query, count:count, uncount:uncount, store:store});
+        res.render("reviews/list",{reviews:reviews,params:req.query, count:count, uncount:uncount, store:store, reports:reports});
     }else {
         res.redirect("/")
     }

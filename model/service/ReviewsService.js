@@ -2,6 +2,7 @@ const sequelize=require("../chapchapSequelize");
 const reviewsEntity=require("../entity/ReviewsEntity")(sequelize);
 const reviewRepliesEntity=require("../entity/ReviewRepliesEntity")(sequelize);
 const storesEntity = require("../entity/StoresEntity")(sequelize);
+const reportsEntity = require("../entity/ReportsEntity")(sequelize);
 const {Op, Sequelize}=require("sequelize");
 class ReviewsService{
     async list(storeNum,rRstatus) {
@@ -82,8 +83,13 @@ class ReviewsService{
         return result;
     }
 
-    async report(storeNum){
-
+    async reportReviewFindAll(storeId){
+        const find = await reportsEntity.findAll({
+            where:{
+                report_store_id: storeId,
+            }
+        })
+        return find;
     }
 }
 module.exports=new ReviewsService();

@@ -6,7 +6,7 @@ const storesEntity=require("../entity/StoresEntity")(sequelize);
 const chapstorysEntity=require("../entity/ChapStorysEntity")(sequelize);
 const reviewsEntity=require("../entity/ReviewsEntity")(sequelize);
 const PageVo=require("../vo/PageVo");
-const {Op, Sequelize}=require("sequelize");
+const {Op, Sequelize, where}=require("sequelize");
 
 class ReportsService {
     // 심사->비공개 처리하기.
