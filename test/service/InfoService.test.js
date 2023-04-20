@@ -109,9 +109,9 @@ describe("InfoService test",()=> {
     test("insertHolidays", async () => { // 가게 휴무일 등록
         const holiday = {
             store_num: "2",
-            holi_num: "11",
+            holi_num: "18",
             week: "일",
-            date: null,
+            date: "2023-04-01",
             regular: 1
         }
         let insert = 0;
@@ -228,10 +228,10 @@ describe("InfoService test",()=> {
 
     test("insertBreaktime", async () => { // 가게 브레이크타임 등록
         const breaktime = {
-            rest_num: "11",
+            rest_num: "16",
             rest_start_time: "12:30:00",
             rest_end_time: "15:30:00",
-            store_num: "7"
+            store_num: "21"
         }
         let insert = 0;
         try {

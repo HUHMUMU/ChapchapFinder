@@ -109,8 +109,8 @@ block content
                         div.form-floating(style='display:flex; flex-direction:column; align-items:center')
                             h5.mb-3.label.fs-6(for='regular') 공개/비공개 선택
                             select.form-select.mb-5(name="regular")
-                                option(value='정규') 정규
-                                option(value='비정규') 비정규
+                                option(value='1') 정규
+                                option(value='0') 비정규
                         button.btn.btn-outline-danger.btn-sm(type='button' style="height: 30px; visibility:hidden") 삭제
             div
                 div.d-flex.justify-content-between
@@ -152,36 +152,36 @@ block content
                     div
                         label(for="parking") 주차 편의
                     div.form-check.form-switch.d-flex.align-items-center
-                        label.form-check-label.me-5(for="parking" value="0") off
-                        input.form-check-input(type="checkbox", name="parking", role="switch", id="parking",value="0", style="width: 2.5rem; height: 1.5rem;")
-                        label.form-check-label.ms-2(for="parking" value="1") on
+                        label.form-check-label.me-5(for="parking" value=0) off
+                        input.form-check-input.form-control(type="checkbox", name="parking", role="radio", id="parking",value=0, style="width: 2.5rem; height: 1.5rem;" checked=0)
+                        label.form-check-label.ms-2(for="parking" value=1) on
                 div(style='display:flex; flex-direction:column; align-items:center')
                     div
                         label 애기 의자
                     div.form-check.form-switch.d-flex.align-items-center
-                        label.form-check-label.me-5(for="babychair" value="0") 0
-                        input.form-check-input(type="checkbox",name="babychair" role="switch", id="babychair", value="0" style="width: 2.5rem; height: 1.5rem;")
-                        label.form-check-label.ms-2(for="babychair" value="1") 1
+                        label.form-check-label.me-5(for="babychair" value=0) off
+                        input.form-check-input.form-control(type="checkbox",name="babychair" role="radio", id="babychair", value=0 style="width: 2.5rem; height: 1.5rem;" checked=0)
+                        label.form-check-label.ms-2(for="babychair" value=1) on
                 div(style='display:flex; flex-direction:column; align-items:center')
                     div
                         label 흡연실
                     div.form-check.form-switch.d-flex.align-items-center
-                        label.form-check-label.me-5(for="smokingroom" value="0") 0
-                        input.form-check-input(type="checkbox",name="smokingroom" role="switch", id="smokingroom", value="0" style="width: 2.5rem; height: 1.5rem;")
-                        label.form-check-label.ms-2(for="smokingroom" value="1") 1
+                        label.form-check-label.me-5(for="smokingroom" value=0) 0
+                        input.form-check-input.form-control(type="checkbox",name="smokingroom" role="radio", id="smokingroom", value=0 style="width: 2.5rem; height: 1.5rem;" checked=0)
+                        label.form-check-label.ms-2(for="smokingroom" value=1) 1
                 div(style='display:flex; flex-direction:column; align-items:center')
                     div
                         label 와이파이
                     div.form-check.form-switch.d-flex.align-items-center
-                        label.form-check-label.me-5(for="wifi" value="0") 0
-                        input.form-check-input(type="checkbox",name="wifi" role="switch", id="wifi", value="0" style="width: 2.5rem; height: 1.5rem;")
-                        label.form-check-label.ms-2(for="wifi" value="1") 1
+                        label.form-check-label.me-5(for="wifi" value=0) 0
+                        input.form-check-input.form-control(type="checkbox",name="wifi" role="radio", id="wifi", value=0 style="width: 2.5rem; height: 1.5rem;" checked=0)
+                        label.form-check-label.ms-2(for="wifi" value=1) 1
                 div(style='display:flex; flex-direction:column; align-items:center')
                     div
                         label 화장실 구분
                     div.form-check.form-switch.d-flex.align-items-center
                         label.form-check-label.me-5(for="toilet" value="0") 0
-                        input.form-check-input(type="checkbox",name="toilet", role="switch", id="toilet", value="0" style="width: 2.5rem; height: 1.5rem;")
+                        input.form-check-input.form-control(type="checkbox",name="toilet", role="radio", id="toilet", value="1" style="width: 2.5rem; height: 1.5rem;" checked=0)
                         label.form-check-label.ms-2(for="toilet" value="1") 1
         hr
         div.text-end.mb-5

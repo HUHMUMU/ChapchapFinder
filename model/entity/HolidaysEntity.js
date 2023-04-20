@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
             comment: "요일",
         },
         date: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.DATE,
             allowNull: true,
             comment: "일",
         },

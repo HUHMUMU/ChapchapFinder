@@ -23,6 +23,21 @@ class InfoService{
         return info;
     }
     async insertStoreInfo(storeObj){ //가게 등록
+        if (storeObj.parking==null) {
+            storeObj.parking = 0;
+        }
+        if (storeObj.wifi==null) {
+            storeObj.wifi = 0;
+        }
+        if (storeObj.toilet==null) {
+            storeObj.toilet = 0;
+        }
+        if (storeObj.smokingroom==null) {
+            storeObj.smokingroom = 0;
+        }
+        if (storeObj.babychair==null) {
+            storeObj.babychair = 0;
+        }
         const insertInfo=await storesEntity.create(storeObj);
         return insertInfo;
     }
