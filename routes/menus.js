@@ -10,7 +10,6 @@ const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join( 'public','images', 'menu'));
     },
-
     filename: function (req, file, cb) {
         cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`); //이미지 이름
     }
@@ -30,8 +29,10 @@ router.get('/:menu_num/update.do', async (req, res) => {
     res.render('menu/update', { menus });
 });
 router.post("/:menu_num/update.do", upload.single('img'), async (req, res) => {
+    // const menus = await menuService.findOneMenu(req.params.menu_num);
+
     if (req.file) {
-        // fs.unlinkSync("public/"); //images/menu/파일에 있는 이미지 삭제...
+        // fs.unlinkSync(`public/${menus.img}`); // 이전 이미지 파일 삭제
         req.body.img = "/" + req.file.path.replace("public\\", "");
     } else {
         req.body.img = req.params.img; // 파일이 없는 경우 기존 이미지로
@@ -52,14 +53,18 @@ router.get('/insert.do',async (req,res)=>{
     res.render('menu/insert',{storeNum});
 });
 router.post("/insert.do", upload.single('img'),async (req,res)=>{
-    if (req.file) {
-        req.body.img = "/"+req.file.path.replace('public\\', '');
-    } else {
-        req.body.img = ' '; // 파일이 없는 경우 처리
+    if (!req.body) {
+        return res.send("<script>alert('이미지를 선택해주세요.');history.back();</script>");
+    } else{
+        if (req.file) {
+            req.body.img = "/"+req.file.path.replace('public\\', '');
+        } else {
+            req.body.img = ' '; // 파일이 없는 경우 처리
+        }
+
     }
-    const insert = await menuService.insertMenu(
-        req.body
-    );
+
+    const insert = await menuService.insertMenu(req.body);
     if(insert>0) {
         res.redirect("/menu/insert.do");
     }else {

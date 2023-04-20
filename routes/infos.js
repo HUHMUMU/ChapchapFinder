@@ -35,10 +35,12 @@ router.post('/insert.do',async (req,res)=>{
     }catch (e){
         console.error(e)
     }
-    if(insertCate >0 ) {
-        res.redirect("/");
+    if(insertCate>0 && insertStoreInfo>0 && insertHoliday>0 && insertBreaktime>0 && insertImg>0) {
+        alert("등록성공");
+        res.redirect("/.do");
     }else{
-        res.render("infos/insert")
+        alert("등록이 되지 않았습니다.");
+        res.redirect("/infos/insert.do");
     }
 })
 

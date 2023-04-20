@@ -48,6 +48,11 @@ module.exports=(sequelize)=> {
             type: DataTypes.INTEGER,
             allowNull: false,
             comment: '가게 고유번호'
+        },
+        menu_num: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            comment: '메뉴번호',
         }
     }, {
         tableName: 'reviews',
@@ -63,6 +68,10 @@ module.exports=(sequelize)=> {
         reviewsEntity.belongsTo(models.usersEntity, {
             foreignKey: 'user_id',
             targetKey: 'user_id'
+        });
+        reviewsEntity.belongsTo(models.menuManagesEntity, {
+            foreignKey: 'menu_num',
+            targetKey: 'menu_num'
         });
     };
 
