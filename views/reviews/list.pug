@@ -7,26 +7,44 @@ block content
             div.d-flex.justify-content-between
                 - const starAvg = Math.round((reviews.reduce((acc, review) => acc + review.star, 0) / reviews.length) * 10) / 10
                 h1.my-4.text-start 별점 평균: #{starAvg.toFixed(1)}
-                div.my-4(style="width: 50%")
-                - const totalReviews = reviews.length
-                - const stars = [0, 0, 0, 0, 0]
-                each review in reviews
-                    - if (review.star >= 1 && review.star <= 5)
-                    - stars[review.star - 1]++
+                - let reviewsNum = reviews.length //리뷰 총 개수
+                - const starCounts = {1: 0,2: 0, 3: 0,4: 0, 5: 0, };
+                - for (const review of reviews) {starCounts[review.star] += 1;}
+                - let fiveStarCount = starCounts[5];
+                - let percentage5 = Math.round((fiveStarCount / reviewsNum) * 100);
+                - let fourStarCount = starCounts[4];
+                - let percentage4 = Math.round((fourStarCount / reviewsNum) * 100);
+                - let threeStarCount = starCounts[3];
+                - let percentage3 = Math.round((threeStarCount / reviewsNum) * 100);
+                - let twoStarCount = starCounts[2];
+                - let percentage2 = Math.round((twoStarCount / reviewsNum) * 100);
+                - let oneStarCount = starCounts[1];
+                - let percentage1 = Math.round((oneStarCount / reviewsNum) * 100);
+                div.w-50
+                    div.d-flex.justify-content-around
+                        p 5점: #{starCounts['5']}개
+                        div.progress.my-3.me-3.w-75(style="height: 15%;")
+                            div.progress-bar(role='progressbar', aria-label='Example with label', style=`width: ${percentage5}%;`, aria-valuenow=`${percentage5}`, aria-valuemin='0', aria-valuemax='100') #{percentage5}%
+                    div.d-flex.justify-content-around
+                        p 4점: #{starCounts['4']}개
+                        div.progress.my-3.me-3.w-75(style="height: 15%;")
+                            div.progress-bar(role='progressbar', aria-label='Example with label', style=`width: ${percentage4}%;`, aria-valuenow=`${percentage4}`, aria-valuemin='0', aria-valuemax='100') #{percentage4}%
+                    div.d-flex.justify-content-around
+                        p 3점: #{starCounts['3']}개
+                        div.progress.my-3.me-3.w-75(style="height: 15%;")
+                            div.progress-bar(role='progressbar', aria-label='Example with label', style=`width: ${percentage3}%;`, aria-valuenow=`${percentage3}`, aria-valuemin='0', aria-valuemax='100') #{percentage3}%
+                    div.d-flex.justify-content-around
+                        p 2점: #{starCounts['2']}개
+                        div.progress.my-3.me-3.w-75(style="height: 15%;")
+                            div.progress-bar(role='progressbar', aria-label='Example with label', style=`width: ${percentage2}%;`, aria-valuenow=`${percentage2}`, aria-valuemin='0', aria-valuemax='100') #{percentage2}%
+                    div.d-flex.justify-content-around
+                        p 1점: #{starCounts['1']}개
+                        div.progress.my-3.me-3.w-75(style="height: 15%;")
+                            div.progress-bar(role='progressbar', aria-label='Example with label', style=`width: ${percentage1}%;`, aria-valuenow=`${percentage1}`, aria-valuemin='0', aria-valuemax='100') #{percentage1}%
 
-                div.progress
-                    each star, index in stars
-                        - const percentage = totalReviews > 0 ? Math.round(star / totalReviews * 100 * 10) / 10 : 0
-                        div.progress-bar(
-                            role='progressbar'
-                            aria-valuenow=percentage
-                            aria-valuemin='0'
-                            aria-valuemax='100'
-                            style=`width: ${percentage}%;`
-                        )
-                            | #{index + 1} star: #{percentage}%
 
-        form.mx-auto.mt-4.mb-2(method="GET", action="/boards/list.do",style="width:400px")
+
+        form.mx-auto.mt-4.mb-2(method="GET", action="/reviews/list.do",style="width:400px")
             input(type="hidden",value=params.field,name="field")
             input(type="hidden",value=params.value,name="value")
             div.d-flex.justify-content-between.my-4.input-group(style="width: 100%")
@@ -53,8 +71,8 @@ block content
                             div.my-4 메뉴 사진 #{review.img}
                             p.my-4 주문메뉴:
                         div.col-2.d-flex.flex-column.align-items-start.justify-content-between
-                            div
-                                button.btn.btn-outline-secondary.my-4(type="button") 신고하기
+                            div.mt-3
+                                include ../reports/report
                             -if(firstReply==null)
                                 div.text-end.mb-3
                                     div.modal.fade(aria-hidden="true", aria-labelledby="insertModalToggle", tabindex="-1" id=`insertModalToggle${review.review_num}`)
@@ -79,22 +97,3 @@ block content
                         -const replyPostdate = firstReply.post_date;
                         if(`${replyContent}`)
                         include ../replies/list
-    //script.
-    //    const modalToggle = document.querySelector(`[data-review-num="${review.review_num}"]`);
-    //    const insertMo = modalToggle.querySelector(".modal-footer button");
-    //    const textA = modalToggle.querySelector(".modal-body textarea");
-    //    const xhr = new XMLHttpRequest();
-    //    const url = "/replies/insert.do";
-    //
-    //    insertMo.addEventListener(`click`, () => {
-    //        const params = JSON.stringify({value: textA.value, review_num: modalToggle.dataset.reviewNum});
-    //        xhr.open("POST", url, true);
-    //        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-    //        xhr.onreadystatechange = function () {
-    //            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-    //                const response = JSON.parse(xhr.responseText);
-    //                console.log(response);
-    //            }
-    //        };
-    //        xhr.send(params);
-    //    });
