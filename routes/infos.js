@@ -22,6 +22,9 @@ router.post('/insert.do',async (req,res)=>{
         if (!req.body[key]) {
             req.body[key] = null;
         }
+        if(req.body[key]=="on"){
+            req.body[key] = 1;
+        }
     }
 
 
