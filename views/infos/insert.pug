@@ -8,6 +8,7 @@ block content
             h3.mt-5.mb-5.label(for='store_name') 가게명
             input#store_name.form-control.mb-5( name='store_name', type='text' placeholder="??")
         hr
+        input#s_rstatus.form-control.mb-5( name='s_rstatus', type='text', value="공개" hidden placeholder="??")
         div.form-floating
             h3.mt-5.mb-5.label(for='store_num') 가게 고유번호
             input#store_num.form-control.mb-5( name='store_num', type='text' readonly placeholder="??" value=storeManage.store_num)
@@ -108,8 +109,8 @@ block content
                         div.form-floating(style='display:flex; flex-direction:column; align-items:center')
                             h5.mb-3.label.fs-6(for='regular') 공개/비공개 선택
                             select.form-select.mb-5(name="regular")
-                                option(value='공개') 공개
-                                option(value='비공개') 비공개
+                                option(value='정규') 정규
+                                option(value='비정규') 비정규
                         button.btn.btn-outline-danger.btn-sm(type='button' style="height: 30px; visibility:hidden") 삭제
             div
                 div.d-flex.justify-content-between
