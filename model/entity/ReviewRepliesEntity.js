@@ -17,6 +17,7 @@ module.exports = (sequelize) => {
         post_date: {
             type: DataTypes.DATEONLY,
             allowNull: false,
+            defaultValue: DataTypes.NOW, // 현재 날짜로 설정
             comment: "작성 날짜"
         },
         content: {
