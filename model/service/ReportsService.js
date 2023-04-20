@@ -13,6 +13,6 @@ class ReportsService{
         return report;
     }
 
-    async reportAll()
+
 }
 module.exports=new ReportsService();

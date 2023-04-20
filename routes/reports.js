@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const reportsService=require("../model/service/ReportService");
+const reportsService=require("../model/service/ReportsService");
 
 router.get('/insert.do', async function(req, res) {
     res.render("report/insert");
