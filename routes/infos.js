@@ -7,11 +7,7 @@ const path=require("path");
 router.get('/insert.do',async (req,res)=>{
     let storeId = req.session.loginStore.store_id
     let storeManage= await  storeManagesService.findStoreManage(storeId)
-    if (storeManage) {
-        res.render('infos/insert', { storeManage : storeManage })
-    }else {
-        res.redirect('/')
-    }
+    res.render('infos/insert', { storeManage : storeManage })
 })
 router.post('/insert.do',async (req,res)=>{
     let storeNum = req.session.loginStore.store_num
@@ -20,12 +16,15 @@ router.post('/insert.do',async (req,res)=>{
     let insertBreaktime=0;
     let insertCate=0;
     let insertImg=0;
+    console.log(req.body);
+    for(let key in req.body){
+        console.log(key,req.body[key]);
+        if (!req.body[key]) {
+            req.body[key] = null;
+        }
+    }
 
-    const parking = req.body.parking !== null ? req.body.parking : 0;
-    const wifi = req.body.parking !== null ? req.body.parking : 0;
-    const toilet = req.body.parking !== null ? req.body.parking : 0;
-    const smokingroom = req.body.parking !== null ? req.body.parking : 0;
-    const babychair = req.body.parking !== null ? req.body.parking : 0;
+
     try{
         insertStoreInfo=await infoService.insertStoreInfo(req.body);
         insertCate = await infoService.insertStoreTypes2(req.body)
@@ -35,11 +34,9 @@ router.post('/insert.do',async (req,res)=>{
     }catch (e){
         console.error(e)
     }
-    if(insertCate>0 && insertStoreInfo>0 && insertHoliday>0 && insertBreaktime>0 && insertImg>0) {
-        alert("등록성공");
-        res.redirect("/.do");
+    if(insertCate && insertStoreInfo && insertHoliday && insertBreaktime && insertImg) {
+        res.redirect("/");
     }else{
-        alert("등록이 되지 않았습니다.");
         res.redirect("/infos/insert.do");
     }
 })
