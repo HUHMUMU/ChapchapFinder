@@ -5,13 +5,16 @@ block content
     div
         each r in reportsStore
             div.card.col
-                div.card-body
-                    span 신고번호 : #{r.report_num}
-                    i.bi.bi-dot
-                    if(r.report_store_id)
-                        small 신고사장ID : #{r.report_store_id}
-                    if(r.report_user_id)
-                        small 신고유저ID : #{r.report_user_id}
+                div.card-body.d-flex.justify-content-between
+                    div
+                        span 신고번호 : #{r.report_num}
+                        i.bi.bi-dot
+                        if(r.report_store_id)
+                            small 신고사장ID : #{r.report_store_id}
+                        if(r.report_user_id)
+                            small 신고유저ID : #{r.report_user_id}
+                    a.btn.btn-danger.btn-sm.m-2(href=`#`) 가게상세이동
+                    // 추후에 spring에서 구현할 가게상세로 링크연결할 예정
                 div
                     h5.card-title 신고내용 : #{r.report_content}
                     h6.card-text 신고당한가게 고유번호 : #{r.store.store_num}
