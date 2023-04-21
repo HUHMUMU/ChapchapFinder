@@ -3,6 +3,32 @@ const router = express.Router();
 const infoService=require("../model/service/InfoService");
 const storeManagesService=require("../model/service/StoreManagesService");
 const path=require("path");
+const multer = require('multer');
+const storage=multer.diskStorage(
+    {
+        destination:(req,file,cb)=>{ //cb : destination의 값을 지정
+            cb(null,"./public/images/storeImg");
+        },
+        filename:(req,file,cb)=>{
+            let ext=path.extname(file.originalname);
+            let name="reply_"+Date.now()+"_"+(Math.trunc(Math.random()*1000))+ext; //.jpeg
+            //0.123012937901273809*1E9 => 12301293.7901273809 => 12301294
+            req.body.store_img="/images/storeImg/"+name;
+            cb(null,name);
+        },
+        limits: {
+            fileSize: 1024 * 1024 * 10, // 10MB
+        }
+    }
+);
+function fileFilter (req, file, cb)  {
+    let mimetype=file.mimetype.split("/");
+    if (mimetype[0]!=="image"){
+        return cb(new Error("이미지만 업로드 가능합니다."), false);
+    }
+    cb(null, true);
+};
+const upload=multer({storage:storage,fileFilter:fileFilter});
 
 router.get('/insert.do',async (req,res)=>{
     let storeId = req.session.loginStore.store_id
@@ -33,7 +59,7 @@ router.post('/insert.do',async (req,res)=>{
         insertCate = await infoService.insertStoreTypes2(req.body)
         insertHoliday=await infoService.insertHolidays(req.body)
         insertBreaktime=await infoService.insertBreaktime(req.body)
-        insertImg=await infoService.insertImg(req.body)
+        insertImg=await infoService.insertImg(req.body);
     }catch (e){
         console.error(e)
     }
