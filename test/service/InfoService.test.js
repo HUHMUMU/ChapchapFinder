@@ -53,7 +53,7 @@ describe("InfoService test",()=> {
 
     test("updateByStoreInfo", async () => { //가게 정보 수정
         const store = {
-            store_num: "11",
+            store_num: "1",
             store_name: "재연쓰의 손맛",
             main_img: "1.png",
             detail_info: "그냥그냥한 손맛",
@@ -70,7 +70,7 @@ describe("InfoService test",()=> {
             s_rstatus: "비공개",
             parking: 1,
             wifi: 1,
-            toilet: "공용",
+            toilet: 1,
             smokingroom: 1,
             babychair: 1
         };
@@ -203,7 +203,7 @@ describe("InfoService test",()=> {
 
     test("updateStoretypes", async () => { //가게 카테고리 수정
         try {
-            const updateCate = await infoService.updateStoreTypes(1, 12, 5)
+            const updateCate = await infoService.updateStoreTypes(1, 1, 5)
             console.log("수정 : " + JSON.stringify(updateCate));
         } catch (e) {
             console.error(e);
@@ -246,7 +246,8 @@ describe("InfoService test",()=> {
         const breaktime = {
             store_num: "1",
             rest_start_time: "18:08:00",
-            rest_end_time: "18:38:00"
+            rest_end_time: "18:38:00",
+            rest_num:"1"
         };
         try {
             let update = await infoService.updateBreaktime(breaktime)

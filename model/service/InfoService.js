@@ -142,7 +142,9 @@ class InfoService{
     async updateBreaktime(breaktimeObj) { // 가게 브레이크타임 수정
         const updateBreaktime = await BreakTimesEntity.update(breaktimeObj, {
             where: {
-                store_num: breaktimeObj.store_num
+                store_num: breaktimeObj.store_num,
+                rest_start_time:breaktimeObj.rest_start_time,
+                rest_end_time:breaktimeObj.rest_end_time
             },
         });
         return updateBreaktime;

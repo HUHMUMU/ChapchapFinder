@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-    form#addStoreInfoForm(method="post", enctype="multipart/form-data")
+    form#addStoreInfoForm(method="post", action='/infos/update.do' enctype="multipart/form-data")
         h1 가게정보수정
         hr
         div.form-floating

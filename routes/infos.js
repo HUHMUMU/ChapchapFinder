@@ -101,7 +101,7 @@ router.get('/detail.do', async (req, res) => {
     }
 });
 
-router.post("/update.do",async (req,res)=>{
+router.post("/update.do",async (req ,res)=>{
     let updateStoreInfo=0;
     let updateHoliday=0;
     let updateBreaktime=0;
@@ -120,7 +120,7 @@ router.post("/update.do",async (req,res)=>{
     if(updateStoreInfo && updateHoliday && updateBreaktime && updateCate && updateImg){
         res.redirect("/");
     }else {
-        res.redirect(`/detail.do`);
+        res.redirect(`/update.do`);
     }
 });
 
