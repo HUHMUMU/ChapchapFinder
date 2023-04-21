@@ -106,6 +106,7 @@ app.use('/users', storeManagesRouter);
 app.use('/replies', repliesRouter);
 app.use('/infos', infoRouter);
 app.use('/menu', menusRouter);
+app.use('/chapdeal', chapdealsRouter);
 app.use('/waitings', waitingRouter);
 app.use('/chapdeal', chapdealsRouter);
 

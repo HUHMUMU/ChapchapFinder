@@ -4,7 +4,9 @@ block content
     div.d-flex.justify-content-between
         h4.mb-3 챱딜 수정
     each deal in dealList
+        - const oldImg=deal.event_img
         form.mt-4(action=`/chapdeal/${deal.event_num}/update.do`, method="post", enctype="multipart/form-data")
+            input(type="hidden", value=oldImg, name="oldImg")
             input(type="hidden", value=deal.event_num, name="event_num")
 
             img#preview.mb-1(width="230", height="230", src=deal.event_img)
