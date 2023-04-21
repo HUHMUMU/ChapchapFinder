@@ -1,6 +1,5 @@
 const sequelize=require("../chapchapSequelize");
 const reportsEntity=require("../entity/reportsEntity")(sequelize);
-const storeManagesEntity=require("../entity/StoreManagesEntity")(sequelize);
 const usersEntity=require("../entity/UsersEntity")(sequelize);
 const storesEntity=require("../entity/StoresEntity")(sequelize);
 const chapstorysEntity=require("../entity/ChapStorysEntity")(sequelize);
@@ -96,23 +95,47 @@ class ReportsService {
                 }
             }
         });
-        const chapNums = reports.map(report => report.chap_num);
-        const chapstorys = await chapstorysEntity.findAll({
-            where: {
-                chap_num: chapNums
+
+        const chapstorys = await chapstorysEntity.findAll();
+
+        const chapstoryCount = {};
+        reports.forEach(report => {
+            if (chapstoryCount[report.chap_num]) {
+                chapstoryCount[report.chap_num]++;
+            } else {
+                chapstoryCount[report.chap_num] = 1;
             }
         });
-        const reportsWithChapstory = reports.map(report => {
-            const chapstory = chapstorys.find(c => c.chap_num === report.chap_num);
-            return {
-                ...report.toJSON(),
-                chapstory: chapstory ? chapstory.toJSON() : null
-            };
-        });
+
+        const reportsWithChapstory = reports
+            .filter(report => chapstoryCount[report.chap_num] >= 3)
+            .map(report => {
+                const chapstory = chapstorys.find(c => c.chap_num === report.chap_num);
+                return {
+                    ...report.toJSON(),
+                    chapstory: chapstory ? chapstory.toJSON() : null
+                };
+            });
+
         return reportsWithChapstory;
     }
+    async updateChsRstatusToPublic(chap_num) {
+        return await chapstorysEntity.update(
+            { chs_rstatus: '공개' },
+            { where: { chap_num } }
+        );
+    }
 
-    async reportReview(reportObj) {
+    async updateChsRstatusToPrivate(chap_num) {
+        return await chapstorysEntity.update(
+            { chs_rstatus: '비공개' },
+            { where: { chap_num } }
+        );
+    }
+
+
+
+    async reviewReport(reportObj) {
         const report = await reportsEntity.create(
         {
             report_store_id: reportObj.store_id,

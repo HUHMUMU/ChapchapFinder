@@ -74,13 +74,28 @@ router.get('/reportsChapstory.do', async function(req, res) {
     }
 });
 
+router.post('/chapPublic/:chap_num', async (req, res) => {
+    const { chap_num } = req.params;
+    await reportsService.updateChsRstatusToPublic(chap_num);
+    req.flash("actionMsg", "공개처리 완료");
+    res.redirect('back');
+});
+
+router.post('/chapPrivate/:chap_num', async (req, res) => {
+    const { chap_num } = req.params;
+    await reportsService.updateChsRstatusToPrivate(chap_num);
+    req.flash("actionMsg", "비공개처리 완료");
+    res.redirect('back');
+});
+
+
 router.get('/insert.do', async function(req, res) {
     res.render("report/insert");
 });
 
 router.post('/insert.do', async function(req, res) {
     try{
-        await reportsService.reportReview(req.body);
+        await reportsService.reviewReport(req.body);
         res.redirect(`/reviews/list.do`);
     }catch(e){
         throw new Error(e)

@@ -3,7 +3,24 @@ extends ../layout
 block content
     h2.my-4 유저 신고 관리
     div
-        each r in reportsChapstory
+        each r, index in reportsChapstory
+            if index === 0 || r.chap_num !== reportsChapstory[index - 1].chap_num
+                div.d-flex.justify-content-between
+                    div
+                        h5.card-title 챱스토리고유번호 : #{r.chap_num}
+                        h6.card-text 챱스토리 제목 : #{r.chapstory.title}
+                        h6.card-text 챱스토리 내용 : #{r.chapstory.content}
+                        h6.card-text 챱스토리 등록일 : #{r.chapstory.date}
+                        h6.card-text 챱스토리 상태 : #{r.chapstory.chs_rstatus}
+                    div
+                        a.btn.btn-danger.btn-sm.m-2(href=`#`) 챱스토리이동
+                        // 추후에 spring에서 구현할 챱스토리로 링크연결할 예정
+                        div
+                            form(method='post', action=`/reports/chapPublic/${r.chap_num}`)
+                                button.btn.btn-success.btn-sm.m-2(type='submit') 공개처리
+                            form(method='post', action=`/reports/chapPrivate/${r.chap_num}`)
+                                button.btn.btn-warning.btn-sm.m-2(type='submit') 비공개처리
+
             div.card.col
                 div.card-body.d-flex.justify-content-between
                     div
@@ -13,12 +30,7 @@ block content
                             small 신고사장ID : #{r.report_store_id}
                         if(r.report_user_id)
                             small 신고유저ID : #{r.report_user_id}
-                    a.btn.btn-danger.btn-sm.m-2(href=`#`) 챱스토리이동
-                    // 추후에 spring에서 구현할 챱스토리로 링크연결할 예정
                 div
                     h5.card-title 신고내용 : #{r.report_content}
-                    h6.card-text 챱스토리고유번호 : #{r.chap_num}
-                    h6.card-text 챱스토리 제목 : #{r.chapstory.title}
-                    h6.card-text 챱스토리 내용 : #{r.chapstory.content}
-                    h6.card-text 챱스토리 등록일 : #{r.chapstory.date}
-            hr
+            if index !== (reportsChapstory.length - 1) && r.chap_num !== reportsChapstory[index + 1].chap_num
+                hr
