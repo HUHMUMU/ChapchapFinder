@@ -18,16 +18,10 @@ class ReviewRepliesService {
 
     async modify(reply) {
         try {
-            if (!reply.content) {
-                throw new Error('content is required');
-            }
-            const result = await reviewRepliesEntity.update(
-                { content : reply.content },
-                { where: { review_num: reply.review_num } }
-            );
-            return result;
-        } catch (e) {
-            throw new Error(e);
+            let modify=await reviewRepliesEntity.update(reply,{where:{review_num:reply.review_num}})
+            return modify;
+        }catch (e) {
+            new Error(e);
         }
     }
 

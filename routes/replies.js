@@ -18,26 +18,36 @@ router.post('/insert.do', async function(req, res) {
         res.redirect(`/reviews/list.do`);
     }catch(e){
         throw new Error(e)
-        res.render("reviews/list");
+        res.redirect(`/reviews/list.do`);
     }
 });
 
-router.get('/update.do', async function(req, res) {
-    res.render("replies/update");
-});
 
 router.post('/update.do', async function(req, res) {
-    const reply = {
-        review_num: req.body.review_num,
-        content: req.body.content,
-    };
-    try {
-        await reviewsRepliesService.modify(reply);
-        res.redirect('/reviews/list.do');
-    } catch (e) {
+        let update=0;
+        update= await reviewsRepliesService.modify(req.body);
+
+        if(update>0){
+            res.redirect('/reviews/list.do');
+        }else{
+            res.redirect('/reviews/list.do');
+        }
+});
+
+
+router.get("/:rNum/delete.do", async (req,res)=>{
+    let del=0;
+    try{
+        del=await reviewsRepliesService.deleteOne(req.params.rNum);
+    }catch(e){
         console.error(e);
-        res.render('reviews/list');
+    }
+    if(del>0){
+        res.redirect("/reviews/list.do");
+    }else{
+        res.redirect(`/reviews/list.do`);
     }
 });
+
 
 module.exports = router;

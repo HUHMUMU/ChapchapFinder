@@ -126,16 +126,17 @@ router.post('/reviewPrivate/:review_num', async (req, res) => {
 
 
 router.get('/insert.do', async function(req, res) {
-    res.render("report/insert");
+    res.redirect(`/reviews/list.do`);
 });
 
 router.post('/insert.do', async function(req, res) {
+    let reportCheck=0;
     try{
-        await reportsService.reviewReport(req.body);
+        reportCheck = await reportsService.reportReview(req.body,reportCheck);
         res.redirect(`/reviews/list.do`);
     }catch(e){
+        res.redirect(`/reviews/list.do`);
         throw new Error(e)
-        res.render("reviews/list");
     }
 });
 

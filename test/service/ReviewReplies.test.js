@@ -27,7 +27,7 @@ describe("ReviewsReplies Service test",()=> {
     test("댓글찾기2", async function ()  {
         const reply =
             {
-                review_num : "61",
+                review_num : "2",
                 content : "61번 여덟번째 수정입니다",
             };
         let replies = 0;
@@ -42,7 +42,7 @@ describe("ReviewsReplies Service test",()=> {
     test("댓글찾기3", async function ()  {
         let replies = 0;
         try {
-            replies = await  ReviewsREpliesService.destroy(41);
+            replies = await  ReviewsREpliesService.deleteOne(45);
             console.log("삭제 : "+replies);
         }catch (e) {
             console.error(e)

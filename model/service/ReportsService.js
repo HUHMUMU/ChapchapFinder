@@ -5,7 +5,7 @@ const storesEntity=require("../entity/StoresEntity")(sequelize);
 const chapstorysEntity=require("../entity/ChapStorysEntity")(sequelize);
 const reviewsEntity=require("../entity/ReviewsEntity")(sequelize);
 const PageVo=require("../vo/PageVo");
-const {Op, Sequelize}=require("sequelize");
+const {Op, Sequelize, where}=require("sequelize");
 
 class ReportsService {
     // 심사->비공개 처리하기.
@@ -201,6 +201,16 @@ class ReportsService {
         );
         return report;
     }
+
+    async reportReviewCheck(storeId) {
+        const report = await reportsEntity.findAll({
+            where: {
+                report_store_id: storeId,
+            }
+        })
+            return report;
+    }
+
 
 }
 module.exports=new ReportsService();
