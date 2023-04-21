@@ -50,6 +50,7 @@ CREATE TABLE users
     gender           ENUM ('MALE', 'FEMALE')              NOT NULL COMMENT '성별',
     address          VARCHAR(255)                         NOT NULL COMMENT '주소',
     detail_address   VARCHAR(255)                         NOT NULL COMMENT '상세주소',
+    postnumber   VARCHAR(255)                         NULL COMMENT '우편번호',
     email            VARCHAR(255) unique                  NOT NULL COMMENT '이메일',
     insta_url        VARCHAR(255)                         NULL COMMENT '인스타url',
     face_url         VARCHAR(255)                         NULL COMMENT '페이스북url',
