@@ -502,7 +502,31 @@ INSERT INTO reports (
       ('store001', NULL, '리뷰2에 대한 신고입니다.', 2, NULL, NULL, NULL),
       ('store002', NULL, '유저 신고2입니다.', NULL, 'user05', NULL, NULL),
       ('store003', NULL, '챱스토리2에 대한 신고입니다.', NULL, NULL, 2, NULL),
-      ('store004', NULL, '가게2에 대한 신고입니다.', NULL, NULL, NULL, 2);
+      ('store004', NULL, '가게2에 대한 신고입니다.', NULL, NULL, NULL, 2),
+      (NULL, 'user01', '리뷰1에 대한 신고입니다.', 1, NULL, NULL, NULL),
+      (NULL, 'user02', '유저 신고1입니다.', NULL, 'user04', NULL, NULL),
+      (NULL, 'user03', '챱스토리1에 대한 신고입니다.', NULL, NULL, 1, NULL),
+      (NULL, 'user04', '가게1에 대한 신고입니다.', NULL, NULL, NULL, 1),
+      ('store001', NULL, '리뷰2에 대한 신고입니다.', 2, NULL, NULL, NULL),
+      ('store002', NULL, '유저 신고2입니다.', NULL, 'user05', NULL, NULL),
+      ('store003', NULL, '챱스토리2에 대한 신고입니다.', NULL, NULL, 2, NULL),
+      ('store004', NULL, '가게2에 대한 신고입니다.', NULL, NULL, NULL, 2),
+      (NULL, 'user01', '리뷰1에 대한 신고입니다.', 1, NULL, NULL, NULL),
+      (NULL, 'user02', '유저 신고1입니다.', NULL, 'user04', NULL, NULL),
+      (NULL, 'user03', '챱스토리1에 대한 신고입니다.', NULL, NULL, 1, NULL),
+      (NULL, 'user04', '가게1에 대한 신고입니다.', NULL, NULL, NULL, 1),
+      ('store001', NULL, '리뷰2에 대한 신고입니다.', 2, NULL, NULL, NULL),
+      ('store002', NULL, '유저 신고2입니다.', NULL, 'user05', NULL, NULL),
+      ('store003', NULL, '챱스토리2에 대한 신고입니다.', NULL, NULL, 2, NULL),
+      ('store004', NULL, '가게2에 대한 신고입니다.', NULL, NULL, NULL, 2),
+      (NULL, 'user01', '리뷰3에 대한 신고입니다.', 3, NULL, NULL, NULL),
+      (NULL, 'user02', '유저6 신고1입니다.', NULL, 'user06', NULL, NULL),
+      (NULL, 'user03', '챱스토리3에 대한 신고입니다.', NULL, NULL, 3, NULL),
+      (NULL, 'user04', '가게4에 대한 신고입니다.', NULL, NULL, NULL, 4),
+      ('store001', NULL, '리뷰4에 대한 신고입니다.', 4, NULL, NULL, NULL),
+      ('store002', NULL, '유저7 신고2입니다.', NULL, 'user07', NULL, NULL),
+      ('store003', NULL, '챱스토리3에 대한 신고입니다.', NULL, NULL, 3, NULL),
+      ('store004', NULL, '가게4에 대한 신고입니다.', NULL, NULL, NULL, 4);
 
 #웨이팅 관련 더미데이터
 INSERT INTO storeswaiting VALUES (1, '18:00:00', 50, true, 15, 'https://store1.com', 1);
