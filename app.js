@@ -14,7 +14,6 @@ const menusRouter = require('./routes/menus');
 const chapdealsRouter = require('./routes/chapdeal');
 const waitingRouter=require('./routes/adminWaiting');
 
-
 const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
