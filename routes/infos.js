@@ -44,11 +44,11 @@ router.post('/insert.do', cpUpload, async (req, res) => {
     const storeImgs=req.files['store_img'];
     const mainImg=req.files['main_img'];
     if (mainImg){
-        req.body.main_img = "/" + mainImg[0].path.replace('public\\', '');
+        req.body.main_img = "/" + mainImg[0].path.replace('public/', '');
     }
     if(storeImgs){
         for(const storeImg of storeImgs){
-            req.body.store_img = "/" + storeImg.path.replace('public\\', '');
+            req.body.store_img = "/" + storeImg.path.replace('public/', '');
         }
     }
     //console.log("storeImgs:",storeImgs);

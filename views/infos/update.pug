@@ -15,9 +15,8 @@ block content
         div.form-floating
             div
                 h3.mt-5.mb-5.label(for='main_img') 대표이미지
-                //div.box(style='width: 100px; height: 100px; background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px;')
-                div
-                    input.mb-5(type="file",id='main_img' class="form-control", name="main_img" accept="image/*" onchange="loadFile(this)")
+                img.me-5.mt-5(src=store.main_img , width="230", height="230")
+                input.mb-5.mt-5(type="file",id='main_img' class="form-control", name="main_img" accept="image/*" onchange="loadFile(this)")
         hr
         div.form-floating.mb-5
             div.d-flex.justify-content-between.mt-5
@@ -25,7 +24,7 @@ block content
                 button.btn.btn-primary(type='button' id='addImgBtn') 추가
             each img in imgs
                 img.me-5.mt-5(src=img.store_img , width="230", height="230")
-            div#addImg
+            div#addImg.form-floating
                 div.d-flex.mt-5.justify-content-around.inputImgs
                     input.me-xxl-5.ms-xxl-5(type="file", class="form-control", id="store_img" name="store_img" accept="image/*" onchange="loadFile(this)")
                     button.btn.btn-outline-danger.btn-sm.me-xxl-5(type='button' style="height: 30px; width:50px" onclick="this.closest('.inputImgs').remove()" ) 삭제

@@ -67,6 +67,8 @@ app.use(async function(req, res, next) {
   }
   next();
 });
+app.use('/storeImg', express.static('storeImg'))
+
 
 //모든 요청에서 퍼그 렌더시 변수로 loginUser 를 제공
 app.use(function (req, res, next){
