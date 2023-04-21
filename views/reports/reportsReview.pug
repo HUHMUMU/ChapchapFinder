@@ -1,9 +1,25 @@
 extends ../layout
 
 block content
-    h2.my-4 리뷰 신고 관리
+    h2.my-4 유저 신고 관리
     div
-        each r in reportsReview
+        each r, index in reportsReview
+            if index === 0 || r.review_num !== reportsReview[index - 1].review_num
+                div.d-flex.justify-content-between
+                    div
+                        h6.card-text 리뷰고유번호 : #{r.review.review_num}
+                        h6.card-text 리뷰내용 : #{r.review.content}
+                        h6.card-text 한줄평 : #{r.review.comment}
+                        h6.card-text 메뉴번호 : #{r.review.menu_num}
+                        h6.card-text 신고당한리뷰상태 : #{r.review.r_rstatus}
+                    div
+                        a.btn.btn-danger.btn-sm.m-2(href=`#`) 리뷰이동
+                        // 추후에 spring에서 구현할 리뷰로 링크연결할 예정
+                        div
+                            form(method='post', action=`/reports/reviewPublic/${r.review_num}`)
+                                button.btn.btn-success.btn-sm.m-2(type='submit') 공개처리
+                            form(method='post', action=`/reports/reviewPrivate/${r.review_num}`)
+                                button.btn.btn-warning.btn-sm.m-2(type='submit') 비공개처리
             div.card.col
                 div.card-body.d-flex.justify-content-between
                     div
@@ -13,12 +29,7 @@ block content
                             small 신고사장ID : #{r.report_store_id}
                         if(r.report_user_id)
                             small 신고유저ID : #{r.report_user_id}
-                    a.btn.btn-danger.btn-sm.m-2(href=`#`) 리뷰이동
-                    // 추후에 spring에서 구현할 가게상세-리뷰로 링크연결할 예정
                 div
                     h5.card-title 신고내용 : #{r.report_content}
-                    h6.card-text 리뷰고유번호 : #{r.review.review_num}
-                    h6.card-text 리뷰내용 : #{r.review.content}
-                    h6.card-text 한줄평 : #{r.review.comment}
-                    h6.card-text 메뉴번호 : #{r.review.menu_num}
-            hr
+            if index !== (reportsReview.length - 1) && r.review_num !== reportsReview[index + 1].review_num
+                hr

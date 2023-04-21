@@ -1,9 +1,24 @@
 extends ../layout
 
 block content
-    h2.my-4 유저 신고 관리
+    h2.my-4 가게 신고 관리
     div
-        each r in reportsStore
+        each r, index in reportsStore
+            if index === 0 || r.store_num !== reportsStore[index - 1].store_num
+                div.d-flex.justify-content-between
+                    div
+                        h6.card-text 신고당한가게 고유번호 : #{r.store.store_num}
+                        h6.card-text 신고당한가게 이름 : #{r.store.store_name}
+                        h6.card-text 신고당한가게 주소 : #{r.store.address}
+                        h6.card-text 신고당한가게 상태 : #{r.store.s_rstatus}
+                    div
+                        a.btn.btn-danger.btn-sm.m-2(href=`#`) 가게상세이동
+                        // 추후에 spring에서 구현할 가게상세로 링크연결할 예정
+                        div
+                            form(method='post', action=`/reports/storePublic/${r.store_num}`)
+                                button.btn.btn-success.btn-sm.m-2(type='submit') 공개처리
+                            form(method='post', action=`/reports/storePrivate/${r.store_num}`)
+                                button.btn.btn-warning.btn-sm.m-2(type='submit') 비공개처리
             div.card.col
                 div.card-body.d-flex.justify-content-between
                     div
@@ -13,11 +28,7 @@ block content
                             small 신고사장ID : #{r.report_store_id}
                         if(r.report_user_id)
                             small 신고유저ID : #{r.report_user_id}
-                    a.btn.btn-danger.btn-sm.m-2(href=`#`) 가게상세이동
-                    // 추후에 spring에서 구현할 가게상세로 링크연결할 예정
                 div
                     h5.card-title 신고내용 : #{r.report_content}
-                    h6.card-text 신고당한가게 고유번호 : #{r.store.store_num}
-                    h6.card-text 신고당한가게 이름 : #{r.store.store_name}
-                    h6.card-text 신고당한가게 주소 : #{r.store.address}
-            hr
+            if index !== (reportsStore.length - 1) && r.store_num !== reportsStore[index + 1].store_num
+                hr

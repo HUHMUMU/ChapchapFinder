@@ -3,7 +3,23 @@ extends ../layout
 block content
     h2.my-4 유저 신고 관리
     div
-        each r in reportsUser
+        each r, index in reportsUser
+            if index === 0 || r.user_id !== reportsUser[index - 1].user_id
+                div.d-flex.justify-content-between
+                    div
+                        h6.card-text 신고당한유저ID : #{r.user.user_id}
+                        h6.card-text 신고당한유저닉네임 : #{r.user.nickname}
+                        h6.card-text 신고당한유저이름 : #{r.user.name}
+                        h6.card-text 신고당한유저성별 : #{r.user.gender}
+                        h6.card-text 신고당한유저상태 : #{r.user.u_rstatus}
+                    div
+                        a.btn.btn-danger.btn-sm.m-2(href=`#`) 유저상세이동
+                        // 추후에 spring에서 구현할 유저로 링크연결할 예정
+                        div
+                            form(method='post', action=`/reports/userPublic/${r.user_id}`)
+                                button.btn.btn-success.btn-sm.m-2(type='submit') 공개처리
+                            form(method='post', action=`/reports/userPrivate/${r.user_id}`)
+                                button.btn.btn-warning.btn-sm.m-2(type='submit') 비공개처리
             div.card.col
                 div.card-body.d-flex.justify-content-between
                     div
@@ -13,12 +29,7 @@ block content
                             small 신고사장ID : #{r.report_store_id}
                         if(r.report_user_id)
                             small 신고유저ID : #{r.report_user_id}
-                    a.btn.btn-danger.btn-sm.m-2(href=`#`) 유저상세이동
-                    // 추후에 spring에서 구현할 유저상세로 링크연결할 예정
                 div
                     h5.card-title 신고내용 : #{r.report_content}
-                    h6.card-text 신고당한유저ID : #{r.user.user_id}
-                    h6.card-text 신고당한유저닉네임 : #{r.user.nickname}
-                    h6.card-text 신고당한유저이름 : #{r.user.name}
-                    h6.card-text 신고당한유저성별 : #{r.user.gender}
-            hr
+            if index !== (reportsUser.length - 1) && r.user_id !== reportsUser[index + 1].user_id
+                hr

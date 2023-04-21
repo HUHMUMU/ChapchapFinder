@@ -12,28 +12,35 @@ class ReportsService {
 
     // review_num!=null만 찾기
     async findByReviewNum() {
-        const reportAtReview = await reportsEntity.findAll({
+        const reports = await reportsEntity.findAll({
             where: {
                 review_num: {
                     [Op.ne]: null
                 }
-            },
-        });
-        const reviewNums = reportAtReview.map(report => report.review_num);
-        const reviews = await reviewsEntity.findAll({
-            where: {
-                review_num: {
-                    [Op.in]: reviewNums
-                }
             }
         });
-        return reportAtReview.map(report => {
-            const review = reviews.find(r => r.review_num === report.review_num);
-            return {
-                ...report.toJSON(),
-                review: review ? review.toJSON() : null
-            };
+        const reviews= await reviewsEntity.findAll();
+
+        const reviewCount = {};
+        reports.forEach(report => {
+            if (reviewCount[report.review_num]) {
+                reviewCount[report.review_num]++;
+            } else {
+                reviewCount[report.review_num] = 1;
+            }
         });
+
+        const reportsWithReview = reports
+            .filter(report => reviewCount[report.review_num] >= 3)
+            .map(report => {
+                const review = reviews.find(r => r.review_num === report.review_num);
+                return {
+                    ...report.toJSON(),
+                    review: review ? review.toJSON() : null
+                };
+            });
+
+        return reportsWithReview;
     }
 
     // user_id (신고당한 유저 고유번호로)가 null이 아닌 것 조회
@@ -45,19 +52,27 @@ class ReportsService {
                 }
             }
         });
-        const userId = reports.map(report => report.user_id);
-        const users = await usersEntity.findAll({
-            where: {
-                user_id: userId
+        const users= await usersEntity.findAll();
+
+        const userCount = {};
+        reports.forEach(report => {
+            if (userCount[report.user_id]) {
+                userCount[report.user_id]++;
+            } else {
+                userCount[report.user_id] = 1;
             }
         });
-        const reportsWithUser = reports.map(report => {
-            const user = users.find(u => u.user_id === report.user_id);
-            return {
-                ...report.toJSON(),
-                user: user ? user.toJSON() : null
-            };
-        });
+
+        const reportsWithUser = reports
+            .filter(report => userCount[report.user_id] >= 3)
+            .map(report => {
+                const user = users.find(u => u.user_id === report.user_id);
+                return {
+                    ...report.toJSON(),
+                    user: user ? user.toJSON() : null
+                };
+            });
+
         return reportsWithUser;
     }
 
@@ -70,19 +85,27 @@ class ReportsService {
                 }
             }
         });
-        const storeNum = reports.map(report => report.store_num);
-        const stores = await storesEntity.findAll({
-            where: {
-                store_num: storeNum
+        const stores = await storesEntity.findAll();
+
+        const storeCount = {};
+        reports.forEach(report => {
+            if (storeCount[report.store_num]) {
+                storeCount[report.store_num]++;
+            } else {
+                storeCount[report.store_num] = 1;
             }
         });
-        const reportsWithStore = reports.map(report => {
-            const store = stores.find(s => s.store_num === report.store_num);
-            return {
-                ...report.toJSON(),
-                store: store ? store.toJSON() : null
-            };
-        });
+
+        const reportsWithStore = reports
+            .filter(report => storeCount[report.store_num] >= 3)
+            .map(report => {
+                const store = stores.find(s => s.store_num === report.store_num);
+                return {
+                    ...report.toJSON(),
+                    store: store ? store.toJSON() : null
+                };
+            });
+
         return reportsWithStore;
     }
 
@@ -125,15 +148,48 @@ class ReportsService {
             { where: { chap_num } }
         );
     }
-
     async updateChsRstatusToPrivate(chap_num) {
         return await chapstorysEntity.update(
             { chs_rstatus: '비공개' },
             { where: { chap_num } }
         );
     }
-
-
+    async updateSRstatusToPublic(store_num) {
+        await storesEntity.update(
+            { s_rstatus: '공개' },
+            { where: { store_num } }
+        );
+    }
+    async updateSRstatusToPrivate(store_num) {
+        await storesEntity.update(
+            { s_rstatus: '비공개' },
+            { where: { store_num } }
+        );
+    }
+    async updateURstatusToPublic(user_id){
+        await usersEntity.update(
+            { u_rstatus: '공개'},
+            { where: { user_id }}
+        )
+    }
+    async updateURstatusToPrivate(user_id){
+        await usersEntity.update(
+            { u_rstatus: '비공개'},
+            { where: { user_id }}
+        )
+    }
+    async updateRRstatusToPublic(review_num){
+        await reviewsEntity.update(
+            { r_rstatus: '공개'},
+            { where: { review_num }}
+        )
+    }
+    async updateRRstatusToPrivate(review_num){
+        await reviewsEntity.update(
+            { r_rstatus: '비공개'},
+            { where: { review_num }}
+        )
+    }
 
     async reviewReport(reportObj) {
         const report = await reportsEntity.create(
