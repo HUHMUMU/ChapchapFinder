@@ -200,14 +200,6 @@ S
         return cate;
     }
 
-    async insertImg(img ) { //가게 이미지 등록
-        const insertImg = await StoreImgsEntity.create({
-            img_num: img.img_num,
-            store_img: img.store_img,
-            store_num: img.store_num
-        });
-        return insertImg;
-    }
 
     async updateStoreTypes(StoreNum, storetypeId, category) { // 가게 카테고리 수정
         const updateStoretypes = await StoreTypesEntity.update({
@@ -250,7 +242,8 @@ S
         return insertImg;
     }
 
-    async updateImg(img) { //가게 이미지 등록
+
+    async updateImg(img) { //가게 이미지 수정
         const update = await StoreImgsEntity.update({
             store_img: img.store_img
         }, {

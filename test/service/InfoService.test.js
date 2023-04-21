@@ -276,7 +276,7 @@ describe("InfoService test",()=> {
 
     test("insertImg", async () => { // 가게 이미지 등록
         const img = {
-            img_num: "12",
+            img_num: "26",
             store_img: "/images/storeImg/store1_img4.jpg",
             store_num: "1"
         }

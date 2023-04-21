@@ -7,68 +7,71 @@ const multer = require('multer');
 const storage=multer.diskStorage(
     {
         destination:(req,file,cb)=>{ //cb : destination의 값을 지정
-            cb(null,"./public/images/storeImg");
+            cb(null, path.join( 'public','images', 'storeImg'));
         },
         filename:(req,file,cb)=>{
-            let ext=path.extname(file.originalname);
-            let name="reply_"+Date.now()+"_"+(Math.trunc(Math.random()*1000))+ext; //.jpeg
-            //0.123012937901273809*1E9 => 12301293.7901273809 => 12301294
-            req.body.store_img="/images/storeImg/"+name;
-            cb(null,name);
-        },
-        limits: {
-            fileSize: 1024 * 1024 * 10, // 10MB
+            cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`); //이미지 이름
         }
     }
 );
-function fileFilter (req, file, cb)  {
-    let mimetype=file.mimetype.split("/");
-    if (mimetype[0]!=="image"){
-        return cb(new Error("이미지만 업로드 가능합니다."), false);
-    }
-    cb(null, true);
-};
-const upload=multer({storage:storage,fileFilter:fileFilter});
 
-router.get('/insert.do',async (req,res)=>{
+const upload=multer({storage:storage});
+
+router.get('/insert.do', async (req,res)=>{
     let storeId = req.session.loginStore.store_id
     let storeManage= await  storeManagesService.findStoreManage(storeId)
     res.render('infos/insert', { storeManage : storeManage })
 })
-router.post('/insert.do',async (req,res)=>{
-    let storeNum = req.session.loginStore.store_num
-    let insertStoreInfo=0;
-    let insertHoliday =0;
-    let insertBreaktime=0;
-    let insertCate=0;
-    let insertImg=0;
-    console.log(req.body);
-    for(let key in req.body){
-        console.log(key,req.body[key]);
+router.post('/insert.do', upload.single('store_img'), async (req, res) => {
+    let storeNum = req.session.loginStore.store_num;
+    let insertStoreInfo = 0;
+    let insertHoliday = 0;
+    let insertBreaktime = 0;
+    let insertCate = 0;
+    let insertImg = 0;
+    for (let key in req.body) {
+        console.log(key, req.body[key]);
         if (!req.body[key]) {
             req.body[key] = null;
         }
-        if(req.body[key]=="on"){
+        if (req.body[key] == "on") {
             req.body[key] = 1;
         }
     }
-
-
-    try{
-        insertStoreInfo=await infoService.insertStoreInfo(req.body);
-        insertCate = await infoService.insertStoreTypes2(req.body)
-        insertHoliday=await infoService.insertHolidays(req.body)
-        insertBreaktime=await infoService.insertBreaktime(req.body)
-        insertImg=await infoService.insertImg(req.body);
-    }catch (e){
-        console.error(e)
+    if (req.file) {
+        req.body.store_img = "/" + req.file.path.replace('public\\', '');
+    } else {
+        req.body.store_img = '';
     }
-    if(insertCate && insertStoreInfo && insertHoliday && insertBreaktime && insertImg) {
+    console.log(req.file)
+    try {
+        insertStoreInfo = await infoService.insertStoreInfo(req.body);
+        console.log("insertStoreInfo" + insertStoreInfo)
+        insertCate = await infoService.insertStoreTypes2(req.body);
+        console.log("insertStoreTypes2" + insertCate)
+        insertHoliday = await infoService.insertHolidays(req.body);
+        console.log("insertHolidays" + insertHoliday)
+        insertBreaktime = await infoService.insertBreaktime(req.body);
+        console.log("insertBreaktime" + insertBreaktime)
+        insertImg = await infoService.insertImg(req.body);
+        console.log("insertImg" + insertImg)
+    } catch (e) {
+        console.error(e);
+    }
+    if (
+        insertCate &&
+        insertStoreInfo &&
+        insertHoliday &&
+        insertBreaktime &&
+        insertImg
+    ) {
         res.redirect("/");
-    }else{
+    } else {
+        req.flash("error", "저장 중 오류가 발생했습니다. 다시 시도해주세요.")
         res.redirect("/infos/insert.do");
     }
-})
+});
+
 
 
 router.get('/detail.do', async (req, res) => {
