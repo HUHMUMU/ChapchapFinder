@@ -203,11 +203,12 @@ block content
 
         function addImgInputComponent() {
             return `
-                        <div class="d-flex mt-5 justify-content-around inputImgs">
+                        <div class="d-flex mt-5 justify-content-around inputImgs form-floating">
                           <input type="file" class="form-control me-xxl-5 ms-xxl-5" id="store_img" name="store_img" accept="image/*" onchange="loadFile(this)">
                           <button class="btn btn-outline-danger btn-sm me-xxl-5 ms-5" type="button" style="height: 30px; width:50px" onclick="this.closest('.inputImgs').remove()">삭제</button>
                         </div>
                     `;
+
         }
 
 

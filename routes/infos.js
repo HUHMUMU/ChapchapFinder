@@ -15,6 +15,7 @@ const storage=multer.diskStorage(
     }
 );
 
+
 const upload=multer({storage:storage});
 
 router.get('/insert.do', async (req,res)=>{
@@ -22,7 +23,9 @@ router.get('/insert.do', async (req,res)=>{
     let storeManage= await  storeManagesService.findStoreManage(storeId)
     res.render('infos/insert', { storeManage : storeManage })
 })
-router.post('/insert.do', upload.single('store_img'), async (req, res) => {
+const cpUpload = upload.fields([{ name: 'main_img', maxCount: 1 }, { name: 'store_img', maxCount: 8 }])
+
+router.post('/insert.do', cpUpload, async (req, res) => {
     let storeNum = req.session.loginStore.store_num;
     let insertStoreInfo = 0;
     let insertHoliday = 0;
@@ -30,7 +33,7 @@ router.post('/insert.do', upload.single('store_img'), async (req, res) => {
     let insertCate = 0;
     let insertImg = 0;
     for (let key in req.body) {
-        console.log(key, req.body[key]);
+        //console.log(key, req.body[key]);
         if (!req.body[key]) {
             req.body[key] = null;
         }
@@ -38,11 +41,19 @@ router.post('/insert.do', upload.single('store_img'), async (req, res) => {
             req.body[key] = 1;
         }
     }
-    if (req.file) {
-        req.body.store_img = "/" + req.file.path.replace('public\\', '');
-    } else {
-        req.body.store_img = '';
+    const storeImgs=req.files['store_img'];
+    const mainImg=req.files['main_img'];
+    if (mainImg){
+        req.body.main_img = "/" + mainImg[0].path.replace('public\\', '');
     }
+    if(storeImgs){
+        for(const storeImg of storeImgs){
+            req.body.store_img = "/" + storeImg.path.replace('public\\', '');
+        }
+    }
+    //console.log("storeImgs:",storeImgs);
+    //console.log("mainImg:",mainImg);
+
     console.log(req.file)
     try {
         insertStoreInfo = await infoService.insertStoreInfo(req.body);
