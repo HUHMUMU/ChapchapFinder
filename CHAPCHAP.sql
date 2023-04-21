@@ -61,6 +61,7 @@ CREATE TABLE users
     u_rstatus        ENUM ('공개', '심사', '비공개', '휴면', '탈퇴') NOT NULL COMMENT '상태'
 );
 
+
 CREATE TABLE menu_manages
 (
     menu_num  INT primary key auto_increment NOT NULL COMMENT '메뉴번호',
