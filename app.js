@@ -67,6 +67,8 @@ app.use(async function(req, res, next) {
   }
   next();
 });
+app.use('/storeImg', express.static('storeImg'))
+
 
 //모든 요청에서 퍼그 렌더시 변수로 loginUser 를 제공
 app.use(function (req, res, next){
@@ -126,7 +128,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(8080,()=>{
-  console.log("http://localhost:8080 expressjs 관리자 프로젝트 시작");
+app.listen(8088,()=>{
+  console.log("http://localhost:8088 expressjs 관리자 프로젝트 시작");
 })
 module.exports = app;

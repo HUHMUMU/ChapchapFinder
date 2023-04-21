@@ -58,9 +58,9 @@ router.post("/insert.do", upload.single('img'),async (req,res)=>{
         return res.send("<script>alert('이미지를 선택해주세요.');history.back();</script>");
     } else{
         if (req.file) {
-            req.body.img = "/"+req.file.path.replace('public\\', '');
+            req.body.store_img = "/"+req.file.path.replace('public\\', '');
         } else {
-            req.body.img = ' '; // 파일이 없는 경우 처리
+            req.body.store_img = ' '; // 파일이 없는 경우 처리
         }
 
     }
