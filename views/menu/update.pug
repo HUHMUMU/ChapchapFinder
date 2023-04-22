@@ -4,6 +4,7 @@ block content
     div
         h4.mb-3 메뉴 수정
     each menu in menus
+        - const oldImg=menu.img
         form.mt-4(action=`/menu/${menu.menu_num}/update.do`, method="post", enctype="multipart/form-data")
             input(type="hidden", value=menu.menu_num, name="menu_num")
 
