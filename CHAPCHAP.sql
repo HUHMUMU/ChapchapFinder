@@ -58,7 +58,7 @@ CREATE TABLE users
     profile_img      VARCHAR(255)                         NULL COMMENT '프로필사진',
     introduce        VARCHAR(255)                         NULL COMMENT '자기소개',
     email_check_code VARCHAR(8)                           NULL COMMENT '가입인증이메일코드',
-    u_rstatus        ENUM ('공개', '심사', '비공개', '휴면', '탈퇴') NOT NULL COMMENT '상태'
+    u_rstatus        ENUM ('공개', '심사', '비공개', '휴면', '탈퇴', '이메일인증중') NOT NULL COMMENT '상태'
 );
 
 
