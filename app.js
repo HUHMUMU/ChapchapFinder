@@ -98,7 +98,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.use('/', indexRouter);
-app.use('/reports', reportsRouter);
+// app.use('/reports', reportsRouter);
 app.use('/replies', repliesRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/stores', storesRouter);
