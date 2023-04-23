@@ -42,22 +42,23 @@ CREATE TABLE stores
 
 CREATE TABLE users
 (
-    user_id          VARCHAR(255) primary key unique      NOT NULL COMMENT '유저아이디',
-    nickname         VARCHAR(255) unique                  NOT NULL COMMENT '유저닉네임',
-    pw               VARCHAR(255)                         NOT NULL COMMENT '비밀번호',
-    name             VARCHAR(255)                         NOT NULL COMMENT '이름',
-    birth            DATE                                 NOT NULL COMMENT '생년월일',
-    gender           ENUM ('MALE', 'FEMALE')              NOT NULL COMMENT '성별',
-    address          VARCHAR(255)                         NOT NULL COMMENT '주소',
-    detail_address   VARCHAR(255)                         NOT NULL COMMENT '상세주소',
-    postnumber   VARCHAR(255)                         NULL COMMENT '우편번호',
-    email            VARCHAR(255) unique                  NOT NULL COMMENT '이메일',
-    insta_url        VARCHAR(255)                         NULL COMMENT '인스타url',
-    face_url         VARCHAR(255)                         NULL COMMENT '페이스북url',
-    youtube_url      VARCHAR(255)                         NULL COMMENT '유튜브url',
-    profile_img      VARCHAR(255)                         NULL COMMENT '프로필사진',
-    introduce        VARCHAR(255)                         NULL COMMENT '자기소개',
-    email_check_code VARCHAR(8)                           NULL COMMENT '가입인증이메일코드',
+    user_id          VARCHAR(255) primary key unique                NOT NULL COMMENT '유저아이디',
+    nickname         VARCHAR(255) unique                            NOT NULL COMMENT '유저닉네임',
+    pw               VARCHAR(255)                                   NOT NULL COMMENT '비밀번호',
+    name             VARCHAR(255)                                   NOT NULL COMMENT '이름',
+    birth            DATE                                           NOT NULL COMMENT '생년월일',
+    gender           ENUM ('MALE', 'FEMALE')                        NOT NULL COMMENT '성별',
+    address          VARCHAR(255)                                   NOT NULL COMMENT '주소',
+    detail_address   VARCHAR(255)                                   NOT NULL COMMENT '상세주소',
+    postnumber       VARCHAR(255)                                   NULL COMMENT '우편번호',
+    email            VARCHAR(255) unique                            NOT NULL COMMENT '이메일',
+    insta_url        VARCHAR(255)                                   NULL COMMENT '인스타url',
+    face_url         VARCHAR(255)                                   NULL COMMENT '페이스북url',
+    youtube_url      VARCHAR(255)                                   NULL COMMENT '유튜브url',
+    profile_img      VARCHAR(255)                                   NULL COMMENT '프로필사진',
+    introduce        VARCHAR(255)                                   NULL COMMENT '자기소개',
+    email_check_code VARCHAR(8)                                     NULL COMMENT '가입인증이메일코드',
+    chapbanner       VARCHAR(255)                                   NULL COMMENT '챱스토리배너',
     u_rstatus        ENUM ('공개', '심사', '비공개', '휴면', '탈퇴', '이메일인증중') NOT NULL COMMENT '상태'
 );
 
@@ -669,16 +670,16 @@ INSERT INTO store_imgs (store_num, store_img) VALUES
     (8, '/images/storeImg/store8_img1.jpg');
 
 INSERT INTO chapstoryimgs (chap_num, img) VALUES
-    (1, '/images/chapstoryimg/chapstory1-1.jpg'),
-    (1, '/images/chapstoryimg/chapstory1-2.jpg'),
-    (1, '/images/chapstoryimg/chapstory1-3.jpg'),
-    (2, '/images/chapstoryimg/chapstory2-1.jpg'),
-    (2, '/images/chapstoryimg/chapstory2-2.jpg'),
-    (3, '/images/chapstoryimg/chapstory3-1.jpg'),
-    (3, '/images/chapstoryimg/chapstory3-2.jpg'),
-    (4, '/images/chapstoryimg/chapstory4-1.jpg'),
-    (4, '/images/chapstoryimg/chapstory4-2.jpg'),
-    (5, '/images/chapstoryimg/chapstory5-1.jpg');
+  (1, '/public/img/chapstory/chapstory1-1.jpg'),
+  (1, '/public/img/chapstory/chapstory1-2.jpg'),
+  (1, '/public/img/chapstory/chapstory1-3.jpg'),
+  (2, '/public/img/chapstory/chapstory2-1.jpg'),
+  (2, '/public/img/chapstory/chapstory2-2.jpg'),
+  (3, '/public/img/chapstory/chapstory3-1.jpg'),
+  (3, '/public/img/chapstory/chapstory3-2.jpg'),
+  (4, '/public/img/chapstory/chapstory4-1.jpg'),
+  (4, '/public/img/chapstory/chapstory4-2.jpg'),
+  (5, '/public/img/chapstory/chapstory5-1.jpg');
 
 INSERT INTO chap_deals (store_num, event_title, event_condition, event_reward, event_img, event_start, event_end) VALUES
   (1, '해피 아워 할인', '오후 5시부터 오후 7시 방문', '음료 50% 할인', 'event2.jpg', '2023-04-16', '2023-04-25'),
