@@ -98,14 +98,14 @@ CREATE TABLE chapstorys
     chap_num    INT auto_increment primary key NOT NULL COMMENT '챱스토리번호',
     title       VARCHAR(255)                   NOT NULL COMMENT '제목',
     content     VARCHAR(255)                   NOT NULL COMMENT '내용',
-    viewcount   INT                            NOT NULL COMMENT '조회수',
+    viewcount   INT  UNSIGNED                  NULL DEFAULT 0 COMMENT '조회수',
     post_time   TIMESTAMP                      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '작성날짜',
-    likes       INT                            NOT NULL COMMENT '좋아요',
+    likes       INT                            NULL DEFAULT 0 COMMENT '좋아요',
     profile     VARCHAR(255)                   NULL COMMENT '프로필',
     main_img    VARCHAR(255)                   NULL COMMENT '대표사진',
     update_time TIMESTAMP                      NULL     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정날짜',
     user_id     VARCHAR(255)                   NOT NULL COMMENT '유저아이디',
-    chs_rstatus ENUM ('공개', '심사', '비공개')       NOT NULL COMMENT '신고상태',
+    chs_rstatus ENUM ('공개', '심사', '비공개')   NOT NULL DEFAULT '공개' COMMENT '신고상태',
     FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
