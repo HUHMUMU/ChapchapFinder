@@ -285,6 +285,28 @@ CREATE TABLE reports
     # review_num 와 user_id 와 chap_num 와 store_num 의 4개중 3개는 NULL 이어야 함
 );
 
+CREATE TABLE chat_rooms
+(
+    cr_id        INT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '채팅방 아이디',
+    user_id      VARCHAR(255) NOT NULL COMMENT '채팅방 생성자 아이디',
+    name         VARCHAR(255) NOT NULL COMMENT '채팅방 이름',
+    description  TEXT COMMENT '채팅방 설명',
+    post_time    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '채팅방 생성 시간',
+    update_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '채팅방 최근 업데이트 시간'
+);
+
+CREATE TABLE chat_messages
+(
+    cm_id     INT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '메시지 아이디',
+    cr_id     INT UNSIGNED                  NOT NULL COMMENT '채팅방 아이디',
+    user_id   VARCHAR(255)                  NOT NULL COMMENT '송신자 아이디',
+    content   TEXT                          NOT NULL COMMENT '메시지 내용',
+    status    ENUM ('ENTER','LEAVE','CHAT') NOT NULL COMMENT '메세지 상태 상태',
+    post_time TIMESTAMP                     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '메시지 전송 시간',
+    FOREIGN KEY (cr_id) REFERENCES chat_rooms (cr_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 #여기부터 더미데이터
 INSERT INTO store_manages (store_id, pw, business_num, store_call, phone, email) VALUES
  ('store001', 'pw123456', '1234567890', '02-1234-5678', '010-1111-2222', 'store001_owner@email.com'),
@@ -692,3 +714,24 @@ INSERT INTO chap_deals (store_num, event_title, event_condition, event_reward, e
   (8, '치킨 가족 할인', '4인분 주문 시 1인분 무료', '치킨 1인분 무료', 'event4.jpg', '2023-04-18', '2023-04-28'),
   (10, '피자 콤보 할인', '피자와 사이드메뉴 함께 주문', '음료수 무료', 'event5.jpg', '2023-04-22', '2023-05-02'),
   (10, '파스타 및 와인 이벤트', '파스타 2인분 주문 시 와인 1병 무료', '와인 1병 무료', 'event6.jpg', '2023-04-24', '2023-05-09');
+
+INSERT INTO chat_rooms(user_id, name, post_time)
+VALUES
+    ('user01', 'Room1', '2022-01-01 12:00:00'),
+    ('user02', 'Room2', '2022-01-02 13:00:00'),
+    ('user03', 'Room3', '2022-01-03 14:00:00'),
+    ('user04', 'Room4', '2022-01-04 15:00:00'),
+    ('user05', 'Room5', '2022-01-05 16:00:00');
+
+INSERT INTO chat_messages(cr_id, user_id, content, status)
+VALUES
+    (1, 'user01',  '안녕하세요!', 'ENTER'),
+    (1, 'user02',  '안녕하세요~', 'ENTER'),
+    (1, 'user01', '오늘 날씨가 참 좋네요.', 'CHAT'),
+    (1, 'user02', '네, 정말 좋은 날씨입니다.', 'CHAT'),
+    (1, 'user01', '그렇군요.', 'CHAT'),
+    (1, 'user01', '잠깐만요. 제가 문서 작업 중인데 잠시 쉬고 싶어서 나갔다가 다시 들어왔습니다.', 'LEAVE'),
+    (1, 'user01', '다시 돌아왔습니다.', 'CHAT'),
+    (1, 'user02', '어떤 문서 작업을 하고 있었나요?', 'CHAT'),
+    (1, 'user01', '저희 회사의 신제품 출시 계획서를 작성하고 있었습니다.', 'CHAT'),
+    (1, 'user02', '그런가요? 대단하십니다!', 'CHAT');
