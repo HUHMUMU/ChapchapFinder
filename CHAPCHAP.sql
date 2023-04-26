@@ -292,7 +292,8 @@ CREATE TABLE chat_rooms
     name         VARCHAR(255) NOT NULL COMMENT '채팅방 이름',
     description  TEXT COMMENT '채팅방 설명',
     post_time    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '채팅방 생성 시간',
-    update_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '채팅방 최근 업데이트 시간'
+    update_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '채팅방 최근 업데이트 시간',
+    FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE chat_messages
@@ -306,6 +307,7 @@ CREATE TABLE chat_messages
     FOREIGN KEY (cr_id) REFERENCES chat_rooms (cr_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 
 #여기부터 더미데이터
 INSERT INTO store_manages (store_id, pw, business_num, store_call, phone, email) VALUES
@@ -356,7 +358,7 @@ INSERT INTO users (user_id, nickname, pw, name, birth, gender, address, detail_a
    ('user19', '진수', 'password123', '박진수', '1993-07-01', 'MALE', '서울특별시 동작구', '오피스텔 201호', 'jinsu@example.com', NULL, 'https://www.facebook.com/jinsu', NULL, NULL, '안녕하세요, 박진수입니다.', '공개'),
    ('user20', '은지', 'password123', '김은지', '1995-11-20', 'FEMALE', '인천광역시 서구', '아파트 601호', 'eunji_kim@example.com', NULL, NULL, 'https://www.youtube.com/eunji_kim', NULL, '안녕하세요, 김은지입니다.', '심사');
 
-INSERT INTO chapstorys (title, content, viewcount, date, likes, profile, main_img, update_time, user_id, chs_rstatus)
+INSERT INTO chapstorys (title, content, viewcount, post_time, likes, profile, main_img, update_time, user_id, chs_rstatus)
 VALUES ('The best sushi in town', 'I have tried sushi in many places, but this restaurant truly stands out. The quality of the fish is amazing.', 170, '2023-04-11', 32, 'profile11.jpg', 'main_img11.jpg', '2023-04-11 13:00:00', 'user01', '공개'),
        ('A wonderful bakery', 'This bakery offers a wide variety of breads and pastries, all of them fresh and delicious.', 160, '2023-04-12', 31, 'profile12.jpg', 'main_img12.jpg', '2023-04-12 14:00:00', 'user02', '공개'),
        ('A delightful tea house', 'I visited this tea house with my friends and we had a great time trying out different teas and snacks.', 140, '2023-04-13', 29, 'profile13.jpg', 'main_img13.jpg', '2023-04-13 15:00:00', 'user03', '공개'),
@@ -734,4 +736,4 @@ VALUES
     (1, 'user01', '다시 돌아왔습니다.', 'CHAT'),
     (1, 'user02', '어떤 문서 작업을 하고 있었나요?', 'CHAT'),
     (1, 'user01', '저희 회사의 신제품 출시 계획서를 작성하고 있었습니다.', 'CHAT'),
-    (1, 'user02', '그런가요? 대단하십니다!', 'CHAT');
+    (1, 'user02', '그런가요? 대단하십니다!', 'CHAT')
