@@ -80,27 +80,23 @@ class WaitingService {
      */
     async EnterNotiToUserBtn(storeNum) {
         try {
-            const result = await UsersWaitingEntity.findAll({
-                attributes: [
-                    "waiting_num",
-                    "user_id",
-                    "user_people",
-                    "enter_status",
-                    "start_time",
-                    "store_num",
-                ],
+            const user = await UsersWaitingEntity.findOne({
                 order: [["start_time", "ASC"]],
                 where: {
                     start_time: {
                         [Op.lte]: 3,
                     },
-                    store_num:storeNum
+                    store_num: storeNum
                 },
             });
 
+            if (!user) {
+                console.log("No user found");
+                return;
+            }
 
             // 입장 알림을 보내는 로직 작성
-            console.log(`대기번호(${UsersWaitingEntity.start_time}번)에게 입장 알림을 보냈습니다.`);
+            console.log(`대기번호(${user.start_time}번)에게 입장 알림을 보냈습니다.`);
 
             // 대기번호 1순위인 유저의 입장 알림을 보낸 후, 해당 유저의 데이터를 삭제하는 코드
             await UsersWaitingEntity.destroy({
@@ -113,6 +109,66 @@ class WaitingService {
         }
         return UsersWaitingEntity;
     }
+    // 여기서부터 GPT가 짜준 코드
+    // async EnterNotiToUserBtn(storeNum) {
+    //     try {
+    //         const user = await UsersWaitingEntity.findOne({
+    //             order: [["start_time", "ASC"]],
+    //             where: {
+    //                 start_time: {
+    //                     [Op.lte]: 3,
+    //                 },
+    //                 store_num: storeNum
+    //             },
+    //         });
+    //
+    //         if (!user) {
+    //             console.log("No user found");
+    //             return;
+    //         }
+    //
+    //         // 입장 알림을 보내는 로직 작성
+    //         console.log(`대기번호(${user.start_time}번)에게 입장 알림을 보냈습니다.`);
+    //
+    //         // 대기
+    //         // 대기번호 1순위인 유저의 입장 알림을 보낸 후, 해당 유저의 데이터를 삭제하는 코드
+    //         // 만약 삭제가 필요하다면 아래 코드를 주석 해제해주세요. 하지만 일반적으로는 삭제보다는 상태를 변경하는 것이 좋습니다.
+    //         // await user.destroy();
+    //
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
+    //
+    // async CancelToUserBtn(storeNum){
+    //     try {
+    //         const user = await UsersWaitingEntity.findOne({
+    //             order: [["start_time", "ASC"]],
+    //             where: {
+    //                 start_time: {
+    //                     [Op.lte]: 3,
+    //                 },
+    //                 store_num:storeNum
+    //             },
+    //         });
+    //
+    //         if (!user) {
+    //             console.log("No user found");
+    //             return;
+    //         }
+    //
+    //         // 강제 취소 알림을 보내는 로직 작성
+    //         console.log(`대기번호(${user.start_time}번)을 강제 취소했습니다.`);
+    //
+    //         // 대기번호 1순위인 유저의 강제 취소 알림을 보낸 후, 해당 유저의 데이터를 삭제하는 코드
+    //         // 만약 삭제가 필요하다면 아래 코드를 주석 해제해주세요. 하지만 일반적으로는 삭제보다는 상태를 변경하는 것이 좋습니다.
+    //         // await user.destroy();
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
+    // 여기까지
+
     /**
      * 대기유저TOP3에게 강제 취소 보내는 메서드
      // * @returns {Promise<void>}
