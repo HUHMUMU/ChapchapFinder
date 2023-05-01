@@ -34,7 +34,7 @@ router.post("/:event_num/update.do", upload.single('event_img'), async (req, res
         if(oldImg){ // 기존 이미지가 있다면
             fs.unlinkSync(`public/${oldImg}`); // 기존 이미지를 파일에서 삭제
         }
-        req.body.img = "/" + req.file.path.replace("public\\", ""); // 새로운 이미지 db에 저장
+        req.body.event_img = "/" + req.file.path.replace("public\\", ""); // 새로운 이미지 db에 저장
     } else {
         req.body.event_img = req.params.event_img; // 파일이 없는 경우 기존 이미지를 db에 저장
     }
