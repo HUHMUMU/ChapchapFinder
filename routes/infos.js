@@ -143,7 +143,7 @@ router.get("/delete.do", async (req,res)=>{
     if(dropStoreInfo>0 && dropHoliday>0 && dropBreaktime>0 && dropStoreTypes>0 && dropImgs>0){
         res.redirect("/");
     }else{
-        res.redirect(`/detail.do`);
+        res.redirect("/infos/detail.do");
     }
 });
 

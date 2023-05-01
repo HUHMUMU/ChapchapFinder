@@ -14,7 +14,6 @@ const infoRouter = require('./routes/infos');
 const menusRouter = require('./routes/menus');
 const chapdealsRouter = require('./routes/chapdeal');
 const waitingRouter=require('./routes/adminWaiting');
-const reportsRouter=require('./routes/reports');
 
 const app = express();
 // view engine setup
@@ -110,6 +109,7 @@ app.use('/infos', infoRouter);
 app.use('/menu', menusRouter);
 app.use('/chapdeal', chapdealsRouter);
 app.use('/waitings', waitingRouter);
+app.use('/reports', reportsRouter);
 
 
 // catch 404 and forward to error handler

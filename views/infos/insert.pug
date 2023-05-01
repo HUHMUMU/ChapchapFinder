@@ -4,7 +4,7 @@ block content
     form#addInfoForm(method='post' action='/infos/insert.do' enctype="multipart/form-data")
         h1.mt-5 가게정보입력
         hr
-        div(method="post", enctype="multipart/form-data")
+        div
             h3.mt-5.mb-5.label(for='store_name') 가게명
             input#store_name.form-control.mb-5( name='store_name', type='text' placeholder="??" vlaue="d")
         hr
@@ -13,24 +13,24 @@ block content
             h3.mt-5.mb-5.label(for='store_num') 가게 고유번호
             input#store_num.form-control.mb-5( name='store_num', type='text' readonly placeholder="??" value=storeManage.store_num)
         hr
-        div.form-floating(method="post", enctype="multipart/form-data")
+        div.form-floating
             div
                 h3.mt-5.mb-5.label(for='main_img') 대표이미지
                 //div.box(style='width: 100px; height: 100px; background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px;')
                 div
                     input.mb-5(type="file",id='main_img' class="form-control", name="main_img" accept="image/*" onchange="loadFile(this)")
         hr
-        div.form-floating(method="post", enctype="multipart/form-data")
+        div.form-floating
             div.d-flex.justify-content-between.mt-5
                 h3.label(for='store_img') 이미지 등록
                 button.btn.btn-primary(type='button' id='addImgBtn') 추가
                 //div(style='display:flex; justify-content: space-around; align-items:center;')
             div#addImg.form-floating
-                div.d-flex.mt-5.justify-content-around.inputImgs(method="post", enctype="multipart/form-data")
+                div.d-flex.mt-5.justify-content-around.inputImgs
                     input.me-xxl-5.ms-xxl-5(type="file", multiple class="form-control", id="store_img", name="store_img" accept="image/*" onchange="loadFile(this)")
                     button.btn.btn-outline-danger.btn-sm.me-xxl-5.ms-5(type='button' style="height: 30px; width:50px" onclick="this.closest('.inputImgs').remove()" ) 삭제
         hr
-        div(method="post", enctype="multipart/form-data")
+        div
             div.d-flex.justify-content-between.mt-5
                 h3.label(for='select_main_category') 가게 업종 선택
                 button.btn.btn-primary(type='button' id='addStoreTypesBtn') 추가
@@ -60,16 +60,16 @@ block content
                             option(value='20') 베이커리카페
                     button.btn.btn-outline-danger.btn-sm.ms-5(type='button' style="height: 30px; width: 50px; visibility:hidden" ) 삭제
         hr
-        div.form-floating(method="post", enctype="multipart/form-data")
+        div.form-floating
             h3.mt-5.mb-5.label(for='address') 가게 주소
             input#address.form-control.mb-5(name='address', type='text' placeholder="경기 파주시 지목로 43 101~105호" value="33")
         hr
         div
             h3.mt-5.mb-5 가게 소개 글
-            div.form-floating(method="post", enctype="multipart/form-data")
+            div.form-floating
                 h5.mb-3.label(for='detail_info') 가게 디테일 소개글 작성
                 input#detail_info.form-control.mb-4(name='detail_info', type='text' placeholder="가게 상세 소개글 작성 (가게 메인에 올라가는 글입니다.)" value="1")
-            div.form-floating(method="post", enctype="multipart/form-data")
+            div.form-floating
                 h5.mb-3.label(for='short_info') 가게 한줄 소개글 작성
                 input#short_info.form-control.mb-5(name='short_info', type='text' placeholder="가게 한 줄 소개글 작성 (가게 미리보기에 올라가는 글입니다.)" value="2")
         hr
@@ -139,12 +139,12 @@ block content
                     h5.mb-3.label(for='waiting_closetime')(style='display: inline-block; margin-right: 10px;') 웨이팅 마감 시간
                     input#waiting_closetime.form-control.mb-5(name='waiting_closetime', type='text' placeholder="??" value="3")
         hr
-        div.form-floating(method="post", enctype="multipart/form-data")
+        div.form-floating
             h3.mt-5.mb-5.label(for='madein') 원산지 표시
             h4.mb-3 재료에 대한 원산지 표시
             textarea.form-control(id='madein' name='madein' placeholder="염병염병여병쳠ㅁ병~~~" value="2")
         hr
-        div.form-floating(method="post", enctype="multipart/form-data")
+        div.form-floating
             h3.mt-5.mb-5.labe 방송 출연 정보
             h4.mb-3.label(for='tvshow') 출연 매채 등록
             input#tvshow.form-control.mb-5(name='tvshow', type='text' placeholder="출연 매채 등록" value="3")
