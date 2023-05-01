@@ -45,5 +45,14 @@ class ChapdealService{
         });
         return dropDeal;
     }
+
+    async dropDealByStoreNum(storeNum){
+        const dropDeal = await chapDealsEntity.dest({
+            where : {
+                store_num : storeNum
+            }
+        });
+        return dropDeal;
+    }
 }
 module.exports=new ChapdealService();

@@ -121,6 +121,15 @@ class InfoService{
         return dropHoliday;
     }
 
+    async dropAllHoliday(storeNum){ // 가게 모든 휴무일 삭제
+        const dropAllHoliday=await HolidaysEntity.destroy({
+            where : {
+                store_num : storeNum
+            }
+        });
+        return dropAllHoliday;
+    }
+
 
 
     //브레이크타임
@@ -158,6 +167,15 @@ class InfoService{
             }
         });
         return dropBreaktime;
+    }
+
+    async dropAllBreaktime(storeNum){ // 가게 모든 브레이크타임 삭제
+        const dropAllBreaktime = await BreakTimesEntity.destroy({
+            where : {
+                store_num : storeNum
+            }
+        });
+        return dropAllBreaktime;
     }
 
 
@@ -225,6 +243,15 @@ S
         return dropStoreTypes;
     }
 
+    async dropAllStoreTypes(storeNum){ // 가게 모든 카테고리 삭제
+        const dropAllStoreTypes = await StoreTypesEntity.destroy({
+            where : {
+                store_num : storeNum
+            }
+        });
+        return dropAllStoreTypes;
+    }
+
     //이미지
     async findImg(storeNum){ //가게 이미지 찾기
         const findImg = await StoreImgsEntity.findAll({
@@ -267,6 +294,14 @@ S
         return dropStoreImgs;
     }
 
+    async dropAllImg(storeNum){ // 가게 이미지 삭제
+        const dropAllStoreImgs = await StoreImgsEntity.destroy({
+            where : {
+                store_num : storeNum
+            }
+        });
+        return dropAllStoreImgs;
+    }
 
 
 

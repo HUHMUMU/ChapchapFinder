@@ -109,6 +109,7 @@ app.use('/infos', infoRouter);
 app.use('/menu', menusRouter);
 app.use('/chapdeal', chapdealsRouter);
 app.use('/waitings', waitingRouter);
+app.use('/reports', reportsRouter);
 
 
 // catch 404 and forward to error handler

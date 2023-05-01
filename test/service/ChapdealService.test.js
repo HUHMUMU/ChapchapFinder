@@ -44,4 +44,10 @@ describe("ChapdealService test",()=>{
         console.log(deals);
     });
 
+
+    test("dropDeal",async ()=>{
+        const deals=await chapdealService.dropDeal(15);
+        console.log(deals);
+    });
+
 })
