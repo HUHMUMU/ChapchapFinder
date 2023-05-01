@@ -4,8 +4,6 @@ const StoreWaitingEntity=require("../entity/StoresWaitingEntity")(sequelize);
 const UsersEntity = require("../entity/UsersEntity")(sequelize);
 const { Op } = require("sequelize");
 class WaitingService {
-
-
     /**
      * 대기중인 모든 유저 정보 가져오기
      *
