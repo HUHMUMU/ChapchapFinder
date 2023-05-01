@@ -85,5 +85,14 @@ module.exports=(sequelize)=> {
         tableName: "users",
         timestamps: false
     });
+
+    // UsersEntity.js
+    usersEntity.associate = (models) => {
+        usersEntity.hasMany(models.usersWaitingEntity, {
+            foreignKey: "store_num",
+            sourceKey: "store_num",
+        });
+    };
+
     return usersEntity;
 }

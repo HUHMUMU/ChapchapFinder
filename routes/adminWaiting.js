@@ -24,8 +24,7 @@ const path=require("path");
 // 1. 입장순서가 제일 가까운 3팀만 표 하나에 보이기
 
 router.get('/waiting.do', async (req, res) => {
-
-
+    let storeNum = req.session.loginStore.store_num
     let waitingList=null;
     let getTop3WaitingUsers=null;
     let WaitingListExceptTop3Users=null;
@@ -34,13 +33,13 @@ router.get('/waiting.do', async (req, res) => {
     let EnterNotiToUserBtn=null;
     let CancelToUserBtn=null;
     try{
-        waitingList=await WaitingService.waitingList();
-        getTop3WaitingUsers=await WaitingService.getTop3WaitingUsers();
-        WaitingListExceptTop3Users=await WaitingService.WaitingListExceptTop3Users();
-        getLastWaitingUser=await WaitingService.getLastWaitingUser();
-        waitingStats=await WaitingService.waitingStats();
-        EnterNotiToUserBtn=await WaitingService.EnterNotiToUserBtn();
-        CancelToUserBtn=await WaitingService.CancelToUserBtn();
+        waitingList=await WaitingService.waitingList(storeNum);
+        getTop3WaitingUsers=await WaitingService.getTop3WaitingUsers(storeNum);
+        WaitingListExceptTop3Users=await WaitingService.WaitingListExceptTop3Users(storeNum);
+        getLastWaitingUser=await WaitingService.getLastWaitingUser(storeNum);
+        waitingStats=await WaitingService.waitingStats(storeNum);
+        EnterNotiToUserBtn=await WaitingService.EnterNotiToUserBtn(storeNum);
+        CancelToUserBtn=await WaitingService.CancelToUserBtn(storeNum);
     }catch (e) {
         console.error(e);
     }

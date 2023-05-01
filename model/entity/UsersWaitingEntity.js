@@ -14,11 +14,6 @@ module.exports = (sequelize) => {
             allowNull: false,
             comment: "유저 인원수",
         },
-        wait_num: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            comment: "대기 번호",
-        },
         waiting_date: {
             type: DataTypes.DATEONLY,
             allowNull: false,
