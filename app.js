@@ -14,7 +14,6 @@ const infoRouter = require('./routes/infos');
 const menusRouter = require('./routes/menus');
 const chapdealsRouter = require('./routes/chapdeal');
 const waitingRouter=require('./routes/adminWaiting');
-const reportsRouter=require('./routes/reports');
 
 const app = express();
 // view engine setup
@@ -100,7 +99,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.use('/', indexRouter);
-// app.use('/reports', reportsRouter);
+app.use('/reports', reportsRouter);
 app.use('/replies', repliesRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/stores', storesRouter);
