@@ -6,7 +6,7 @@ block content
         div.border.border-2.border-dark.my-4.rounded-3
             div.d-flex.justify-content-between
                 - const starAvg = Math.round((reviews.reduce((acc, review) => acc + review.star, 0) / reviews.length) * 10) / 10
-                h1.my-4.text-start 별점 평균: #{starAvg.toFixed(1)}
+                h3.my-4.ms-3.text-start 별점 평균: #{starAvg.toFixed(1)}
                 - let reviewsNum = reviews.length //리뷰 총 개수
                 - const starCounts = {1: 0,2: 0, 3: 0,4: 0, 5: 0, };
                 - for (const review of reviews) {starCounts[review.star] += 1;}
@@ -24,23 +24,23 @@ block content
                     div.d-flex.justify-content-around
                         p 5점: #{starCounts['5']}개
                         div.progress.my-3.me-3.w-75(style="height: 15%;")
-                            div.progress-bar(role='progressbar', aria-label='Example with label', style=`width: ${percentage5}%;`, aria-valuenow=`${percentage5}`, aria-valuemin='0', aria-valuemax='100') #{percentage5}%
+                            div.progress-bar.bg-warning(role='progressbar', aria-label='Example with label', style=`width: ${percentage5}%;`, aria-valuenow=`${percentage5}`, aria-valuemin='0', aria-valuemax='100') #{percentage5}%
                     div.d-flex.justify-content-around
                         p 4점: #{starCounts['4']}개
                         div.progress.my-3.me-3.w-75(style="height: 15%;")
-                            div.progress-bar(role='progressbar', aria-label='Example with label', style=`width: ${percentage4}%;`, aria-valuenow=`${percentage4}`, aria-valuemin='0', aria-valuemax='100') #{percentage4}%
+                            div.progress-bar.bg-warning(role='progressbar', aria-label='Example with label', style=`width: ${percentage4}%;`, aria-valuenow=`${percentage4}`, aria-valuemin='0', aria-valuemax='100') #{percentage4}%
                     div.d-flex.justify-content-around
                         p 3점: #{starCounts['3']}개
                         div.progress.my-3.me-3.w-75(style="height: 15%;")
-                            div.progress-bar(role='progressbar', aria-label='Example with label', style=`width: ${percentage3}%;`, aria-valuenow=`${percentage3}`, aria-valuemin='0', aria-valuemax='100') #{percentage3}%
+                            div.progress-bar.bg-warning(role='progressbar', aria-label='Example with label', style=`width: ${percentage3}%;`, aria-valuenow=`${percentage3}`, aria-valuemin='0', aria-valuemax='100') #{percentage3}%
                     div.d-flex.justify-content-around
                         p 2점: #{starCounts['2']}개
                         div.progress.my-3.me-3.w-75(style="height: 15%;")
-                            div.progress-bar(role='progressbar', aria-label='Example with label', style=`width: ${percentage2}%;`, aria-valuenow=`${percentage2}`, aria-valuemin='0', aria-valuemax='100') #{percentage2}%
+                            div.progress-bar.bg-warning(role='progressbar', aria-label='Example with label', style=`width: ${percentage2}%;`, aria-valuenow=`${percentage2}`, aria-valuemin='0', aria-valuemax='100') #{percentage2}%
                     div.d-flex.justify-content-around
                         p 1점: #{starCounts['1']}개
                         div.progress.my-3.me-3.w-75(style="height: 15%;")
-                            div.progress-bar(role='progressbar', aria-label='Example with label', style=`width: ${percentage1}%;`, aria-valuenow=`${percentage1}`, aria-valuemin='0', aria-valuemax='100') #{percentage1}%
+                            div.progress-bar.bg-warning(role='progressbar', aria-label='Example with label', style=`width: ${percentage1}%;`, aria-valuenow=`${percentage1}`, aria-valuemin='0', aria-valuemax='100') #{percentage1}%
 
 
 
@@ -75,7 +75,7 @@ block content
                                 -var check=false;
                                 each rc,i in reportCheck
                                     if(rc.review_num===review.review_num)
-                                        button.btn.btn-primary(type="submit" disabled) 신고 완료
+                                        button.btn.btn-warning(type="submit" disabled) 신고 완료
                                         -check=true;
                                 if(check===false)
                                     include ../reports/report
@@ -96,8 +96,8 @@ block content
                                                             rows:"3"
                                                         }, name="content")
                                                     div.modal-footer
-                                                        button.btn.btn-primary(type="submit") 등록하기
-                                a.mb-3.btn.btn-primary(data-bs-toggle="modal", href=`#insertModalToggle${review.review_num}`, role="button") 등록하기
+                                                        button.btn.btn-warning(type="submit") 등록하기
+                                a.mb-3.btn.btn-warning(data-bs-toggle="modal", href=`#insertModalToggle${review.review_num}`, role="button") 등록하기
                     if(firstReply!=null)
                         -const replyContent = firstReply.content;
                         -const replyPostdate = firstReply.post_date;
