@@ -96,36 +96,36 @@ describe("InfoService test",()=> {
         }
     });
     test("dropStoreInfo", async () => { // 가게 삭제
-        try {
-            const holiday = await infoService.dropAllHoliday( 1)
-            console.log("삭제 :" + holiday)
-        } catch (e) {
-            console.error(e)
-        }
-        try {
-            const storeType = await infoService.dropAllStoreTypes( 1)
-            console.log("삭제 :" + storeType)
-        } catch (e) {
-            console.error(e)
-        }
-        try {
-            const breaktime = await infoService.dropAllBreaktime( 1)
-            console.log("삭제 :" + breaktime)
-        } catch (e) {
-            console.error(e)
-        }
-        try {
-            const dropStoreImg = await infoService.dropAllImg(1)
-            console.log("삭제 :" + dropStoreImg)
-        } catch (e) {
-            console.error(e)
-        }
-        try {
-            const dropStoreImg = await infoService.dropAllImg(1)
-            console.log("삭제 :" + dropStoreImg)
-        } catch (e) {
-            console.error(e)
-        }
+        // try {
+        //     const holiday = await infoService.dropAllHoliday( 1)
+        //     console.log("삭제 :" + holiday)
+        // } catch (e) {
+        //     console.error(e)
+        // }
+        // try {
+        //     const storeType = await infoService.dropAllStoreTypes( 1)
+        //     console.log("삭제 :" + storeType)
+        // } catch (e) {
+        //     console.error(e)
+        // }
+        // try {
+        //     const breaktime = await infoService.dropAllBreaktime( 1)
+        //     console.log("삭제 :" + breaktime)
+        // } catch (e) {
+        //     console.error(e)
+        // }
+        // try {
+        //     const dropStoreImg = await infoService.dropAllImg(1)
+        //     console.log("삭제 :" + dropStoreImg)
+        // } catch (e) {
+        //     console.error(e)
+        // }
+        // try {
+        //     const dropStoreImg = await infoService.dropAllImg(1)
+        //     console.log("삭제 :" + dropStoreImg)
+        // } catch (e) {
+        //     console.error(e)
+        // }
         const store = await infoService.dropStoreInfo(1);
         console.log(store)
     });
