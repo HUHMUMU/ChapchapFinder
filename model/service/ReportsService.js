@@ -191,12 +191,12 @@ class ReportsService {
         )
     }
 
-    async reviewReport(reportObj) {
+    async reportReview(reportObj) {
         const report = await reportsEntity.create(
-        {
-            report_store_id: reportObj.store_id,
-            report_content: reportObj.content,
-            review_num: reportObj.review_num
+            {
+                report_store_id: reportObj.store_id,
+                report_content: reportObj.content,
+                review_num: reportObj.review_num
             }
         );
         return report;

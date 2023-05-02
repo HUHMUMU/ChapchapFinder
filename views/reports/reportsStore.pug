@@ -12,7 +12,7 @@ block content
                         h6.card-text 신고당한가게 주소 : #{r.store.address}
                         h6.card-text 신고당한가게 상태 : #{r.store.s_rstatus}
                     div
-                        a.btn.btn-danger.btn-sm.m-2(href=`#`) 가게상세이동
+                        a.btn.btn-danger.btn-sm.m-2(href=`http://localhost:9090/store/${r.store_num}/detail.do`) 가게상세이동
                         // 추후에 spring에서 구현할 가게상세로 링크연결할 예정
                         div
                             form(method='post', action=`/reports/storePublic/${r.store_num}`)

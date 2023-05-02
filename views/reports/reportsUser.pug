@@ -13,7 +13,7 @@ block content
                         h6.card-text 신고당한유저성별 : #{r.user.gender}
                         h6.card-text 신고당한유저상태 : #{r.user.u_rstatus}
                     div
-                        a.btn.btn-danger.btn-sm.m-2(href=`#`) 유저상세이동
+                        a.btn.btn-danger.btn-sm.m-2(href=`http://localhost:9090/user/${r.user_id}/detail.do`) 유저상세이동
                         // 추후에 spring에서 구현할 유저로 링크연결할 예정
                         div
                             form(method='post', action=`/reports/userPublic/${r.user_id}`)

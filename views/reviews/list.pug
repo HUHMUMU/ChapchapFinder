@@ -73,12 +73,13 @@ block content
                         div.col-2.d-flex.flex-column.align-items-start.justify-content-between
                             div.mt-3
                                 -var check=false;
-                                each rc,i in reportCheck
-                                    if(rc.review_num===review.review_num)
+                                    each rc,i in reportCheck
+                                        if(rc.review_num===review.review_num)
+                                            -check=true;
+                                    if(check===false)
+                                        include ../reports/report
+                                    else
                                         button.btn.btn-warning(type="submit" disabled) 신고 완료
-                                        -check=true;
-                                if(check===false)
-                                    include ../reports/report
                             if(firstReply==null)
                                 div.text-end.mb-3
                                     div.modal.fade(aria-hidden="true", aria-labelledby="insertModalToggle", tabindex="-1" id=`insertModalToggle${review.review_num}`)

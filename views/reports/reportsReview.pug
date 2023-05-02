@@ -13,7 +13,7 @@ block content
                         h6.card-text 메뉴번호 : #{r.review.menu_num}
                         h6.card-text 신고당한리뷰상태 : #{r.review.r_rstatus}
                     div
-                        a.btn.btn-danger.btn-sm.m-2(href=`#`) 리뷰이동
+                        a.btn.btn-danger.btn-sm.m-2(href=`http://localhost:9090/store/${r.review.store_num}/detail.do`) 리뷰이동
                         // 추후에 spring에서 구현할 리뷰로 링크연결할 예정
                         div
                             form(method='post', action=`/reports/reviewPublic/${r.review_num}`)
