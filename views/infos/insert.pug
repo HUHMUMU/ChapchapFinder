@@ -6,7 +6,7 @@ block content
         hr
         div
             h3.mt-5.mb-5.label(for='store_name') 가게명
-            input#store_name.form-control.mb-5( name='store_name', type='text' placeholder="??" vlaue="d")
+            input#store_name.form-control.mb-5( name='store_name', type='text')
         hr
         input#s_rstatus.form-control.mb-5( name='s_rstatus', type='text', value="공개" hidden placeholder="??")
         div.form-floating
@@ -62,16 +62,16 @@ block content
         hr
         div.form-floating
             h3.mt-5.mb-5.label(for='address') 가게 주소
-            input#address.form-control.mb-5(name='address', type='text' placeholder="경기 파주시 지목로 43 101~105호" value="33")
+            input#address.form-control.mb-5(name='address', type='text' placeholder="경기 파주시 지목로 43 101~105호")
         hr
         div
             h3.mt-5.mb-5 가게 소개 글
             div.form-floating
                 h5.mb-3.label(for='detail_info') 가게 디테일 소개글 작성
-                input#detail_info.form-control.mb-4(name='detail_info', type='text' placeholder="가게 상세 소개글 작성 (가게 메인에 올라가는 글입니다.)" value="1")
+                input#detail_info.form-control.mb-4(name='detail_info', type='text' placeholder="가게 상세 소개글 작성 (가게 메인에 올라가는 글입니다.)" )
             div.form-floating
                 h5.mb-3.label(for='short_info') 가게 한줄 소개글 작성
-                input#short_info.form-control.mb-5(name='short_info', type='text' placeholder="가게 한 줄 소개글 작성 (가게 미리보기에 올라가는 글입니다.)" value="2")
+                input#short_info.form-control.mb-5(name='short_info', type='text' placeholder="가게 한 줄 소개글 작성 (가게 미리보기에 올라가는 글입니다.)" )
         hr
         div
             h3.mt-5.mb-5 url 등록
@@ -100,6 +100,7 @@ block content
                         div.form-floating
                             h5.mb-3.label.fs-6(for='week')(style='margin-right: 10px;') 휴무 요일 선택
                             select.form-select.mb-5(name="week")
+                                option 요일을 선택하세요
                                 option(value='월') 월
                                 option(value='화') 화
                                 option(value='수') 수
@@ -124,30 +125,30 @@ block content
                     div.d-flex.justify-content-around
                         div.form-floating
                             h5.mb-3.label.fs-6(for='rest_start_time')(style='margin-right: 10px;') 휴식 시작 시간
-                            input#rest_start_time.form-control.mb-4(name='rest_start_time', type='time' placeholder="??" value="2")
+                            input#rest_start_time.form-control.mb-4(name='rest_start_time', type='time' placeholder="??" )
                         div.form-floating
                             h5.mb-3.label.fs-6(for='rest_end_time')(style='margin-right: 10px;') 휴식 끝 시간
-                            input#rest_end_time.form-control.mb-4(name='rest_end_time', type='time' placeholder="??" value="3")
+                            input#rest_end_time.form-control.mb-4(name='rest_end_time', type='time' placeholder="??")
                         button.btn.btn-outline-danger.btn-sm(type='button' style="height: 30px; visibility:hidden") 삭제
                 div.form-floating
                     h5.mb-3.label(for='opentime')(style='display: inline-block; margin-right: 10px;') 영업 시간
-                    input#opentime.form-control.mb-4(name='opentime', type='text' placeholder="??" value="3")
+                    input#opentime.form-control.mb-4(name='opentime', type='text' placeholder="??" )
                 div.form-floating
                     h5.mb-3.label(for='lastorder')(style='display: inline-block; margin-right: 10px;') 라스트 오더
-                    input#lastorder.form-control.mb-4(name='lastorder', type='text' placeholder="??" value="3")
+                    input#lastorder.form-control.mb-4(name='lastorder', type='text' placeholder="??" )
                 div.form-floating
                     h5.mb-3.label(for='waiting_closetime')(style='display: inline-block; margin-right: 10px;') 웨이팅 마감 시간
-                    input#waiting_closetime.form-control.mb-5(name='waiting_closetime', type='text' placeholder="??" value="3")
+                    input#waiting_closetime.form-control.mb-5(name='waiting_closetime', type='text' placeholder="??")
         hr
         div.form-floating
             h3.mt-5.mb-5.label(for='madein') 원산지 표시
             h4.mb-3 재료에 대한 원산지 표시
-            textarea.form-control(id='madein' name='madein' placeholder="염병염병여병쳠ㅁ병~~~" value="2")
+            textarea.form-control(id='madein' name='madein' )
         hr
         div.form-floating
             h3.mt-5.mb-5.labe 방송 출연 정보
             h4.mb-3.label(for='tvshow') 출연 매채 등록
-            input#tvshow.form-control.mb-5(name='tvshow', type='text' placeholder="출연 매채 등록" value="3")
+            input#tvshow.form-control.mb-5(name='tvshow', type='text' placeholder="출연 매채 등록" )
         hr
         div
             h3.mt-5.mb-5 편의 시설
