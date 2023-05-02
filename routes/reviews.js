@@ -4,6 +4,8 @@ const reviewsService=require("../model/service/ReviewsService");
 const reportsService = require("../model/service/ReportsService");
 const path=require("path");
 const multer=require("multer");
+const fs = require('fs');
+
 const storage=multer.diskStorage(
     {
         destination:(req,file,cb)=>{ //cb : destination의 값을 지정

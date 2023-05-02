@@ -9,11 +9,6 @@ describe("StoreManagesEntity Test", () => {
         }
     )
 
-
-
-
-
-
     test("findAll", async () => {
         const storemanages = await storeManagesService.findAll();
         console.log(storemanages);
