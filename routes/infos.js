@@ -23,6 +23,7 @@ router.get('/insert.do', async (req,res)=>{
     let storeManage= await  storeManagesService.findStoreManage(storeId)
     res.render('infos/insert', { storeManage : storeManage })
 })
+
 const cpUpload = upload.fields([{ name: 'main_img', maxCount: 1 }, { name: 'store_img', maxCount: 8 }])
 
 router.post('/insert.do', cpUpload, async (req, res) => {
@@ -117,7 +118,7 @@ router.post("/update.do",async (req ,res)=>{
         console.error(e)
     }
 
-    if(updateStoreInfo && updateHoliday && updateBreaktime && updateCate && updateImg){
+    if(updateStoreInfo>0 && updateHoliday>0 && updateBreaktime>0 && updateCate>0 && updateImg>0){
         res.redirect("/");
     }else {
         res.redirect(`/update.do`);
